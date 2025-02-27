@@ -1,159 +1,182 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-  ];
+    imports = [
+        ./hardware-configuration.nix
+        inputs.home-manager.nixosModules.default
+    ];
 
-  # BOOTLOADER
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    # BOOTLOADER
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-  # ENABLE FLAKES
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    # ENABLE FLAKES
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # NETWORKING
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+    # NETWORKING
+    networking.hostName = "nixos";
+    networking.networkmanager.enable = true;
 
-  # LOCALE
-  time.timeZone = "Asia/Amman";
-  i18n.defaultLocale = "ja_JP.UTF-8";
+    # LOCALE
+    time.timeZone = "Asia/Amman";
+    i18n.defaultLocale = "ja_JP.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ja_JP.UTF-8";
-    LC_IDENTIFICATION = "ja_JP.UTF-8";
-    LC_MEASUREMENT = "ja_JP.UTF-8";
-    LC_MONETARY = "ja_JP.UTF-8";
-    LC_NAME = "ja_JP.UTF-8";
-    LC_NUMERIC = "ja_JP.UTF-8";
-    LC_PAPER = "ja_JP.UTF-8";
-    LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "ja_JP.UTF-8";
-  };
-
-  # USERS
-  users.users.nix3l = {
-    isNormalUser = true;
-    description = "nix3l";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
-  # HOME MANAGER
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "nix3l" = import ./home.nix;
+    i18n.extraLocaleSettings = {
+        LC_ADDRESS = "ja_JP.UTF-8";
+        LC_IDENTIFICATION = "ja_JP.UTF-8";
+        LC_MEASUREMENT = "ja_JP.UTF-8";
+        LC_MONETARY = "ja_JP.UTF-8";
+        LC_NAME = "ja_JP.UTF-8";
+        LC_NUMERIC = "ja_JP.UTF-8";
+        LC_PAPER = "ja_JP.UTF-8";
+        LC_TELEPHONE = "ja_JP.UTF-8";
+        LC_TIME = "ja_JP.UTF-8";
     };
-  };
 
-  # GRAPHICS
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+    # USERS
+    users.users.nix3l = {
+        isNormalUser = true;
+        description = "nix3l";
+        extraGroups = [ "networkmanager" "wheel" ];
+    };
 
-  hardware.nvidia = {
-    # required.
-    modesetting.enable = true;
+    # HOME MANAGER
+    home-manager = {
+        extraSpecialArgs = { inherit inputs; };
+        users = {
+            "nix3l" = import ./home.nix;
+        };
 
-    # Use the nvidia open source kernel module
-    open = false;
+        backupFileExtension = "backup";
+    };
 
-    # enable the nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
+    # GRAPHICS
+    hardware.graphics.enable = true;
+    services.xserver.videoDrivers = [ "nvidia" ];
 
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+    hardware.nvidia = {
+        # required
+        modesetting.enable = true;
 
-  # KEYBOARD
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-  
-  # japanese input
-  i18n.inputMethod = {
-     type = "fcitx5";
-     enable = true;
-     fcitx5.addons = with pkgs; [
-       fcitx5-mozc
-       fcitx5-gtk
-     ];
+        # use the nvidia open source kernel module
+        open = false;
 
-     fcitx5.waylandFrontend = true;
-  };
+        # enable the nvidia settings menu,
+        # accessible via `nvidia-settings`.
+        nvidiaSettings = true;
 
-  services.xserver.desktopManager.runXdgAutostartIfNone = true;
-      
-  # touchpad support in X servers
-  services.libinput.enable = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
 
-  # PRINTING
-  services.printing.enable = true;
+    # KEYBOARD
+    services.xserver.xkb = {
+        layout = "us";
+        variant = "";
+    };
 
-  # AUDIO
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+    # japanese input
+    i18n.inputMethod = {
+        enable = true;
+        type = "fcitx5";
+        fcitx5.addons = with pkgs; [
+            fcitx5-mozc
+            fcitx5-gtk
+        ];
 
-  # PROGRAMS
-  nixpkgs.config.allowUnfree = true; # allow non-FOSS
-  environment.systemPackages = with pkgs; [
-     neovim
-     git
-     gh
-     openssl
+        fcitx5.waylandFrontend = true;
+    };
 
-     alacritty
-     xfce.thunar
-     librewolf-bin
-     mpv
-     discord
-     betterdiscordctl
-     spotify
-     spicetify-cli
-     lutris
-     qbittorrent
-     rofi-wayland
+    # PRINTING
+    services.printing.enable = true;
 
-     neofetch
-     unzip
-     eza
-     wget
+    # AUDIO
+    services.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+    };
 
-     # nerd-fonts
-     noto-fonts
-     noto-fonts-cjk-sans
-     noto-fonts-emoji
-     liberation_ttf
-     fira-code
-     fira-code-symbols
-  ];
+    # PROGRAMS
+    nixpkgs.config.allowUnfree = true; # allow non-FOSS
+    environment.systemPackages = with pkgs; [
+        # essentials
+        vim
+        git
+        gh
+        openssl
+        zsh
+        dconf # dont know what this is but gtk doesnt work without it for some reason
+        (ffmpeg-full.override { withUnfree = true; withOpengl = true; })
 
-  fonts.packages = with pkgs; [
-     # nerd-fonts
-     noto-fonts
-     noto-fonts-cjk-sans
-     noto-fonts-emoji
-     liberation_ttf
-     fira-code
-     fira-code-symbols
-  ];
+        # apps
+        hyprland
+        alacritty
+        xfce.thunar
+        librewolf-bin
+        mpv
+        discord
+        betterdiscordctl
+        lutris
+        qbittorrent
+        feh
+        flameshot
+	networkmanagerapplet
 
-  # SERVICES
-  services.openssh.enable = true;
+        # terminal apps
+        neofetch
+        unzip
+        eza
+        wget
+        brightnessctl
+        htop
+        btop
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11";
+        # fonts
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        liberation_ttf
+        fira-code
+        fira-code-symbols
+        font-awesome
+        font-awesome_5
+        font-awesome_4
+
+        # other
+        capitaine-cursors
+    ];
+
+    fonts.packages = with pkgs; [
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        liberation_ttf
+        fira-code
+        fira-code-symbols
+        font-awesome
+        font-awesome_5
+        font-awesome_4
+    ];
+
+    # SESSION VARIABLES
+    environment.sessionVariables = {
+        NIXOS_OZONE_WL = "1"; # hint at electron apps to use wayland
+    };
+
+    # SERVICES
+    services.openssh.enable = true;
+    services.upower.enable = true;
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
+
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "24.11";
 }

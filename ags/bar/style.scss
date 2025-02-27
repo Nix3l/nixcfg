@@ -1,0 +1,121 @@
+$fg:       #ebdbb2;
+$bg:       #282828;
+$light-bg: #3c3836;
+$red:      #cc241d; 
+$blue:     #458588; 
+$aqua:     #8ec07c;
+$purple:   #b16286;
+
+button {
+    box-shadow: 0 0px;
+}
+
+window.Bar {
+    background: $bg;
+    color: $fg;
+
+    font-weight: bold;
+    font-size: 14px;
+    font-family: "Font Awesome 5", "FiraCode";
+
+    >box {
+        margin: 8px 0px;
+    }
+}
+
+window.Bar box.LeftBox {
+    margin-left:  12px;
+    margin-right: 4px;
+}
+
+window.Bar box.CentreBox {
+    margin-left:  4px;
+    margin-right: 4px;
+}
+
+window.Bar box.RightBox {
+    margin-left:  4px;
+    margin-right: 0px;
+}
+
+button.DashboardLauncher {
+    background: $light-bg;
+    color: $fg;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 20px;
+    font-weight: normal;
+
+    margin-right: 8px;
+}
+
+// TODO: make the things short but wide
+
+box.Workspaces {
+    background: $light-bg;
+    color: $fg;
+
+    padding: 6px 2px;
+
+    border-radius: 8px;
+
+    >button {
+        background: $fg;
+
+        border: none;
+        border-radius: 12px;
+
+        padding: 0px;
+        margin-left: 8px;
+        margin-right: 8px;
+
+        min-width: 32px;
+        min-height: 4px;
+
+        transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    }
+    
+    >button.Focused {
+        background: $aqua;
+        min-width: 56px;
+    }
+}
+
+box.FocusedClient {
+    background: $light-bg;
+    color: $fg;
+
+    border: none;
+    border-radius: 6px;
+}
+
+box.Tray {
+    background: $bg;
+    margin: 0px;
+    margin-right: 8px;
+}
+
+box.TrayContents {
+    background: $light-bg;
+    margin: 0px;
+
+    border-radius: 8px;
+}
+
+button.TrayToggle {
+    background: $bg;
+    color: $fg;
+    border: none;
+}
+
+.TrayItem {
+    background: $light-bg;
+    color: $fg;
+    border: none;
+
+    >icon {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,382 @@
+$fg:       #ebdbb2;
+$bg:       #282828;
+$light-bg: #3c3836;
+$red:      #cc241d; 
+$blue:     #458588; 
+$aqua:     #8ec07c;
+$purple:   #b16286;
+$yellow:   #d79921;
+
+button {
+    box-shadow: 0 0px;
+}
+
+slider {
+    background: transparent;
+    color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: 0 0px;
+}
+
+scrollable {
+    .frame {
+        padding: 0px;
+
+        outline: none;
+        border: none;
+    }
+}
+
+@mixin module {
+    background: $light-bg;
+    color: $fg;
+
+    border: none;
+    border-radius: 10px;
+
+    margin: 0px;
+    padding: 24px;
+}
+
+window.Dashboard {
+    background: transparent;
+    color: $fg;
+    font-family: "Font Awesome 5", "FiraCode";
+    font-size: 24px;
+    font-weight: bold;
+}
+
+// TIME MODULE
+.TimeModule {
+    @include module;
+
+    font-size: 48px;
+}
+
+// INFO MODULE
+.InfoModule {
+    @include module;
+
+    .InfoText {
+        font-size: 16px;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .pfp {
+        font-size: 120px;
+    }
+}
+
+// NOTIFICATION MODULE
+.NotificationModule {
+    @include module;
+
+    .Clear {
+        background: transparent;
+        color: $fg;
+        border: none;
+    }
+}
+
+.Notifications {
+    padding: 8px;
+
+    .Notif {
+        background: $blue;
+        color: $fg;
+
+        padding: 8px;
+        border-radius: 8px;
+
+        icon {
+            font-size: 32px;
+        }
+
+        .Header, .Body {
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        .Header {
+            font-size: 16px;
+        }
+
+        .Body {
+            font-size: 12px;
+        }
+
+        button.Dismiss {
+            background: transparent;
+            color: $fg;
+            border: none;
+        }
+    }
+}
+
+// SETTINGS MODULE
+.SettingsModule {
+    @include module;
+
+    button {
+        background: transparent;
+        color: $fg;
+
+        border: none;
+    }
+
+    button.SelectedButton {
+        background: $aqua;
+    }
+}
+
+.NetworkModule {
+    .Sidebar {
+        font-size: 16px;
+
+        padding: 8px;
+        border-radius: 8px;
+
+        .Spin {
+            color: $blue;
+        }
+    }
+
+    .Contents {
+        box {
+            padding: 6px;
+        }
+
+        .AccessPoint, .ActiveAccessPoint {
+            border-radius: 8px;
+
+            >icon {
+                color: $fg;
+                font-size: 32px;
+            }
+
+            .ssid {
+                font-size: 20px;
+            }
+
+            .info {
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+            }
+        }
+    }
+}
+
+.BluetoothModule, .BluetoothModuleDisabled {
+
+}
+
+.BluetoothModuleDisabled {
+}
+
+.CalendarModule {
+    .Calendar {
+        background: transparent;
+        color: $fg;
+        border: none;
+        font-weight: normal;
+
+        .button {
+            color: $fg;
+        }
+
+        // for some reason .highlight is the top row of day names??? ok
+        .highlight {
+            background: transparent;
+            font-size: 100px;
+        }
+
+        :selected {
+            background: $blue;
+        }
+    }
+}
+
+.MixerModule {
+    .Icons {
+        color: $fg;
+    }
+
+    .Bars {
+        * {
+            border: none;
+            border-radius: 6px;
+
+            trough {
+                background: transparent;
+            }
+        }
+
+        .Battery {
+            block.filled.full {
+                background: $aqua;
+            }
+
+            block.filled {
+                background: $yellow;
+            }
+        }
+
+        .Memory, .Cpu {
+            block.filled.full {
+                background: $red;
+            }
+
+            block.filled {
+                background: $aqua;
+            }
+        }
+    }
+
+    .Values {
+        font-size: 19px;
+    }
+}
+
+// TASK TRACKER MODULE
+.TaskTrackerModule {
+    @include module;
+
+    .Task {
+        font-size: 20px;
+
+        .Info {
+            font-size: 24px;
+        }
+
+        .Time {
+            font-weight: normal;
+            font-style: italic;
+        }
+    }
+
+    centerbox {
+        font-weight: normal;
+        font-style: italic;
+    }
+}
+
+// VOLUME MODULE
+.VolumeModule {
+    @include module;
+
+    .VolumeButton {
+        background: transparent;
+        color: $fg;
+
+        border: none;
+    }
+
+    .VolumeSlider {
+        trough {
+            background: $bg;
+            border: none;
+            border-radius: 12px;
+            min-height: 10px;
+        }
+
+        highlight {
+            background: $blue;
+            border: none;
+            border-radius: 12px;
+            min-height: 10px;
+        }
+    }
+}
+
+// MEDIA MODULE
+.MediaModule {
+    @include module;
+
+    .MediaControlButton {
+        background: transparent;
+        color: $fg;
+        border: none;
+    }
+
+    .PreviousControl .NextControl {
+        font-size: 16px;
+    }
+
+    .PlayPauseControl {
+        font-size: 28px;
+        min-height: 40px;
+    }
+}
+
+// APP LAUNCHER MODULE
+.AppLauncherModule {
+    @include module;
+    padding: 12px;
+
+    .AppsContainer {
+        border: none;
+        outline: none;
+    }
+
+    entry {
+        background: transparent;
+        color: $fg;
+
+        border: none;
+        transition: none;
+    }
+
+    .FilledPrompt {
+        font-size: 16px;
+    }
+
+    .EmptyPrompt {
+        font-style: italic;
+    }
+
+    .NoMatch {
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .AppEntry, .AppEntrySelected {
+        background: transparent;
+        color: $fg;
+
+        border: none;
+        border-radius: 0px;
+        padding: 8px;
+
+        icon {
+            font-size: 32px;
+        }
+
+        label {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+        }
+    }
+
+    .AppEntrySelected {
+        background: $blue;
+    }
+
+    .AppEntry:hover, .AppEntrySelected:hover {
+        background: $aqua;
+    }
+}
+
+// DESKTOP CONTROLS MODULE
+.ControlsModule {
+    @include module;
+
+    .DesktopControlButton {
+        background: transparent;
+        color: $fg;
+        border: none;
+    }
+}
