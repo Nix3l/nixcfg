@@ -10,345 +10,18 @@ import Battery from "gi://AstalBattery"
 
 enum SettingsTypes {
     Mixer = 0,
-    Network = 1,
-    Bluetooth = 2,
-    Calendar = 3,
+    Calendar = 1,
 }
 
-let selected_setting = Variable(SettingsTypes.Network);
+let selected_setting = Variable(SettingsTypes.Mixer);
 
-// NETWORK MODULE
 const network = Network.get_default();
-let primary = bind(network, "primary");
-let state = bind(network, "state");
-
-let wifi: Network.Wifi = network.wifi;
-let wired: Network.Wired = network.wired;
-
-let access_points = bind(wifi, "access_points").as(list => FilterNetworks(list));
-
-function FilterNetworks(list: Network.AccessPoint[]): Network.AccessPoint[] {
-    let found: string[] = [];
-    return list.sort((a, b) => b.strength - a.strength)
-    .filter((ap) => {
-        if(found.includes(ap.ssid)) {
-            return false;
-        } else {
-            found.push(ap.ssid);
-            return true;
-        }
-    });
-}
-
-function NetworkIcon(input: string): string {
-    if(input.includes("signal-strong")) return "./assets/wifi-good.svg";
-    if(input.includes("signal-ok")) return "./assets/wifi-ok.svg";
-    if(input.includes("signal-weak")) return "./assets/wifi-weak.svg";
-
-    return "./assets/wifi-none.svg";
-}
-
-function NetworkAccessPoint({ ap } : { ap: Network.AccessPoint }): JSX.Element {
-    return <box
-        heightRequest={28}
-        className={bind(wifi, "active_access_point").as(active =>
-            active.ssid == ap.ssid ? "ActiveAccessPoint" : "AccessPoint"
-        )}
-    >
-        <icon valign={Gtk.Align.CENTER} icon={bind(ap, "icon_name").as(name => NetworkIcon(name))} />
-        <label halign={Gtk.Align.START} label={bind(ap, "ssid").get()} className="ssid" />
-        <box
-            hexpand
-            halign={Gtk.Align.END}
-        >
-            <button
-                cursor="pointer"
-                onClick={() => exec(`bash -c 'nmcli c ${ap.ssid}'`)}
-                className="ConnectionToggle"
-            >
-                <label label={bind(wifi, "active_access_point").as(active =>
-                    active.ssid === ap.ssid ? "" : ""
-                )} />
-            </button>
-        </box>
-    </box>
-}
-
-function NetworkWifiContents(): JSX.Element {
-    return <scrollable
-        hscroll={Gtk.PolicyType.NEVER}
-        className="Contents"
-    >
-        <box
-            vertical
-            hexpand
-            vexpand
-            spacing={12}
-        > {
-            access_points.as(list => list
-                .sort((a, b) => b.strength - a.strength)
-                .map(ap =>
-                    (<NetworkAccessPoint ap={ap} />)
-            ))
-        } </box>
-    </scrollable>
-}
-
-function NetworkModule(): JSX.Element {
-    primary = bind(network, "primary");
-    state = bind(network, "state");
-
-    wifi = network.get_wifi() as Network.Wifi;
-    wired = network.get_wired() as Network.Wired;
-
-    return <box
-        vexpand
-        hexpand
-        className="NetworkModule"
-    >
-        <box
-            vertical
-            vexpand
-            spacing={12}
-            className="Sidebar"
-        >
-            <button
-                onClick={() => {
-                    if(network.primary == Network.Primary.WIFI)
-                        network.primary = Network.Primary.WIRED;
-                    else if(network.primary == Network.Primary.WIRED)
-                        network.primary = Network.Primary.WIFI
-                }}
-                className="Switcher"
-            >
-                <label label={primary.as(p =>
-                    p == Network.Primary.WIRED ? "" :
-                    p == Network.Primary.WIFI  ? "" :
-                    "")
-                } />
-            </button>
-            <button
-                onClick={() => wifi.scan()}
-                className="Reload"
-            >
-                <label label="" className={
-                    bind(wifi, "scanning").as(spinning => spinning ? "Spin" : "")
-                }/>
-            </button>
-            <button
-                onClick={() => {
-                    for(let ap of wifi.access_points) {
-                        print(ap.ssid + " " + ap.strength + " " + ap.frequency + " " + ap.bssid); 
-                    }
-                }}
-            >
-                <label label="d" />
-            </button>
-        </box>
-        {
-            primary.as(p =>
-                p == Network.Primary.WIRED ?
-                    (<label label="wired" />) :
-                p == Network.Primary.WIFI ?
-                    (<NetworkWifiContents />) :
-                    (<label label="idk" />)
-                )
-        } 
-    </box>
-}
-
-// BLUETOOTH MODULE
 const bluetooth = Bluetooth.get_default();
 const adapter: Bluetooth.Adapter = bluetooth.adapter;
 
-let show_paired_devices = Variable(true);
-let show_unpaired_devices = Variable(false);
+const battery = Battery.get_default();
 
-function PairedDevice({ device }: { device: Bluetooth.Device }): JSX.Element {
-    return <box
-        hexpand
-        className="PairedDevice"
-    >
-        <icon halign={Gtk.Align.START} icon={bind(device, "icon")} />
-        <label halign={Gtk.Align.START} label={bind(device, "name")} />
-        <button
-            halign={Gtk.Align.END}
-            onClick={() => device.cancel_pairing()}
-            className="PairToggle"
-        >
-            <label label="" />
-        </button>
-        <button
-            halign={Gtk.Align.END}
-            onClick={() => {
-                if(device.connected)
-                    device.disconnect_device();
-                else
-                    device.connect_device();
-            }}
-            className="ConnectionToggle"
-        >
-            <label label={bind(device, "connecting").as(connecting => connecting ?
-                "" :
-                device.connected ? "" : ""
-            )} />
-        </button>
-    </box>
-}
-
-function UnPairedDevice({ device }: { device: Bluetooth.Device }): JSX.Element {
-    return <box
-        hexpand
-        className="UnPairedDevice"
-    >
-        <icon halign={Gtk.Align.START} icon={bind(device, "icon")} />
-        <label halign={Gtk.Align.START} label={bind(device, "name")} />
-        <box halign={Gtk.Align.END}>
-            <button
-                halign={Gtk.Align.END}
-                onClick={() => device.pair()}
-                className="PairToggle"
-            >
-                <label label={bind(device, "connecting").as(connecting => connecting ?
-                    "" : ""
-                )} />
-            </button>
-        </box>
-    </box>
-}
-
-function BluetoothModule(): JSX.Element {
-    return <box
-        vexpand
-        hexpand
-        spacing={12}
-        className={
-            bind(bluetooth, "is_powered").as(powered => powered ?
-                "BluetoothModule" : "BluetoothModuleDisabled"
-            )
-        }
-    >
-        <box
-            vertical
-            vexpand
-            spacing={12}
-            className="Sidebar"
-        >
-            <button
-                onClick={() => bluetooth.toggle()}
-            >
-                <label label={
-                    bind(bluetooth, "is_powered").as(powered => powered ?
-                        "" : ""
-                    )
-                } />
-            </button>
-            <button
-                onClick={() => {
-                    if(!bluetooth.is_powered) return;
-                    if(adapter.discovering)
-                        adapter.stop_discovery();
-                    else
-                        adapter.start_discovery();
-                }}
-            >
-                <label label={
-                    bind(adapter, "discovering").as(discovering => discovering ?
-                        "" : ""
-                    )
-                } />
-            </button>
-            <button
-                onClick={() => {
-                    for(let device of bluetooth.devices)
-                        print(device.name + " " + device.alias + " " + device.paired + " " + device.connected);
-                }}
-            >
-                <label label="d" />
-            </button>
-        </box>
-        <box
-            vertical
-            vexpand
-            hexpand
-            spacing={12}
-            className="Devices"
-        >
-            <box hexpand>
-                <label label="Paired Devices" />
-                <button
-                    onClick={() => show_paired_devices.set(!show_paired_devices.get())}
-                    className="SectionRevealButton"
-                >
-                    <label label={bind(show_paired_devices).as(show => show ?
-                        "" : ""
-                    )} />
-                </button>
-            </box>
-            <revealer
-                revealChild={bind(show_paired_devices)}
-                transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-            >
-                <box
-                    vertical
-                    hexpand
-                    spacing={12}
-                    className="PairedDevices"
-                >
-                    <label
-                        visible={bind(bluetooth, "devices").as(list => list
-                            .filter((device) => device.paired && device.name != null)
-                            .length == 0)
-                        }
-                        label="No Devices Paired"
-                    />
-                    {
-                        bind(bluetooth, "devices").as(list => list
-                            .filter((device) => device.paired && device.name != null)
-                            .map((device) => (<PairedDevice device={device} />))
-                        )
-                    }
-                </box>
-            </revealer>
-            <box hexpand>
-                <label label="Available Devices" />
-                <button
-                    onClick={() => show_unpaired_devices.set(!show_unpaired_devices.get())}
-                    className="SectionRevealButton"
-                >
-                    <label label={bind(show_unpaired_devices).as(show => show ?
-                        "" : ""
-                    )} />
-                </button>
-            </box>
-            <revealer
-                revealChild={bind(show_unpaired_devices)}
-                transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-            >
-                <box
-                    vertical
-                    hexpand
-                    spacing={12}
-                    className="UnPairedDevices"
-                >
-                    <label
-                        visible={bind(bluetooth, "devices").as(list => list
-                            .filter((device) => device.paired && device.name != null)
-                            .length == 0)
-                        }
-                        label="No Devices Found"
-                    />
-                    {
-                        bind(bluetooth, "devices").as(list => list
-                            .filter((device) => !device.paired && device.name != null)
-                            .map((device) => (<UnPairedDevice device={device} />))
-                        )
-                    }
-                </box>
-            </revealer>
-        </box>
-    </box>
-}
+const max_brightness = Number(exec(`bash -c 'brightnessctl m'`));
 
 // CALENDAR MODULE
 function CalendarModule(): JSX.Element {
@@ -370,91 +43,240 @@ function CalendarModule(): JSX.Element {
 }
 
 // MIXER MODULE
-const battery = Battery.get_default();
-
 function BatteryIcon() {
-    return  battery.percentage < 0.25 ? "" :
-            battery.percentage < 0.75  ? "" :
-            battery.percentage < 1.00 ? "" :
-            "";
+    return battery.percentage < 0.25 ? "" :
+           battery.percentage < 0.75  ? "" :
+           battery.percentage < 1.00 ? "" :
+           "";
+}
+
+function NetworkIcon(input: string): string {
+    if(input.includes("signal-excellent")) return "./assets/wifi-good.svg";
+    if(input.includes("signal-ok")) return "./assets/wifi-ok.svg";
+    if(input.includes("signal-weak")) return "./assets/wifi-weak.svg";
+
+    return "./assets/wifi-none.svg";
+}
+
+function GetBrightness(): number {
+    return Number(exec(`bash -c 'brightnessctl g'`));
+}
+
+function SetBrightness(brightness: number): number {
+    return Number(exec(`bash -c 'brightnessctl s ${brightness}'`));
+}
+
+function NetworkStatus(): JSX.Element {
+    let ap = bind(network.wifi, "active_access_point");
+    return <stack
+        hexpand
+        visibleChildName={ap.as(ap => ap ? "on" : "off")}
+    >
+        <box
+            hexpand
+            spacing={12}
+            name="on"
+            className="Network"
+        > 
+            <icon icon={bind(network.wifi.active_access_point, "icon_name").as(name => NetworkIcon(name))}/>
+            <box
+                vertical
+                hexpand
+                halign={Gtk.Align.START}
+                valign={Gtk.Align.CENTER}
+            >
+                <label
+                    label={ap.as(ap => ap.ssid)}
+                    halign={Gtk.Align.START}
+                    className="Name"
+                />
+                <label
+                    label={
+                        bind(network.wifi, "internet").as(internet =>
+                            internet != Network.Internet.CONNECTED ?
+                                "Connected, No Internet" : "Connected"
+                    )}
+                    halign={Gtk.Align.START}
+                    className="Status"
+                />
+            </box>
+        </box>
+        <box
+            hexpand
+            spacing={12}
+            name="off"
+            className="Network"
+        >
+            <icon icon={NetworkIcon("signal-none")} />
+            <box
+                vertical
+                hexpand
+                halign={Gtk.Align.START}
+                valign={Gtk.Align.CENTER}
+            >
+                <label
+                    label="---"
+                    halign={Gtk.Align.START}
+                    className="Name"
+                />
+                <label
+                    label="Disconnected"
+                    halign={Gtk.Align.START}
+                    className="Status"
+                />
+            </box>
+        </box>
+    </stack>
+}
+
+function BluetoothStatus(): JSX.Element {
+    if(!adapter.discovering && bluetooth.is_powered) adapter.start_discovery();
+    let paired_device = bind(bluetooth, "devices").as(list => list
+            .filter((device) => device.paired && device.name != null)
+            .find((device) => device.connected));
+
+    return <stack
+        hexpand
+        visibleChildName={bind(bluetooth, "is_powered").as(powered => powered ? "on" : "off")}
+    >
+        <box
+            name="on"
+            hexpand
+            spacing={12}
+            className="Bluetooth"
+        >
+            <label label="" />
+            <box
+                vertical
+                hexpand
+            >
+                <label
+                    halign={Gtk.Align.START}
+                    label={paired_device.as((device) => device ? device.name : "No Device")}
+                    className="Name"
+                />
+                <label
+                    halign={Gtk.Align.START}
+                    label={paired_device.as((device) => device ? "Paired, Connected" : "Connect to a Device to see its status")}
+                    className="Status"
+                />
+            </box>
+        </box>
+        <box
+            name="off"
+            hexpand
+            spacing={12}
+            className="Bluetooth"
+        >
+            <label label="" />
+            <box
+                vertical
+                hexpand
+            >
+                <label
+                    halign={Gtk.Align.START}
+                    label="Disabled"
+                    className="Name"
+                />
+                <label
+                    halign={Gtk.Align.START}
+                    label="Connect to Bluetooth to see its status"
+                    className="Status"
+                />
+            </box>
+        </box>
+    </stack>
 }
 
 // TODO: change from vertical => horizontal boxes to horizontal => vertical boxes for ideal widths
 function MixerModule(): JSX.Element {
     return <box
+        vertical
         hexpand
         spacing={12}
         className="MixerModule"
     >
         <box
-            vertical
-            halign={Gtk.Align.START}
-            spacing={12}
-            className={"Icons"}
-        >
-            <label label={bind(battery, "charging").as(charging => charging ? "" : BatteryIcon())} className="icon" />
-            <label label="" className="icon" />
-            <label label="" className="icon" />
-        </box>
-        <box
-            vertical
             hexpand
             spacing={12}
-            className={"Bars"}
         >
-            <LevelBar
+            <box
+                vertical
+                halign={Gtk.Align.START}
+                spacing={12}
+                className={"Icons"}
+            >
+                <label label={bind(battery, "charging").as(charging => charging ? "" : BatteryIcon())} className="icon" />
+                <label label="" className="icon" />
+                <label label="" className="icon" />
+            </box>
+            <box
+                vertical
                 hexpand
-                heightRequest={24}
-                min_value={0}
-                max_value={1} 
-                value={bind(battery, "percentage")} 
-                className="Battery"
-            />
-            <LevelBar
-                hexpand
-                heightRequest={24}
-                min_value={0}
-                max_value={1}
-                value={bind(mem_usage).as(mem => mem / max_ram)}
-                className="Memory"
-            />
-            <LevelBar
-                hexpand
-                heightRequest={24}
-                min_value={0}
-                max_value={1}
-                value={bind(cpu_usage).as(usage => usage)}
-                className="Cpu"
-            />
+                spacing={12}
+                className={"Bars"}
+            >
+                <LevelBar
+                    hexpand
+                    heightRequest={24}
+                    min_value={0}
+                    max_value={1} 
+                    value={bind(battery, "percentage")} 
+                    className="Battery"
+                />
+                <LevelBar
+                    hexpand
+                    heightRequest={24}
+                    min_value={0}
+                    max_value={1}
+                    value={bind(mem_usage).as(mem => mem / max_ram)}
+                    className="Memory"
+                />
+                <LevelBar
+                    hexpand
+                    heightRequest={24}
+                    min_value={0}
+                    max_value={1}
+                    value={bind(cpu_usage).as(usage => usage)}
+                    className="Cpu"
+                />
+            </box>
+            <box
+                vertical
+                halign={Gtk.Align.END}
+                spacing={12}
+                className={"Values"}
+            >
+                <label
+                    label={bind(battery, "percentage").as(full => (full * 100) + "%")}
+                    halign={Gtk.Align.START}
+                    className="value"
+                />
+                <label
+                    label={bind(mem_usage_abbr)}
+                    halign={Gtk.Align.START}
+                    className="value"
+                />
+                <label 
+                    label={bind(cpu_usage).as(usage => (usage * 100).toPrecision(3) + "%")}
+                    halign={Gtk.Align.START}
+                    className="value"
+                />
+            </box>
         </box>
+        <NetworkStatus />
+        <BluetoothStatus />
         <box
-            vertical
-            halign={Gtk.Align.END}
-            spacing={12}
-            className={"Values"}
+            hexpand
+            className="Brightness"
         >
-            <label
-                label={
-                    bind(battery, "percentage").as(full => (full * 100) + "%")
-                }
-                halign={Gtk.Align.START}
-                className="value"
-            />
-            <label
-                label={
-                    bind(mem_usage_abbr)
-                }
-                halign={Gtk.Align.START}
-                className="value"
-            />
-            <label 
-                label={
-                    bind(cpu_usage).as(usage =>
-                        (usage * 100).toPrecision(3) + "%"
-                    )
-                }
-                halign={Gtk.Align.START}
-                className="value"
+            <label label="" />
+            <slider
+                hexpand
+                drawValue={false}
+                cursor="pointer"
+                value={GetBrightness() / max_brightness}
+                onDragged={(self) => SetBrightness((0.1 + self.value * 0.9) * max_brightness)}
             />
         </box>
     </box>
@@ -469,6 +291,8 @@ function SettingsButton({ type, label }: { type: SettingsTypes; label: string })
         </button>
 }
 
+// yes i only remembered halfway through writing this that stacks exist
+// no i do not care enough to switch
 export function SettingsModule(): JSX.Element {
     return <box
         vertical
@@ -480,20 +304,14 @@ export function SettingsModule(): JSX.Element {
             spacing={8}
             className="SettingsList"
         >
-            <SettingsButton type={SettingsTypes.Network} label="" />
-            <SettingsButton type={SettingsTypes.Bluetooth} label="" />
-            <SettingsButton type={SettingsTypes.Calendar} label="" />
             <SettingsButton type={SettingsTypes.Mixer} label="" />
+            <SettingsButton type={SettingsTypes.Calendar} label="" />
         </box> {
             bind(selected_setting).as(setting =>
-                setting == SettingsTypes.Network ?
-                    (<NetworkModule />) :
-                setting == SettingsTypes.Bluetooth ?
-                    (<BluetoothModule />) :
-                setting == SettingsTypes.Calendar ?
-                    (<CalendarModule />) :
                 setting == SettingsTypes.Mixer ?
                     (<MixerModule />) :
+                setting == SettingsTypes.Calendar ?
+                    (<CalendarModule />) :
                 (<label label="error?? noway!" />)
             )
         }

@@ -51,7 +51,14 @@ window.Dashboard {
 .TimeModule {
     @include module;
 
-    font-size: 48px;
+    .Time {
+        font-size: 48px;
+    }
+
+    .Seconds {
+        font-size: 22px;
+        font-weight: normal;
+    }
 }
 
 // INFO MODULE
@@ -131,51 +138,6 @@ window.Dashboard {
     }
 }
 
-.NetworkModule {
-    .Sidebar {
-        font-size: 16px;
-
-        padding: 8px;
-        border-radius: 8px;
-
-        .Spin {
-            color: $blue;
-        }
-    }
-
-    .Contents {
-        box {
-            padding: 6px;
-        }
-
-        .AccessPoint, .ActiveAccessPoint {
-            border-radius: 8px;
-
-            >icon {
-                color: $fg;
-                font-size: 32px;
-            }
-
-            .ssid {
-                font-size: 20px;
-            }
-
-            .info {
-                font-size: 14px;
-                font-weight: normal;
-                font-style: normal;
-            }
-        }
-    }
-}
-
-.BluetoothModule, .BluetoothModuleDisabled {
-
-}
-
-.BluetoothModuleDisabled {
-}
-
 .CalendarModule {
     .Calendar {
         background: transparent;
@@ -190,7 +152,6 @@ window.Dashboard {
         // for some reason .highlight is the top row of day names??? ok
         .highlight {
             background: transparent;
-            font-size: 100px;
         }
 
         :selected {
@@ -237,6 +198,52 @@ window.Dashboard {
 
     .Values {
         font-size: 19px;
+    }
+
+    .Network, .Bluetooth {
+        padding: 8px;
+
+        icon {
+            font-size: 32px;
+        }
+
+        .Name {
+            font-size: 20px;
+        }
+
+        .Status {
+            font-size: 12px;
+            font-weight: normal;
+            font-style: italic;
+        }
+    }
+
+    .Network {
+        background: $blue;
+    }
+
+    .Bluetooth {
+        background: $aqua;
+    }
+
+    .Brightness {
+        padding: 8px;
+
+        scale {
+            trough, highlight {
+                border: none;
+                outline: none;
+                min-height: 6px;
+            }
+
+            trough {
+                background: $bg;
+            }
+
+            highlight {
+                background: $yellow;
+            }
+        }
     }
 }
 
@@ -295,17 +302,36 @@ window.Dashboard {
 .MediaModule {
     @include module;
 
-    .MediaControlButton {
+    .Info {
+        >label {
+            font-size: 32px;
+            font-weight: normal;
+            color: $aqua;
+        }
+
+        .Major {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        .Minor {
+            font-size: 12px;
+            font-style: italic;
+            font-weight: normal;
+        }
+    }
+
+    .Control {
         background: transparent;
         color: $fg;
         border: none;
     }
 
-    .PreviousControl .NextControl {
+    .Previous .Next {
         font-size: 16px;
     }
 
-    .PlayPauseControl {
+    .PlayPause {
         font-size: 28px;
         min-height: 40px;
     }

@@ -22,13 +22,3 @@ export class LevelBar extends astalify(Gtk.LevelBar) {
         super(props as any);
     }
 }
-
-export class Spinner extends astalify(Gtk.Spinner) {
-    static {
-        GObject.registerClass(this);
-    }
-
-    constructor(props: ConstructProps<Spinner, Gtk.Spinner.ConstructorProps>) {
-        super(props as any);
-    }
-}
