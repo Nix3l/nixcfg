@@ -1,25 +1,27 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, bind } from "astal"
 
-function FixDigits(x: number): string {
-    return x < 10 ? "0" + x : x.toString();
-}
+import { FixTimeDigits } from "../util/utils"
 
 let time_hm = Variable("").poll(1000, () => {
     let date = new Date();
     let hours = date.getHours();
     let minutes = date.getMinutes();
 
-    return FixDigits(hours) + ":" +
-           FixDigits(minutes);
+    return FixTimeDigits(hours) + ":" +
+           FixTimeDigits(minutes);
 });
 
 let time_s = Variable("").poll(1000, () => {
     let date = new Date();
     let seconds = date.getSeconds();
 
-    return FixDigits(seconds);
+    return FixTimeDigits(seconds);
 });
+
+let day = Variable("00").poll(1000, () => FixTimeDigits(new Date().getDate()));
+let month = Variable("00").poll(1000, () => FixTimeDigits(new Date().getMonth() + 1));
+let year = Variable("00").poll(1000, () => FixTimeDigits(new Date().getFullYear() - 2000));
 
 export function TimeModule(): JSX.Element {
     return <box
@@ -42,5 +44,18 @@ export function TimeModule(): JSX.Element {
                 className="Seconds"
             />
         </box>
+    </box>
+}
+
+export function DateModule(): JSX.Element {
+    return <box
+        vertical
+        vexpand
+        spacing={12}
+        className="DateModule"
+    >
+        <label label={bind(day)} />
+        <label label={bind(month)} />
+        <label label={bind(year)} />
     </box>
 }

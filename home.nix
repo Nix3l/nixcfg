@@ -28,10 +28,6 @@
         EXPLORER = "thunar";
     };
 
-    home.packages = [
-        # packages
-    ];
-
     home.file = {
         # any files i want to write can go here
     };
@@ -40,11 +36,11 @@
     programs.git = {
         enable = true;
 
-	userName = "nix3l";
-	userEmail = "momanianas123@gmail.com";
-	extraConfig = {
-	    init.defaultBranch = "master";
-	};
+        userName = "nix3l";
+        userEmail = "momanianas123@gmail.com";
+        extraConfig = {
+            init.defaultBranch = "master";
+        };
     };
 
     # WM
@@ -52,92 +48,102 @@
         enable = true;
         package = pkgs.hyprland;
         systemd.enable = true;
+        xwayland.enable = true;
 
         settings = {
-           # MONITOR
-           monitor = ",preferred,auto,1";
+	    # MONITOR
+	    monitor = [ ",preferred,auto,1" "HDMI-A-1,preferred,auto,1,mirror,eDP-1" ];
 
-           # LOOK
-           general = {
-               border_size = 2;
+	    # LOOK
+	    general = {
+		border_size = 2;
 
-               gaps_in = 5; # between windows
-               gaps_out = 10; # between windows and montor edge
+		gaps_in = 5; # between windows
+		gaps_out = 10; # between windows and montor edge
 
-               "col.inactive_border" = "0x665c5444";
-               "col.active_border" = "0xebdbb2ff";
+		"col.inactive_border" = "0xff928374";
+		"col.active_border" = "0xffebdbb2";
 
-               layout = "diwndle";
+		layout = "diwndle";
 
-               resize_on_border = false;
-           };
+		resize_on_border = false;
+	    };
 
-           decoration = {
-               rounding = 0;
+	    decoration = {
+		rounding = 0;
 
-               active_opacity = 1.0;
-               inactive_opacity = 1.0;
+		active_opacity = 1.0;
+		inactive_opacity = 0.92;
 
-               dim_inactive = false;
+		dim_inactive = false;
 
-               # you can just add a custom shader wow
-               # that is actually awesome
-               # screen_shader = "";
+		blur = {
+		    enabled = true;
+		    passes = 2;
+		};
 
-               blur = {
-                 enabled = false;
-               };
+		shadow = {
+		    enabled = false;
+		};
 
-               shadow = {
-                 enabled = false;
-               };
-           };
+		# you can just add a custom shader wow
+		# that is actually awesome
+		# screen_shader = "";
+	    };
 
-           # INPUT
-           "$mod" = "SUPER";
+	    # INPUT
+	    "$mod" = "SUPER";
 
-           "$terminal" = "alacritty";
-           "$browser" = "librewolf";
-           "$explorer" = "thunar";
+	    "$terminal" = "alacritty";
+	    "$browser" = "librewolf";
+	    "$explorer" = "thunar";
 
-           input = {
-               kb_layout = "us";
-               touchpad = { natural_scroll = true; };
+	    input = {
+		kb_layout = "us";
+		touchpad = { natural_scroll = true; };
 
-               repeat_rate = 45;
-               repeat_delay = 200;
-           };
+		repeat_rate = 45;
+		repeat_delay = 200;
+	    };
 
-           bind = [
-               "$mod, W, killactive"
-               "$mod SHIFT, Q, exit"
-               "$mod, S, togglefloating"
-               "$mod, F, fullscreen"
+	    bind = [
+		"$mod, W, killactive"
+		"$mod SHIFT, Q, exit"
+		"$mod, S, togglefloating"
+		"$mod, F, fullscreen"
 
-               "$mod, 1, workspace, 1"
-               "$mod, 2, workspace, 2"
-               "$mod, 3, workspace, 3"
-               "$mod, 4, workspace, 4"
+		"$mod, 1, workspace, 1"
+		"$mod, 2, workspace, 2"
+		"$mod, 3, workspace, 3"
+		"$mod, 4, workspace, 4"
 
-               "$mod SHIFT, 1, movetoworkspace, 1"
-               "$mod SHIFT, 2, movetoworkspace, 2"
-               "$mod SHIFT, 3, movetoworkspace, 3"
-               "$mod SHIFT, 4, movetoworkspace, 4"
+		"$mod SHIFT, 1, movetoworkspace, 1"
+		"$mod SHIFT, 2, movetoworkspace, 2"
+		"$mod SHIFT, 3, movetoworkspace, 3"
+		"$mod SHIFT, 4, movetoworkspace, 4"
 
-               "$mod, left, movefocus, l"
-               "$mod, right, movefocus, r"
-               "$mod, up, movefocus, u"
-               "$mod, down, movefocus, d"
+		"$mod, left, movefocus, l"
+		"$mod, right, movefocus, r"
+		"$mod, up, movefocus, u"
+		"$mod, down, movefocus, d"
 
-               "$mod, RETURN, exec, $terminal"
-               "$mod, B, exec, $browser"
-               "$mod, E, exec, $explorer"
-            ];
+		"$mod, RETURN, exec, $terminal"
+		"$mod, B, exec, $browser"
+		"$mod SHIFT, B, exec, $browser --private-window"
+		"$mod, E, exec, $explorer"
+		"$mod, G, exec, ags run ~/nixcfg/ags/dashboard/app.ts --log-file ~/nixcfg/ags/dashboard/log.txt"
+	    ];
 
-            bindm = [
-               "$mod, mouse:272, movewindow"
-               "$mod, mouse:273, resizewindow"
-            ];
+	    bindm = [
+		"$mod, mouse:272, movewindow"
+		"$mod, mouse:273, resizewindow"
+	    ];
+
+	    exec-once = [
+		"ags run ~/nixcfg/ags/bar/app.ts --log-file ~/nixcfg/ags/bar/log.txt &"
+		"nm-applet &"
+		"fcitx5 &"
+	    ];
         };
     };
 
@@ -153,8 +159,7 @@
             mpris
             network
             notifd
-            tray
-	    wireplumber
+            wireplumber
         ];
     };
 
@@ -176,8 +181,13 @@
             ipc = "on";
             splash = false;
 
-            preload = [ "~/pics/wallpapers/chinese-hills.jpg" ];
-            wallpaper = [ "eDP-1,~/pics/wallpapers/chinese-hills.jpg" ];
+            preload = [
+		"~/pics/wallpapers/chinese-hills.jpg"
+		"~/pics/wallpapers/ghibli-japanese-walled-garden.png"
+		"~/pics/wallpapers/ign-waifu.png"
+	    ];
+
+            wallpaper = [ "eDP-1,~/pics/wallpapers/ghibli-japanese-walled-garden.png" ];
         };
     };
 
@@ -185,8 +195,8 @@
     gtk = {
         enable = true;
         theme = {
-            package = pkgs.gruvbox-dark-gtk;
-            name = "gruvbox-dark-gtk";
+            package = pkgs.gruvbox-gtk-theme;
+            name = "Gruvbox";
         };
 
         iconTheme = {
@@ -197,9 +207,18 @@
 
     qt = {
         enable = true;
-        platformTheme = "gtk";
+        platformTheme.name = "gtk";
         style.name = "adwaita-dark";
         style.package = pkgs.adwaita-qt;
+    };
+
+    dconf = {
+        enable = true;
+        settings = {
+            "org.gnome.desktop.interface" = {
+                color-scheme = "dark";
+            };
+        };
     };
 
     # SHELL
@@ -360,13 +379,23 @@
         enabledExtensions = with spicepkgs.extensions; [
             adblockify
             hidePodcasts
-            fullAppDisplay
             fullAlbumDate
             volumePercentage
+	    fullScreen
         ];
 
         theme = spicepkgs.themes.text;
         colorScheme = "gruvbox";
+    };
+
+    # WHATEVER THIS IS
+    xdg = {
+        enable = true;
+        portal = {
+            enable = true;
+            extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+            config.common.default = [ "gtk" ];
+        };
     };
 
     # let home manager install and manage itself

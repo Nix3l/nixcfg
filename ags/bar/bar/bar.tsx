@@ -7,7 +7,7 @@ import Tray from "gi://AstalTray"
 
 // ngl i hate having to use pascal case but whatever
 
-const hyprland = Hyprland.get_default();
+let hyprland = Hyprland.get_default();
 const tray = Tray.get_default();
 
 // DASHBOARD
@@ -21,7 +21,7 @@ function Dashboard(): JSX.Element {
         onClicked={() => OpenDashboard()}
     >
         <label label="" />
-    </button>;
+    </button>
 }
 
 // WORKSPACES
@@ -30,14 +30,13 @@ function Workspaces(): JSX.Element {
     return <box className="Workspaces"> {
         Array.from({ length: 4 }).map((_, i) =>
             <button
-		heightRequest={10}
+                heightRequest={6}
                 onClicked={() => hyprland.message(`dispatch workspace ${i + 1}`)}
                 className={focused_ws.as(fw => i + 1 === fw.id ? "Focused" : "")}
-	    >
-            </button>
+            />
         )
-    } </box>;
-};
+    } </box>
+}
 
 // FOCUSED WINDOW
 function FocusedClient(): JSX.Element {
@@ -45,26 +44,22 @@ function FocusedClient(): JSX.Element {
     return <box
         className="FocusedClient"
         visible={client.as(Boolean)}
-    > {
-        <label label={client.as(c => c.get_title())} />
-    } </box>;
-};
+    >
+        <label label={client.as(c => c ? c.initial_title : "")} />
+    </box>
+}
 
 // TRAY
 let tray_open = Variable(false);
-
-function SysTrayToggle() {
-    tray_open.set(!tray_open.get());
-}
 
 function SysTray(): JSX.Element {
     return <box className="Tray">
         <button
             className="TrayToggle"
             cursor="pointer"
-            onClick={() => SysTrayToggle() }
+            onClick={() => tray_open.set(!tray_open.get()) }
         >
-            <label label={ bind(tray_open).as(v => v ? ">" : "<") } />
+            <label label={bind(tray_open).as(v => v ? ">" : "<")} />
         </button>
         <revealer
             revealChild={bind(tray_open).as(v => v)}
@@ -95,10 +90,11 @@ export default function TopBar(gdkmonitor: Gdk.Monitor) {
 
     return <window
         className="Bar"
-        gdkmonitor={ gdkmonitor }
-        exclusivity={ Astal.Exclusivity.EXCLUSIVE }
-        anchor={ TOP | LEFT | RIGHT } // anchor the bar to the top left, top center and top right of the screen
-        application={App}>
+        gdkmonitor={gdkmonitor}
+        exclusivity={Astal.Exclusivity.EXCLUSIVE}
+        anchor={TOP | LEFT | RIGHT}
+        application={App}
+    >
         <box>
             <box hexpand halign={Gtk.Align.START} className="LeftBox">
                 <Dashboard />
@@ -111,5 +107,5 @@ export default function TopBar(gdkmonitor: Gdk.Monitor) {
                 <SysTray />
             </box>
         </box>
-    </window>;
+    </window>
 }

@@ -1,3 +1,5 @@
+import { FixTimeDigits } from "../util/utils"
+
 export enum WeekDay {
     Sunday = 0,
     Monday = 1,
@@ -5,7 +7,15 @@ export enum WeekDay {
     Wednesday = 3,
     Thursday = 4,
     Friday = 5,
-    Saturday = 6
+    Saturday = 6,
+}
+
+// TODO: these names are awful
+export enum TaskDuration {
+    Hour = 0,
+    HourHalf = 1,
+    TwoHour = 2,
+    ThreeHour = 3,
 }
 
 export enum TaskStatus {
@@ -14,106 +24,148 @@ export enum TaskStatus {
     Finished = 2,
 }
 
-export class TaskItem {
-    public static NONE: TaskItem = new TaskItem("", "", 0, 0);
-
-    public name: string;
-    public detail: string;
-    public start_time: number;
-    public end_time: number;
-
-    constructor(name: string, detail: string, start_time: number, end_time: number) {
-        this.detail = detail;
-        this.name = name;
-        this.start_time = start_time;
-        this.end_time = end_time;
-    }
-
-    public status(time: number): TaskStatus {
-        if(time < this.start_time) return TaskStatus.Pending;
-        else if(time < this.end_time) return TaskStatus.InProgress;
-        else return TaskStatus.Finished;
-    }
-
-    public get_duration(): number {
-        return this.end_time - this.start_time;
-    }
-}
-
-export class Schedule {
-    public items: TaskItem[][];
-
-    constructor() {
-        this.items = [[], [], [], [], [], [], []];
-    }
-
-    public get_day_schedule(day: WeekDay) {
-        return this.items[day];
-    }
-
-    public add_item(item: TaskItem, day: WeekDay) {
-        this.items[day].push(item);
-    }
-}
-
 function time(hours: number, minutes: number): number {
     return hours + minutes / 60.0;
 }
 
+function task_duration(duration: TaskDuration, ramadan: boolean): number {
+    if(duration == TaskDuration.Hour)
+        return ramadan ? time(0, 50) : time(1, 0); 
+    if(duration == TaskDuration.HourHalf)
+        return ramadan ? time(1, 10) : time(1, 30);
+    if(duration == TaskDuration.TwoHour)
+        return ramadan ? time(1, 30) : time(2, 0);
+    if(duration == TaskDuration.ThreeHour)
+        return ramadan ? time(2, 20) : time(3, 0);
+
+    return 1;
+}
+
+export class TaskItem {
+    public static NONE: TaskItem = new TaskItem("", "", 0, 0, [0], false);
+
+    public name: string;
+    public detail: string;
+    public duration: TaskDuration;
+    public start_time: number;
+    public end_time: number;
+    public ramadan_start_time: number;
+    public ramadan_end_time: number;
+    public days: WeekDay[];
+
+    constructor(name: string, detail: string, start_time: number, duration: TaskDuration, days: WeekDay[], ramadan_timing: boolean) {
+        this.name = name;
+        this.detail = detail;
+        this.duration = duration;
+
+        this.start_time = start_time;
+        this.end_time = start_time + task_duration(this.duration, false);
+        if(ramadan_timing) {
+            let index = (start_time - 8.5) / task_duration(this.duration, false);
+            this.ramadan_start_time = 9.5 + index * task_duration(this.duration, true);
+            this.ramadan_end_time = this.ramadan_start_time + task_duration(this.duration, true);
+        } else {
+            this.ramadan_start_time = this.start_time;
+            this.ramadan_end_time = this.end_time;
+        }
+
+        this.days = days;
+    }
+
+    public status(time: number, ramadan: boolean): TaskStatus {
+        if(time < (ramadan ? this.ramadan_start_time : this.start_time))
+            return TaskStatus.Pending;
+        else if(time < (ramadan ? this.ramadan_end_time : this.end_time))
+            return TaskStatus.InProgress;
+        else
+            return TaskStatus.Finished;
+    }
+
+    public static time_string(time: number) {
+        let hour = time >= 13 ? Math.floor(time) - 12 : Math.floor(time);
+        let minute = Math.round((time - Math.floor(time)) * 60);
+        return FixTimeDigits(hour) + ":" + FixTimeDigits(minute);
+    }
+}
+
+export class Schedule {
+    public daily_tasks: TaskItem[][];
+    public ramadan: boolean;
+
+    constructor() {
+        this.daily_tasks = [[], [], [], [], [], [], []];
+        this.ramadan = true;
+    }
+
+    public get_day_schedule(day: WeekDay): TaskItem[] {
+        return this.daily_tasks[day];
+    }
+
+    public process_tasks(tasks: TaskItem[]) {
+        for(let item of tasks) {
+            for(let day of item.days)
+                this.daily_tasks[day].push(item);
+        }
+
+        for(let i = 0; i < this.daily_tasks.length; i ++) {
+            this.daily_tasks[i] = this.daily_tasks[i].sort(
+                (a, b) => a.start_time - b.start_time
+            );
+        }
+    }
+}
+
 // SCHEDULE
-const math: TaskItem = new TaskItem(
-    "Discrete Math",
-    "W-202",
-    time(9, 30),
-    time(11, 0)
-);
-
-const programming: TaskItem = new TaskItem(
-    "Programming",
-    "S-210",
-    time(11, 30),
-    time(14, 10)
-);
-
-const security: TaskItem = new TaskItem(
-    "Security",
-    "S-214",
-    time(14, 10),
-    time(15, 20)
-);
-
-const pom: TaskItem = new TaskItem(
-    "Principles",
-    "W-109",
-    time(9, 30),
-    time(10, 40)
-);
-
-const english1: TaskItem = new TaskItem(
-    "English",
-    "W-108",
-    time(13, 0),
-    time(13, 50)
-);
-
-const english2: TaskItem = new TaskItem(
-    "English",
-    "W-108",
-    time(13, 0),
-    time(14, 10)
-);
-
 export const schedule: Schedule = new Schedule();
+schedule.ramadan = true;
 
-schedule.add_item(math, WeekDay.Sunday);
-schedule.add_item(programming, WeekDay.Sunday);
-schedule.add_item(security, WeekDay.Sunday);
-
-schedule.add_item(pom, WeekDay.Monday);
-schedule.add_item(english2, WeekDay.Monday);
-
-schedule.add_item(math, WeekDay.Wednesday);
-schedule.add_item(english1, WeekDay.Wednesday);
-schedule.add_item(security, WeekDay.Wednesday);
-
-schedule.add_item(pom, WeekDay.Thursday);
+schedule.process_tasks([
+    new TaskItem(
+        "Discrete Math",
+        "W-202",
+        time(8, 30),
+        TaskDuration.TwoHour,
+        [ WeekDay.Sunday, WeekDay.Wednesday ],
+        true,
+    ),
+    new TaskItem(
+        "Programming",
+        "S-210",
+        time(11, 30),
+        TaskDuration.ThreeHour,
+        [ WeekDay.Sunday ],
+        true,
+    ),
+    new TaskItem(
+        "Security",
+        "S-214",
+        time(14, 30),
+        TaskDuration.HourHalf,
+        [ WeekDay.Sunday, WeekDay.Wednesday ],
+        true,
+    ),
+    new TaskItem(
+        "Principles",
+        "W-109",
+        time(8, 30),
+        TaskDuration.HourHalf,
+        [ WeekDay.Monday, WeekDay.Thursday ],
+        true,
+    ),
+    new TaskItem(
+        "English",
+        "W-108",
+        time(13, 0),
+        TaskDuration.HourHalf,
+        [ WeekDay.Monday, WeekDay.Thursday ],
+        true,
+    ),
+    new TaskItem(
+        "English",
+        "W-108",
+        time(13, 0),
+        TaskDuration.Hour,
+        [ WeekDay.Wednesday ],
+        true,
+    ),
+]);

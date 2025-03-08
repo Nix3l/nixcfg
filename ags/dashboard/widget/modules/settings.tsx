@@ -1,8 +1,9 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, bind, exec } from "astal"
 
-import { Calendar, LevelBar, Spinner } from "../util/utils"
+import { Calendar, LevelBar } from "../util/utils"
 import { mem_usage, mem_usage_abbr, max_ram, cpu_usage } from "../util/stats"
+import { WeekDay, TaskStatus, TaskItem, schedule } from "./schedule"
 
 import Network from "gi://AstalNetwork"
 import Bluetooth from "gi://AstalBluetooth"
@@ -11,9 +12,10 @@ import Battery from "gi://AstalBattery"
 enum SettingsTypes {
     Mixer = 0,
     Calendar = 1,
+    Schedule = 2,
 }
 
-let selected_setting = Variable(SettingsTypes.Mixer);
+let selected_setting = Variable(SettingsTypes.Schedule);
 
 const network = Network.get_default();
 const bluetooth = Bluetooth.get_default();
@@ -23,24 +25,8 @@ const battery = Battery.get_default();
 
 const max_brightness = Number(exec(`bash -c 'brightnessctl m'`));
 
-// CALENDAR MODULE
-function CalendarModule(): JSX.Element {
-    return <box
-        vexpand
-        hexpand
-        vertical
-        className="CalendarModule"
-    >
-        <Calendar 
-            halign={Gtk.Align.FILL}
-            valign={Gtk.Align.FILL}
-            showDetails={false}
-            showHeading
-            showDayNames
-            className="Calendar"
-        />
-    </box>
-}
+let selected_day = Variable(new Date().getDay());
+let ramadan = Variable(schedule.ramadan);
 
 // MIXER MODULE
 function BatteryIcon() {
@@ -282,6 +268,147 @@ function MixerModule(): JSX.Element {
     </box>
 }
 
+// CALENDAR MODULE
+function CalendarModule(): JSX.Element {
+    return <box
+        vexpand
+        hexpand
+        vertical
+        valign={Gtk.Align.CENTER}
+        className="CalendarModule"
+    >
+        <Calendar 
+            halign={Gtk.Align.FILL}
+            valign={Gtk.Align.FILL}
+            showDetails={false}
+            showHeading
+            showDayNames
+            className="Calendar"
+        />
+    </box>
+}
+
+// SCHEDULE MODULE
+function ScheduleDayButton({ day, label }: { day: number, label: string }): JSX.Element {
+    return <button
+        onClick={() => selected_day.set(day)}
+        className={bind(selected_day).as(selected => selected == day ? "Selected" : "")}
+    >
+        <label label={label} />
+    </button>
+}
+
+function ScheduleTask({ task, index }: { task: TaskItem, index: number }): JSX.Element {
+    return <box
+        hexpand
+        spacing={8}
+        className="Task"
+    >
+        <box
+            className="Icon"
+        >
+            <label label={index.toString()} />
+        </box>
+        <box
+            hexpand
+            vertical
+            valign={Gtk.Align.CENTER}
+        >
+            <box
+                hexpand
+                spacing={8}
+                className="Header"
+            >
+                <label label={task.name} className="Name" />
+                <label label={"(" + task.detail + ")"} className="Detail" />
+            </box>
+            <box
+                hexpand
+                className="Time"
+            >
+                <label label={
+                    bind(ramadan).as(ramadan => ramadan ?
+                        TaskItem.time_string(task.ramadan_start_time)
+                        + " - " +
+                        TaskItem.time_string(task.ramadan_end_time) :
+                        TaskItem.time_string(task.start_time)
+                        + " - " +
+                        TaskItem.time_string(task.end_time)
+                )} />
+            </box>
+        </box>
+    </box>
+}
+
+function ScheduleModule(): JSX.Element {
+    return <box
+        vexpand
+        hexpand
+        vertical
+        className="ScheduleModule"
+    >
+        <box
+            hexpand
+            className="Header"
+        >
+            <box
+                hexpand
+                halign={Gtk.Align.START}
+            >
+                <ScheduleDayButton day={0} label="日" />
+                <ScheduleDayButton day={1} label="月" />
+                <ScheduleDayButton day={2} label="火" />
+                <ScheduleDayButton day={3} label="水" />
+                <ScheduleDayButton day={4} label="木" />
+                <ScheduleDayButton day={5} label="金" />
+                <ScheduleDayButton day={6} label="土" />
+            </box>
+            <box
+                halign={Gtk.Align.END}
+            >
+                <button
+                    onClick={() => {
+                        schedule.ramadan = !schedule.ramadan;
+                        ramadan.set(schedule.ramadan);
+                    }}
+                >
+                    <label label={
+                        bind(ramadan).as(ramadan =>
+                            ramadan ? "" : ""
+                    )} />
+                </button>
+            </box>
+        </box>
+        <scrollable
+            hscroll={Gtk.PolicyType.NEVER}
+        >
+            <box
+                hexpand
+                vexpand
+                className="Body"
+            > {
+                bind(selected_day).as((day) => {
+                    let tasks = schedule.get_day_schedule(day);
+                    if(tasks.length == 0)
+                        return (<label hexpand vexpand label="空" className="Empty" />);
+
+                    return (<box
+                        hexpand
+                        vexpand
+                        vertical
+                        spacing={12}
+                        className="Tasks"
+                    > {
+                        tasks.map((task, i) => (
+                            <ScheduleTask task={task} index={i + 1} />
+                        ))
+                    } </box>);
+                })
+            } </box>
+        </scrollable>
+    </box>
+}
+
 function SettingsButton({ type, label }: { type: SettingsTypes; label: string }): JSX.Element {
     return <button
                 onClick={() => selected_setting.set(type)}
@@ -306,13 +433,16 @@ export function SettingsModule(): JSX.Element {
         >
             <SettingsButton type={SettingsTypes.Mixer} label="" />
             <SettingsButton type={SettingsTypes.Calendar} label="" />
+            <SettingsButton type={SettingsTypes.Schedule} label="" />
         </box> {
             bind(selected_setting).as(setting =>
                 setting == SettingsTypes.Mixer ?
                     (<MixerModule />) :
                 setting == SettingsTypes.Calendar ?
                     (<CalendarModule />) :
-                (<label label="error?? noway!" />)
+                setting == SettingsTypes.Schedule ?
+                    (<ScheduleModule />) :
+                (<label label="huh" />)
             )
         }
     </box>

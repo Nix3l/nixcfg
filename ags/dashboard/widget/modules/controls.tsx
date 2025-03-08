@@ -1,44 +1,26 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, bind, exec } from "astal"
 
-// TODO: change these to functions
+function ControlButton({ label, action } : { label: string; action: () => void; }): JSX.Element {
+    return <box
+        className="ControlsModule"
+    >
+        <button
+            onClick={() => action()}
+        >
+            <label label={label} />
+        </button>
+    </box>
+}
+
 export function ControlsModule(): JSX.Element {
     return <box
         vertical
-        vexpand
-        spacing={12}
+        spacing={15}
     >
-        <box className="ControlsModule">
-            <button
-                onClick={() => print("i will get this set up i promise")}
-                className="DesktopControlButton"
-            >
-                <label label="" />
-            </button>
-        </box>
-        <box className="ControlsModule">
-            <button
-                onClick=""
-                className="DesktopControlButton"
-            >
-                <label label="" />
-            </button>
-        </box>
-        <box className="ControlsModule">
-            <button
-                onClick=""
-                className="DesktopControlButton"
-            >
-                <label label="" />
-            </button>
-        </box>
-        <box className="ControlsModule">
-            <button
-                onClick=""
-                className="DesktopControlButton"
-            >
-                <label label="" />
-            </button>
-        </box>
+        <ControlButton label="" action={() => exec("shutdown -P now")} />
+        <ControlButton label="" action={() => exec("systemctl suspend")} />
+        <ControlButton label="" action={() => exec("reboot")} />
+        <ControlButton label="" action={() => exec("hyprctl dispatch exit")} />
     </box>
 }

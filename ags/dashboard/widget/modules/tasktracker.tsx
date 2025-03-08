@@ -17,7 +17,7 @@ let task = Variable(TaskItem.NONE).poll(1000, () => CurrentTask());
 function CurrentTask(): TaskItem {
     let tasks = schedule.get_day_schedule(day.get());
     for(let task of tasks) {
-        if(task.status(time.get()) == TaskStatus.Finished) continue;
+        if(task.status(time.get(), schedule.ramadan) == TaskStatus.Finished) continue;
         return task;
     }
 
@@ -63,18 +63,23 @@ function TaskInfo(): JSX.Element {
             className="Time"
         >
             <label label={
-                bind(task).as(task =>
-                    task.status(time.get()) == TaskStatus.InProgress ?
+                bind(time).as(time =>
+                    task.get().status(time, schedule.ramadan) == TaskStatus.InProgress ?
                     "ends in" :
                     "starts in"
                 )
             } />
             <label label={
-                bind(task).as(task =>
-                    task.status(time.get()) == TaskStatus.InProgress ?
-                    human_readable_time(task.end_time - time.get()) :
-                    human_readable_time(task.start_time - time.get())
-                )
+                bind(time).as((time) => {
+                    const curr: TaskItem = task.get();
+                    return curr.status(time, schedule.ramadan) == TaskStatus.InProgress ?
+                        human_readable_time(
+                            (schedule.ramadan ? curr.ramadan_end_time : curr.end_time) - time
+                        ):
+                        human_readable_time(
+                            (schedule.ramadan ? curr.ramadan_start_time : curr.start_time) - time
+                        )
+                })
             } />
         </box>
     </box>

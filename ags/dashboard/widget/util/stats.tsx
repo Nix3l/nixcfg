@@ -12,7 +12,7 @@ let mem_usage_abbr = Variable("").poll(1000, () => {
 });
 
 let cpu_usage = Variable(0).poll(1000, () => {
-    return (100 - Number(exec(`bash -c 'top -b -n1 | grep \"id, \"'`).split(" ").filter((s) => s !== "")[7])) / 100;
+    return (100 - Number(exec(`bash -c 'top -b -n1 -i | grep \"id, \"'`).split(" ").filter((s) => s !== "")[7])) / 100;
 });
 
 export { mem_usage, mem_usage_abbr, max_ram, cpu_usage }

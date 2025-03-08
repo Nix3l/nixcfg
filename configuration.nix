@@ -108,8 +108,9 @@
         gh
         openssl
         zsh
-        dconf # dont know what this is but gtk doesnt work without it for some reason
+        dconf # needed for gtk
         (ffmpeg-full.override { withUnfree = true; withOpengl = true; })
+        appimage-run
 
         # apps
         hyprland
@@ -123,7 +124,15 @@
         qbittorrent
         feh
         flameshot
-	networkmanagerapplet
+        networkmanagerapplet
+        blueberry
+        steam
+
+        # wine 
+        wineWowPackages.stable
+        # native wayland support (can be unstable)
+        wineWowPackages.waylandFull
+        winetricks
 
         # terminal apps
         neofetch
@@ -133,6 +142,7 @@
         brightnessctl
         htop
         btop
+        unrar
 
         # fonts
         noto-fonts
@@ -144,6 +154,8 @@
         font-awesome
         font-awesome_5
         font-awesome_4
+	ipafont
+	kochi-substitute
 
         # other
         capitaine-cursors
@@ -159,11 +171,31 @@
         font-awesome
         font-awesome_5
         font-awesome_4
+	ipafont
+	kochi-substitute
     ];
+
+    # STEAM
+    programs.steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        dedicatedServer.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
+    };
+
+    # DYNAMICALLY LINKED EXECS
+    programs.nix-ld = {
+        enable = true;
+    };
 
     # SESSION VARIABLES
     environment.sessionVariables = {
         NIXOS_OZONE_WL = "1"; # hint at electron apps to use wayland
+        QT_IM_MODULE = "fcitx";
+        QT_IM_MODULES = "wayland;fcitx";
+        XMODIFIERS = "@im=fcitx";
+        XMODIFIER = "@im=fcitx";
+        GTK_IM_MODULE = "wayland";
     };
 
     # SERVICES

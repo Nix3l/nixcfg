@@ -44,7 +44,6 @@ window.Dashboard {
     color: $fg;
     font-family: "Font Awesome 5", "FiraCode";
     font-size: 24px;
-    font-weight: bold;
 }
 
 // TIME MODULE
@@ -125,6 +124,7 @@ window.Dashboard {
 // SETTINGS MODULE
 .SettingsModule {
     @include module;
+    font-weight: normal;
 
     button {
         background: transparent;
@@ -135,28 +135,6 @@ window.Dashboard {
 
     button.SelectedButton {
         background: $aqua;
-    }
-}
-
-.CalendarModule {
-    .Calendar {
-        background: transparent;
-        color: $fg;
-        border: none;
-        font-weight: normal;
-
-        .button {
-            color: $fg;
-        }
-
-        // for some reason .highlight is the top row of day names??? ok
-        .highlight {
-            background: transparent;
-        }
-
-        :selected {
-            background: $blue;
-        }
     }
 }
 
@@ -176,20 +154,12 @@ window.Dashboard {
         }
 
         .Battery {
-            block.filled.full {
-                background: $aqua;
-            }
-
             block.filled {
                 background: $yellow;
             }
         }
 
         .Memory, .Cpu {
-            block.filled.full {
-                background: $red;
-            }
-
             block.filled {
                 background: $aqua;
             }
@@ -242,6 +212,67 @@ window.Dashboard {
 
             highlight {
                 background: $yellow;
+            }
+        }
+    }
+}
+
+.CalendarModule {
+    .Calendar {
+        background: transparent;
+        color: $fg;
+        border: none;
+        font-weight: normal;
+
+        .button {
+            color: $fg;
+        }
+
+        // for some reason .highlight is the top row of day names??? ok
+        .highlight {
+            background: transparent;
+        }
+
+        :selected {
+            background: $blue;
+        }
+    }
+}
+
+.ScheduleModule {
+    background: transparent;
+    color: $fg;
+    font-weight: normal;
+
+    .Header {
+        button.Selected {
+            background: $aqua;
+        }
+    }
+
+    .Body {
+        .Empty {
+            // color: $bg;
+            font-style: italic;
+        }
+
+        .Task {
+            .Icon {
+                background: $aqua;
+            }
+
+            .Header {
+                .Name {
+                    font-size: 22px;
+                }
+
+                .Detail {
+                    font-size: 18px;
+                }
+            }
+
+            .Time {
+                font-size: 18px;
             }
         }
     }
@@ -400,9 +431,14 @@ window.Dashboard {
 .ControlsModule {
     @include module;
 
-    .DesktopControlButton {
+    button {
         background: transparent;
         color: $fg;
         border: none;
     }
+}
+
+// DATE MODUE
+.DateModule {
+    @include module;
 }

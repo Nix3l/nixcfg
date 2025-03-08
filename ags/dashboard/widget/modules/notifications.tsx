@@ -62,7 +62,9 @@ export function NotificationModule(): JSX.Element {
                 </button>
             </box>
         </box>
-        <scrollable>
+        <scrollable
+            hscroll={Gtk.PolicyType.NEVER}
+        >
             <box
                 vertical
                 vexpand
