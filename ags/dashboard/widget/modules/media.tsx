@@ -60,15 +60,15 @@ export function MediaModule(): JSX.Element {
             <button
                 halign={Gtk.Align.END}
                 hexpand
-                onClick={() => { if(player.available) player.previous() }}
                 cursor="pointer"
+                onClick={() => { if(player.available) player.previous() }}
                 className="Control"
             >
                 <label className="Previous" label="<" />
             </button>
             <button
-                onClick={() => { if(player.available) player.play_pause() }}
                 cursor="pointer"
+                onClick={() => { if(player.available) player.play_pause() }}
                 className="Control"
             >
                 <label className="PlayPause" label={
@@ -79,8 +79,8 @@ export function MediaModule(): JSX.Element {
             </button>
             <button
                 halign={Gtk.Align.START}
-                onClick={() => { if(player.available) player.next() }}
                 cursor="pointer"
+                onClick={() => { if(player.available) player.next() }}
                 className="Control"
             >
                 <label className="Next" label=">" />

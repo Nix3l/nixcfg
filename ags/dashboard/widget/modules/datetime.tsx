@@ -48,7 +48,7 @@ export function TimeModule(): JSX.Element {
 }
 
 export function DateModule(): JSX.Element {
-    return <box
+    return <centerbox
         vertical
         vexpand
         spacing={12}
@@ -57,5 +57,5 @@ export function DateModule(): JSX.Element {
         <label label={bind(day)} />
         <label label={bind(month)} />
         <label label={bind(year)} />
-    </box>
+    </centerbox>
 }

@@ -1,22 +1,26 @@
 $fg:       #ebdbb2;
-$bg:       #282828;
-$light-bg: #3c3836;
-$red:      #cc241d; 
-$blue:     #458588; 
+$fg-muted: #a89984;
+$bg:       #3c3836;
+$bg-light: #504945;
+$red:      #fb4934; 
+$blue:     #83a598; 
 $aqua:     #8ec07c;
-$purple:   #b16286;
-$yellow:   #d79921;
+$purple:   #d3869b;
+$yellow:   #fabd2f;
+$orange:   #fe8019;
 
 button {
     box-shadow: 0 0px;
+    border: none;
+    outline: none;
 }
 
 slider {
     background: transparent;
     color: transparent;
+    box-shadow: 0 0px;
     border: none;
     outline: none;
-    box-shadow: 0 0px;
 }
 
 scrollable {
@@ -29,7 +33,7 @@ scrollable {
 }
 
 @mixin module {
-    background: $light-bg;
+    background: $bg;
     color: $fg;
 
     border: none;
@@ -52,11 +56,12 @@ window.Dashboard {
 
     .Time {
         font-size: 48px;
+        font-weight: bold;
     }
 
     .Seconds {
+        color: $fg-muted;
         font-size: 22px;
-        font-weight: normal;
     }
 }
 
@@ -67,7 +72,6 @@ window.Dashboard {
     .InfoText {
         font-size: 16px;
         font-style: italic;
-        font-weight: normal;
     }
 
     .pfp {
@@ -78,6 +82,11 @@ window.Dashboard {
 // NOTIFICATION MODULE
 .NotificationModule {
     @include module;
+
+    .Title {
+        color: $blue;
+        font-weight: bold;
+    }
 
     .Clear {
         background: transparent;
@@ -90,23 +99,24 @@ window.Dashboard {
     padding: 8px;
 
     .Notif {
-        background: $blue;
+        background: $bg-light;
         color: $fg;
 
-        padding: 8px;
-        border-radius: 8px;
+        padding: 16px;
+        border-radius: 6px;
 
         icon {
-            font-size: 32px;
+            font-size: 64px;
         }
 
-        .Header, .Body {
-            font-style: normal;
-            font-weight: normal;
+        .Fallback {
+            font-size: 48px;
         }
 
         .Header {
+            color: $aqua;
             font-size: 16px;
+            font-weight: bold;
         }
 
         .Body {
@@ -115,7 +125,7 @@ window.Dashboard {
 
         button.Dismiss {
             background: transparent;
-            color: $fg;
+            color: $fg-muted;
             border: none;
         }
     }
@@ -124,7 +134,6 @@ window.Dashboard {
 // SETTINGS MODULE
 .SettingsModule {
     @include module;
-    font-weight: normal;
 
     button {
         background: transparent;
@@ -133,8 +142,13 @@ window.Dashboard {
         border: none;
     }
 
-    button.SelectedButton {
-        background: $aqua;
+    button.Tab {
+        padding: 12px;
+    }
+
+    button.SelectedTab {
+        padding: 12px;
+        background: $bg-light;
     }
 }
 
@@ -146,16 +160,16 @@ window.Dashboard {
     .Bars {
         * {
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
 
             trough {
-                background: transparent;
+                background: $bg-light;
             }
         }
 
         .Battery {
             block.filled {
-                background: $yellow;
+                background: $blue;
             }
         }
 
@@ -171,6 +185,7 @@ window.Dashboard {
     }
 
     .Network, .Bluetooth {
+        background: $bg-light;
         padding: 8px;
 
         icon {
@@ -183,37 +198,16 @@ window.Dashboard {
 
         .Status {
             font-size: 12px;
-            font-weight: normal;
             font-style: italic;
         }
     }
 
     .Network {
-        background: $blue;
+
     }
 
     .Bluetooth {
-        background: $aqua;
-    }
 
-    .Brightness {
-        padding: 8px;
-
-        scale {
-            trough, highlight {
-                border: none;
-                outline: none;
-                min-height: 6px;
-            }
-
-            trough {
-                background: $bg;
-            }
-
-            highlight {
-                background: $yellow;
-            }
-        }
     }
 }
 
@@ -222,7 +216,6 @@ window.Dashboard {
         background: transparent;
         color: $fg;
         border: none;
-        font-weight: normal;
 
         .button {
             color: $fg;
@@ -234,7 +227,7 @@ window.Dashboard {
         }
 
         :selected {
-            background: $blue;
+            background: $fg-muted;
         }
     }
 }
@@ -242,28 +235,36 @@ window.Dashboard {
 .ScheduleModule {
     background: transparent;
     color: $fg;
-    font-weight: normal;
 
     .Header {
+        button {
+            padding: 8px;
+        }
+
         button.Selected {
-            background: $aqua;
+            background: $bg-light;
         }
     }
 
     .Body {
         .Empty {
-            // color: $bg;
+            color: $fg-muted;
             font-style: italic;
+            font-size: 42px;
         }
 
         .Task {
             .Icon {
-                background: $aqua;
+                background: $bg-light;
+                font-weight: bold;
+                padding: 12px;
             }
 
             .Header {
                 .Name {
+                    color: $aqua;
                     font-size: 22px;
+                    font-weight: bold;
                 }
 
                 .Detail {
@@ -287,44 +288,75 @@ window.Dashboard {
 
         .Info {
             font-size: 24px;
+            font-weight: bold;
+
+            .Name {
+                color: $aqua;
+            }
         }
 
         .Time {
-            font-weight: normal;
+            color: $fg-muted;
             font-style: italic;
+            font-weight: bold;
         }
     }
 
     centerbox {
-        font-weight: normal;
+        color: $fg-muted;
         font-style: italic;
     }
 }
 
-// VOLUME MODULE
-.VolumeModule {
+// SLIDERS MODULE
+.SlidersModule {
     @include module;
 
-    .VolumeButton {
-        background: transparent;
-        color: $fg;
+    .Volume {
+        button {
+            background: transparent;
+            color: $fg;
 
-        border: none;
-    }
-
-    .VolumeSlider {
-        trough {
-            background: $bg;
             border: none;
-            border-radius: 12px;
-            min-height: 10px;
         }
 
-        highlight {
-            background: $blue;
-            border: none;
-            border-radius: 12px;
-            min-height: 10px;
+        .Slider {
+            trough, highlight {
+                border: solid 2px $bg-light;
+                border-radius: 12px;
+                min-height: 10px;
+            }
+
+            trough {
+                background: $bg-light;
+                min-width: 380px;
+            }
+
+            highlight {
+                background: $blue;
+            }
+        }
+    }
+
+    .Brightness {
+        label {
+            font-weight: bold;
+        }
+
+        scale {
+            trough, highlight {
+                border: solid 2px $bg-light;
+                border-radius: 12px;
+                min-height: 10px;
+            }
+
+            trough {
+                background: $bg-light;
+            }
+
+            highlight {
+                background: $yellow;
+            }
         }
     }
 }
@@ -336,19 +368,16 @@ window.Dashboard {
     .Info {
         >label {
             font-size: 32px;
-            font-weight: normal;
             color: $aqua;
         }
 
         .Major {
-            font-weight: normal;
             font-size: 16px;
         }
 
         .Minor {
             font-size: 12px;
             font-style: italic;
-            font-weight: normal;
         }
     }
 
@@ -373,6 +402,11 @@ window.Dashboard {
     @include module;
     padding: 12px;
 
+    * {
+        border: none;
+        outline: none;
+    }
+
     .AppsContainer {
         border: none;
         outline: none;
@@ -384,28 +418,23 @@ window.Dashboard {
 
         border: none;
         transition: none;
-    }
-
-    .FilledPrompt {
-        font-size: 16px;
-    }
-
-    .EmptyPrompt {
-        font-style: italic;
+        
+        padding: 6px;
+        font-size: 18px;
     }
 
     .NoMatch {
+        color: $fg-muted;
         font-style: italic;
-        font-weight: normal;
     }
 
-    .AppEntry, .AppEntrySelected {
+    .AppEntry {
         background: transparent;
         color: $fg;
 
         border: none;
-        border-radius: 0px;
-        padding: 8px;
+        border-radius: 6px;
+        padding: 12px;
 
         icon {
             font-size: 32px;
@@ -413,17 +442,12 @@ window.Dashboard {
 
         label {
             font-style: normal;
-            font-weight: normal;
             font-size: 18px;
         }
     }
 
-    .AppEntrySelected {
-        background: $blue;
-    }
-
-    .AppEntry:hover, .AppEntrySelected:hover {
-        background: $aqua;
+    .AppEntry:hover {
+        background: $bg-light;
     }
 }
 
@@ -434,7 +458,23 @@ window.Dashboard {
     button {
         background: transparent;
         color: $fg;
-        border: none;
+        font-weight: bold;
+    }
+
+    .Shutdown {
+        color: $blue;
+    }
+
+    .Sleep {
+        color: $aqua;
+    }
+
+    .Reboot {
+        color: $orange;
+    }
+
+    .Logout {
+        color: $red;
     }
 }
 

@@ -111,6 +111,13 @@
         dconf # needed for gtk
         (ffmpeg-full.override { withUnfree = true; withOpengl = true; })
         appimage-run
+	jdk
+	xwayland
+	grim
+	slurp
+
+	# libraries
+	libnotify
 
         # apps
         hyprland
@@ -127,6 +134,13 @@
         networkmanagerapplet
         blueberry
         steam
+	anki
+	eclipses.eclipse-java
+	libreoffice-qt6
+	obs-studio
+	gscreenshot
+	quickemu
+	gmetronome
 
         # wine 
         wineWowPackages.stable

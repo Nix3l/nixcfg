@@ -89,61 +89,64 @@
 		# you can just add a custom shader wow
 		# that is actually awesome
 		# screen_shader = "";
-	    };
+            };
 
-	    # INPUT
-	    "$mod" = "SUPER";
+            # INPUT
+            "$mod" = "SUPER";
 
-	    "$terminal" = "alacritty";
-	    "$browser" = "librewolf";
-	    "$explorer" = "thunar";
+            "$terminal" = "alacritty";
+            "$browser" = "librewolf";
+            "$explorer" = "thunar";
 
-	    input = {
+            input = {
 		kb_layout = "us";
 		touchpad = { natural_scroll = true; };
 
 		repeat_rate = 45;
 		repeat_delay = 200;
-	    };
+            };
 
-	    bind = [
-		"$mod, W, killactive"
-		"$mod SHIFT, Q, exit"
-		"$mod, S, togglefloating"
-		"$mod, F, fullscreen"
+            bind = [
+                "$mod, W, killactive"
+                "$mod SHIFT, Q, exit"
+                "$mod, S, togglefloating"
+                "$mod, F, fullscreen"
 
-		"$mod, 1, workspace, 1"
-		"$mod, 2, workspace, 2"
-		"$mod, 3, workspace, 3"
-		"$mod, 4, workspace, 4"
+                "$mod, 1, workspace, 1"
+                "$mod, 2, workspace, 2"
+                "$mod, 3, workspace, 3"
+                "$mod, 4, workspace, 4"
 
-		"$mod SHIFT, 1, movetoworkspace, 1"
-		"$mod SHIFT, 2, movetoworkspace, 2"
-		"$mod SHIFT, 3, movetoworkspace, 3"
-		"$mod SHIFT, 4, movetoworkspace, 4"
+                "$mod SHIFT, 1, movetoworkspace, 1"
+                "$mod SHIFT, 2, movetoworkspace, 2"
+                "$mod SHIFT, 3, movetoworkspace, 3"
+                "$mod SHIFT, 4, movetoworkspace, 4"
 
-		"$mod, left, movefocus, l"
-		"$mod, right, movefocus, r"
-		"$mod, up, movefocus, u"
-		"$mod, down, movefocus, d"
+                "$mod, left, movefocus, l"
+                "$mod, right, movefocus, r"
+                "$mod, up, movefocus, u"
+                "$mod, down, movefocus, d"
 
-		"$mod, RETURN, exec, $terminal"
-		"$mod, B, exec, $browser"
-		"$mod SHIFT, B, exec, $browser --private-window"
-		"$mod, E, exec, $explorer"
-		"$mod, G, exec, ags run ~/nixcfg/ags/dashboard/app.ts --log-file ~/nixcfg/ags/dashboard/log.txt"
-	    ];
+                "$mod, RETURN, exec, $terminal"
+                "$mod, B, exec, $browser"
+                "$mod SHIFT, B, exec, $browser --private-window"
+                "$mod, E, exec, $explorer"
+                "$mod, G, exec, ags run ~/nixcfg/ags/dashboard/app.ts --log-file ~/nixcfg/ags/dashboard/log.txt"
+                # "$mod SHIFT, S, exec, gscreenshot -s -c -n -f ~/pics/screenshots/"
+                "$mod SHIFT, S, exec, flameshot gui"
+            ];
 
-	    bindm = [
-		"$mod, mouse:272, movewindow"
-		"$mod, mouse:273, resizewindow"
-	    ];
+            bindm = [
+                "$mod, mouse:272, movewindow"
+                "$mod, mouse:273, resizewindow"
+            ];
 
-	    exec-once = [
-		"ags run ~/nixcfg/ags/bar/app.ts --log-file ~/nixcfg/ags/bar/log.txt &"
-		"nm-applet &"
-		"fcitx5 &"
-	    ];
+            exec-once = [
+                "ags run ~/nixcfg/ags/bar/app.ts --log-file ~/nixcfg/ags/bar/log.txt &"
+                "nm-applet &"
+                "fcitx5 &"
+                "flameshot &"
+            ];
         };
     };
 
@@ -160,6 +163,7 @@
             network
             notifd
             wireplumber
+            tray
         ];
     };
 
@@ -182,10 +186,10 @@
             splash = false;
 
             preload = [
-		"~/pics/wallpapers/chinese-hills.jpg"
-		"~/pics/wallpapers/ghibli-japanese-walled-garden.png"
-		"~/pics/wallpapers/ign-waifu.png"
-	    ];
+                "~/pics/wallpapers/chinese-hills.jpg"
+                "~/pics/wallpapers/ghibli-japanese-walled-garden.png"
+                "~/pics/wallpapers/ign-waifu.png"
+            ];
 
             wallpaper = [ "eDP-1,~/pics/wallpapers/ghibli-japanese-walled-garden.png" ];
         };
@@ -299,6 +303,7 @@
                 clangd.enable = true;
                 nixd.enable = true;
                 ts_ls.enable = true;
+                jdtls.enable = true;
             };
 
             keymaps.lspBuf = {
@@ -310,7 +315,7 @@
             };
         };
  
- 	    plugins.web-devicons.enable = true;
+        plugins.web-devicons.enable = true;
         plugins.nvim-tree = {
             enable = true;
             openOnSetupFile = true;

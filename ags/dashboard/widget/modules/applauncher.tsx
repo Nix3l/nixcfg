@@ -17,10 +17,10 @@ function TrimTitle(title: string, max_len: number): string {
 function AppEntry({ app, index }: { app: Apps.Application; index: number }): JSX.Element {
     return <button
         onClick={() => app.launch()}
-        className={"AppEntry"}
+        className="AppEntry"
     >
         <box
-            spacing={8}
+            spacing={12}
         >
             <icon icon={app.icon_name} />
             <label label={TrimTitle(app.name, 16)} />
@@ -40,25 +40,28 @@ export function AppLauncherModule(): JSX.Element {
         className="AppLauncherModule"
     >
         <entry
-            placeholderText="Search"
+            placeholderText="検索"
             text={text.get()}
             onChanged={(self) => text.set(self.text)}
             onActivate={() => app_list.get()[0].launch()}
-            className={bind(text).as(input => input.length > 0 ? "FilledPrompt" : "EmptyPrompt")}
         />
         <stack
             hexpand
             vexpand
             visibleChildName={bind(app_list).as(list => list.length == 0 ? "none" : "found")}
         >
-            <box
+            <centerbox
                 vertical
                 hexpand
                 vexpand
                 name="none"
             >
-                <label className="NoMatch" label="idiot" />
-            </box>
+                <label
+                    wrap
+                    label="そりゃーないだろ"
+                    className="NoMatch"
+                />
+            </centerbox>
             <scrollable
                 hscroll={Gtk.PolicyType.NEVER}
                 className="AppsContainer"

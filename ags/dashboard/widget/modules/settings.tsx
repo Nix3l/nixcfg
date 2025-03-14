@@ -15,15 +15,14 @@ enum SettingsTypes {
     Schedule = 2,
 }
 
-let selected_setting = Variable(SettingsTypes.Schedule);
+let selected_setting = Variable(SettingsTypes.Mixer);
 
 const network = Network.get_default();
+const wifi = network.wifi;
 const bluetooth = Bluetooth.get_default();
 const adapter: Bluetooth.Adapter = bluetooth.adapter;
 
 const battery = Battery.get_default();
-
-const max_brightness = Number(exec(`bash -c 'brightnessctl m'`));
 
 let selected_day = Variable(new Date().getDay());
 let ramadan = Variable(schedule.ramadan);
@@ -32,7 +31,7 @@ let ramadan = Variable(schedule.ramadan);
 function BatteryIcon() {
     return battery.percentage < 0.25 ? "" :
            battery.percentage < 0.75  ? "" :
-           battery.percentage < 1.00 ? "" :
+           battery.percentage < 0.90 ? "" :
            "";
 }
 
@@ -44,75 +43,72 @@ function NetworkIcon(input: string): string {
     return "./assets/wifi-none.svg";
 }
 
-function GetBrightness(): number {
-    return Number(exec(`bash -c 'brightnessctl g'`));
+function NetworkStatusConnected(): JSX.Element {
+    return <box
+        hexpand
+        spacing={12}
+    >
+        <icon icon={bind(wifi.active_access_point, "icon_name").as(name => NetworkIcon(name))} />
+        <box
+            vertical
+            hexpand
+            halign={Gtk.Align.START}
+            valign={Gtk.Align.CENTER}
+        >
+            <label
+                label={bind(wifi, "active_access_point").as(ap => ap.ssid)}
+                halign={Gtk.Align.START}
+                className="Name"
+            />
+            <label
+                label={
+                    bind(wifi, "internet").as(internet =>
+                        internet != Network.Internet.CONNECTED ?
+                            "Connected, No Internet" : "Connected"
+                )}
+                halign={Gtk.Align.START}
+                className="Status"
+            />
+        </box>
+    </box>
 }
 
-function SetBrightness(brightness: number): number {
-    return Number(exec(`bash -c 'brightnessctl s ${brightness}'`));
+function NetworkStatusDisconnected(): JSX.Element {
+    return <box
+        hexpand
+        spacing={12}
+    >
+        <icon icon={NetworkIcon("signal-none")} />
+        <box
+            vertical
+            hexpand
+            halign={Gtk.Align.START}
+            valign={Gtk.Align.CENTER}
+        >
+            <label
+                label="---"
+                halign={Gtk.Align.START}
+                className="Name"
+            />
+            <label
+                label="Disconnected"
+                halign={Gtk.Align.START}
+                className="Status"
+            />
+        </box>
+    </box>
 }
 
 function NetworkStatus(): JSX.Element {
-    let ap = bind(network.wifi, "active_access_point");
-    return <stack
+    return <box
         hexpand
-        visibleChildName={ap.as(ap => ap ? "on" : "off")}
-    >
-        <box
-            hexpand
-            spacing={12}
-            name="on"
-            className="Network"
-        > 
-            <icon icon={bind(network.wifi.active_access_point, "icon_name").as(name => NetworkIcon(name))}/>
-            <box
-                vertical
-                hexpand
-                halign={Gtk.Align.START}
-                valign={Gtk.Align.CENTER}
-            >
-                <label
-                    label={ap.as(ap => ap.ssid)}
-                    halign={Gtk.Align.START}
-                    className="Name"
-                />
-                <label
-                    label={
-                        bind(network.wifi, "internet").as(internet =>
-                            internet != Network.Internet.CONNECTED ?
-                                "Connected, No Internet" : "Connected"
-                    )}
-                    halign={Gtk.Align.START}
-                    className="Status"
-                />
-            </box>
-        </box>
-        <box
-            hexpand
-            spacing={12}
-            name="off"
-            className="Network"
-        >
-            <icon icon={NetworkIcon("signal-none")} />
-            <box
-                vertical
-                hexpand
-                halign={Gtk.Align.START}
-                valign={Gtk.Align.CENTER}
-            >
-                <label
-                    label="---"
-                    halign={Gtk.Align.START}
-                    className="Name"
-                />
-                <label
-                    label="Disconnected"
-                    halign={Gtk.Align.START}
-                    className="Status"
-                />
-            </box>
-        </box>
-    </stack>
+        className="Network"
+    > {
+        bind(wifi, "active_access_point").as(ap =>
+            wifi.enabled && ap ?
+                (<NetworkStatusConnected />) :
+                (<NetworkStatusDisconnected />))
+    } </box>
 }
 
 function BluetoothStatus(): JSX.Element {
@@ -179,18 +175,31 @@ function MixerModule(): JSX.Element {
     return <box
         vertical
         hexpand
-        spacing={12}
+        vexpand
+        spacing={32}
         className="MixerModule"
     >
         <box
+            vertical
+            hexpand
+            vexpand
+            spacing={12}
+            valign={Gtk.Align.START}
+        >
+            <NetworkStatus />
+            <BluetoothStatus />
+        </box>
+        <box
             hexpand
             spacing={12}
+            valign={Gtk.Align.END}
+            className="StatContainer"
         >
             <box
                 vertical
                 halign={Gtk.Align.START}
                 spacing={12}
-                className={"Icons"}
+                className="Icons"
             >
                 <label label={bind(battery, "charging").as(charging => charging ? "" : BatteryIcon())} className="icon" />
                 <label label="" className="icon" />
@@ -200,7 +209,7 @@ function MixerModule(): JSX.Element {
                 vertical
                 hexpand
                 spacing={12}
-                className={"Bars"}
+                className="Bars"
             >
                 <LevelBar
                     hexpand
@@ -250,21 +259,6 @@ function MixerModule(): JSX.Element {
                 />
             </box>
         </box>
-        <NetworkStatus />
-        <BluetoothStatus />
-        <box
-            hexpand
-            className="Brightness"
-        >
-            <label label="" />
-            <slider
-                hexpand
-                drawValue={false}
-                cursor="pointer"
-                value={GetBrightness() / max_brightness}
-                onDragged={(self) => SetBrightness((0.1 + self.value * 0.9) * max_brightness)}
-            />
-        </box>
     </box>
 }
 
@@ -291,6 +285,7 @@ function CalendarModule(): JSX.Element {
 // SCHEDULE MODULE
 function ScheduleDayButton({ day, label }: { day: number, label: string }): JSX.Element {
     return <button
+        cursor="pointer"
         onClick={() => selected_day.set(day)}
         className={bind(selected_day).as(selected => selected == day ? "Selected" : "")}
     >
@@ -367,6 +362,7 @@ function ScheduleModule(): JSX.Element {
                 halign={Gtk.Align.END}
             >
                 <button
+                    cursor="pointer"
                     onClick={() => {
                         schedule.ramadan = !schedule.ramadan;
                         ramadan.set(schedule.ramadan);
@@ -411,11 +407,12 @@ function ScheduleModule(): JSX.Element {
 
 function SettingsButton({ type, label }: { type: SettingsTypes; label: string }): JSX.Element {
     return <button
-                onClick={() => selected_setting.set(type)}
-                className={bind(selected_setting).as(s => s == type ? "SelectedButton" : "")}
-            >
-            <label label={label} />
-        </button>
+        cursor="pointer"
+        onClick={() => selected_setting.set(type)}
+        className={bind(selected_setting).as(s => s == type ? "SelectedTab" : "Tab")}
+    >
+        <label label={label} />
+    </button>
 }
 
 // yes i only remembered halfway through writing this that stacks exist

@@ -5,12 +5,14 @@ $red:      #cc241d;
 $blue:     #458588; 
 $aqua:     #8ec07c;
 $purple:   #b16286;
+$yellow:   #d79921;
+$orange:   #d65d0e;
 
 button {
     box-shadow: 0 0px;
 }
 
-window.Bar {
+.Bar {
     background: $bg;
     color: $fg;
 
@@ -21,24 +23,24 @@ window.Bar {
     >box {
         margin: 8px 0px;
     }
+
+    box.LeftBox {
+        margin-left:  12px;
+        margin-right: 4px;
+    }
+
+    box.CentreBox {
+        margin-left:  4px;
+        margin-right: 4px;
+    }
+
+    box.RightBox {
+        margin-left:  4px;
+        margin-right: 0px;
+    }
 }
 
-window.Bar box.LeftBox {
-    margin-left:  12px;
-    margin-right: 4px;
-}
-
-window.Bar box.CentreBox {
-    margin-left:  4px;
-    margin-right: 4px;
-}
-
-window.Bar box.RightBox {
-    margin-left:  4px;
-    margin-right: 0px;
-}
-
-button.DashboardLauncher {
+.DashboardLauncher {
     background: $light-bg;
     color: $fg;
 
@@ -51,9 +53,7 @@ button.DashboardLauncher {
     margin-right: 8px;
 }
 
-// TODO: make the things short but wide
-
-box.Workspaces {
+.Workspaces {
     background: $light-bg;
     color: $fg;
 
@@ -61,7 +61,7 @@ box.Workspaces {
 
     border-radius: 8px;
 
-    >button {
+    button {
         background: $fg;
 
         border: none;
@@ -77,13 +77,13 @@ box.Workspaces {
         transition: all 300ms cubic-bezier(1, 0, 0, 1);
     }
     
-    >button.Focused {
+    button.Focused {
         background: $aqua;
         min-width: 56px;
     }
 }
 
-box.FocusedClient {
+.FocusedClient {
     background: $light-bg;
     color: $fg;
 
@@ -93,31 +93,103 @@ box.FocusedClient {
     padding-left: 8px;
 }
 
-box.Tray {
+.DateTime {
+    color: $fg;
+    border: none;
+
+    .Icon {
+        background: $purple;
+        padding: 4px 8px 4px 8px;
+        border-radius: 6px 0px 0px 6px;
+
+        font-size: 16px;
+    }
+
+    .Values {
+        background: $light-bg;
+        padding: 4px 8px 4px 8px;
+        border-radius: 0px 6px 6px 0px;
+
+        .Time {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+}
+
+.Volume {
+    color: $fg;
+    margin-right: 12px;
+
+    .Icon {
+        background: $blue;
+        padding: 4px 8px 4px 8px;
+        border-radius: 6px 0px 0px 6px;
+
+        font-size: 16px;
+    }
+
+    .Value {
+        background: $light-bg;
+        border-radius: 0px 6px 6px 0px;
+        padding: 4px 8px 4px 8px;
+    }
+}
+
+.Power {
+    color: $fg;
+    margin-right: 12px;
+
+    .Icon {
+        background: $yellow;
+        padding: 4px 0px 4px 0px;
+        border-radius: 6px 0px 0px 6px;
+
+        font-size: 14px;
+    }
+
+    .Value {
+        background: $light-bg;
+        border-radius: 0px 6px 6px 0px;
+        padding: 4px 8px 4px 8px;
+    }
+}
+
+.Tray {
     background: $bg;
     margin: 0px;
     margin-right: 8px;
-}
 
-box.TrayContents {
-    background: $light-bg;
-    margin: 0px;
+    .TrayContents {
+        background: $light-bg;
+        margin: 0px;
 
-    border-radius: 8px;
-}
+        border-radius: 8px;
+    }
 
-button.TrayToggle {
-    background: $bg;
-    color: $fg;
-    border: none;
-}
+    .TrayToggle {
+        background: $bg;
+        color: $fg;
+        border: none;
+    }
 
-.TrayItem {
-    background: $light-bg;
-    color: $fg;
-    border: none;
+    .TrayItem {
+        background: $light-bg;
+        color: $fg;
+        border: none;
 
-    >icon {
-        font-size: 18px;
+        >icon {
+            font-size: 18px;
+        }
+
+        menu {
+            color: $fg;
+            background: $bg;
+
+            >*:hover {
+                color: $fg;
+                background: $light-bg;
+            }
+        }
     }
 }

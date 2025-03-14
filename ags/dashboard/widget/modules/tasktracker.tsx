@@ -91,7 +91,7 @@ export function TaskTrackerModule(): JSX.Element {
         className="TaskTrackerModule"
     > {
         bind(task).as(task => task == TaskItem.NONE ?
-            (<centerbox hexpand> <label label="No Available Tasks" /> </centerbox>) :
+            (<centerbox hexpand> <label label="---- 暇だな ----" /> </centerbox>) :
             (<TaskInfo />)
         )
     } </box>

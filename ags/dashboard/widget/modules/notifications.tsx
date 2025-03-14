@@ -5,30 +5,76 @@ import Notifd from "gi://AstalNotifd"
 
 const notifd = Notifd.get_default()
 
+function NotificationIcon(notif: Notifd.Notification): string {
+    if(notif.image != "")
+        return notif.image;
+
+    if(notif.app_icon != "")
+        return notif.image;
+
+    return "../assets/notification.svg";
+}
+
+function TrimTitle(str: string, max_len: number): string {
+    if(str.length > max_len) {
+        str = str.slice(0, str.length - 3);
+        str += "...";
+    }
+
+    return str;
+}
+
 function Notification({ notif }: { notif: Notifd.Notification }): JSX.Element {
     return <box
         hexpand
         spacing={12}
         className="Notif"
     >
-        <icon icon={notif.get_app_icon() || "./assets/notification.svg"} />
+        <centerbox
+            widthRequest={40}
+            className="Icon"
+        >
+            <icon
+                icon={NotificationIcon(notif)}
+                className={notif.app_name == "" && notif.image == "" ? "Fallback" : ""}
+            />
+        </centerbox>
         <box
             hexpand
             vertical
-            spacing={8}
+            spacing={6}
             halign={Gtk.Align.START}
         >
-            <label
-                halign={Gtk.Align.START}
-                label={`${notif.get_app_name()} | ${notif.get_summary()}`} className="Header"
-            />
-            <label
-                wrap
-                halign={Gtk.Align.START}
-                label={notif.get_body()} className="Body"
-            />
+            <box
+                hexpand
+                spacing={4}
+                className="Header"
+            >
+                <label
+                    halign={Gtk.Align.START}
+                    label={TrimTitle(notif.app_name, 22)}
+                />
+            </box>
+            <box
+                vertical
+                hexpand
+                spacing={4}
+                className="Body"
+            >
+                <label
+                    wrap
+                    halign={Gtk.Align.START}
+                    label={"> " + notif.summary}
+                />
+                <label
+                    wrap
+                    halign={Gtk.Align.START}
+                    label={notif.body}
+                />
+            </box>
         </box>
         <button
+            cursor="pointer"
             onClick={() => notif.dismiss()}
             halign={Gtk.Align.END}
             className="Dismiss"
@@ -45,7 +91,11 @@ export function NotificationModule(): JSX.Element {
         className="NotificationModule"
     >
         <box hexpand>
-            <label label="Notification Centre" halign={Gtk.Align.START} />
+            <label
+                halign={Gtk.Align.START}
+                label="Notification Centre"
+                className="Title"
+            />
             <box
                 hexpand
                 halign={Gtk.Align.END}
@@ -62,9 +112,7 @@ export function NotificationModule(): JSX.Element {
                 </button>
             </box>
         </box>
-        <scrollable
-            hscroll={Gtk.PolicyType.NEVER}
-        >
+        <scrollable >
             <box
                 vertical
                 vexpand
