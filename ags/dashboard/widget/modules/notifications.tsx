@@ -121,6 +121,7 @@ export function NotificationModule(): JSX.Element {
                 className="Notifications"
             > {
                 bind(notifd, "notifications").as(list => list
+                    .sort((a,b) => b.time - a.time)
                     .map(notif => 
                         (<Notification notif={notif} />)
                 ))

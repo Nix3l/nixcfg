@@ -3,6 +3,7 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
         home-manager = {
             url = "github:nix-community/home-manager";
@@ -14,9 +15,24 @@
         ags.url = "github:aylur/ags";
     };
 
-    outputs = { nixpkgs, ... } @ inputs: {
-        nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs; };
+    outputs = { nixpkgs, nixpkgs-stable, ... } @ inputs: {
+        nixosConfigurations.default = nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+
+            specialArgs = {
+                pkgs = import nixpkgs {
+                    inherit system;
+                    config.allowUnfree = true;
+                };
+
+                pkgs-stable = import nixpkgs-stable {
+                    inherit system;
+                    config.allowUnfree = true;
+                };
+
+                inherit inputs;
+            };
+
             modules = [
                 ./configuration.nix
                 inputs.home-manager.nixosModules.default

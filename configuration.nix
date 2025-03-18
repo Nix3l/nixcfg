@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, pkgs-stable, inputs, ... }:
 
 {
     imports = [
@@ -86,6 +86,17 @@
         fcitx5.waylandFrontend = true;
     };
 
+    # GREETER
+    services.greetd = {
+	enable = true;
+	settings = {
+	    default_session = {
+		command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
+		user = "nix3l";
+	    };
+	};
+    };
+
     # PRINTING
     services.printing.enable = true;
 
@@ -100,79 +111,91 @@
     };
 
     # PROGRAMS
-    nixpkgs.config.allowUnfree = true; # allow non-FOSS
-    environment.systemPackages = with pkgs; [
-        # essentials
-        vim
-        git
-        gh
-        openssl
-        zsh
-        dconf # needed for gtk
-        (ffmpeg-full.override { withUnfree = true; withOpengl = true; })
-        appimage-run
-	jdk
-	xwayland
-	grim
-	slurp
+    environment.systemPackages = [
+	# essentials
+	pkgs.vim
+	pkgs.git
+	pkgs.gh
+	pkgs.openssl
+	pkgs.zsh
+	pkgs.dconf # needed for gtk
+	(pkgs.ffmpeg-full.override { withUnfree = true; withOpengl = true; })
+	pkgs.appimage-run
+	pkgs.jdk
+	pkgs.xwayland
+	pkgs.grim
+	pkgs.slurp
 
-	# libraries
-	libnotify
+	# dev 
+	pkgs.libnotify
+	pkgs.libmpc
+	pkgs.gcc
+	pkgs.gnumake
+	pkgs.bison
+	pkgs.flex
+	pkgs.gmp
+	pkgs.mpfr
+	pkgs.mpc
+	pkgs.texinfo
 
-        # apps
-        hyprland
-        alacritty
-        xfce.thunar
-        librewolf-bin
-        mpv
-        discord
-        betterdiscordctl
-        lutris
-        qbittorrent
-        feh
-        flameshot
-        networkmanagerapplet
-        blueberry
-        steam
-	anki
-	eclipses.eclipse-java
-	libreoffice-qt6
-	obs-studio
-	gscreenshot
-	quickemu
-	gmetronome
+	# apps
+	pkgs.hyprland
+	pkgs.alacritty
+	pkgs.xfce.thunar
+	pkgs.librewolf-bin
+	pkgs.mpv
+	pkgs.discord
+	pkgs.betterdiscordctl
+	pkgs.lutris
+	pkgs.qbittorrent
+	pkgs.feh
+	pkgs.flameshot
+	pkgs.networkmanagerapplet
+	pkgs.blueberry
+	pkgs.steam
+	pkgs.anki
+	pkgs.eclipses.eclipse-java
+	pkgs.jetbrains.idea-community-bin
+	pkgs.libreoffice-qt6
+	pkgs.obs-studio
+	pkgs.gscreenshot
+	pkgs.quickemu
+	pkgs.gmetronome
 
-        # wine 
-        wineWowPackages.stable
-        # native wayland support (can be unstable)
-        wineWowPackages.waylandFull
-        winetricks
+	# wine 
+	pkgs.wineWowPackages.stable
+	# native wayland support (can be unstable)
+	pkgs.wineWowPackages.waylandFull
+	pkgs.winetricks
 
-        # terminal apps
-        neofetch
-        unzip
-        eza
-        wget
-        brightnessctl
-        htop
-        btop
-        unrar
+	# terminal apps
+	pkgs.neofetch
+	pkgs.unzip
+	pkgs.eza
+	pkgs.wget
+	pkgs.brightnessctl
+	pkgs.htop
+	pkgs.btop
+	pkgs.unrar
 
-        # fonts
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-emoji
-        liberation_ttf
-        fira-code
-        fira-code-symbols
-        font-awesome
-        font-awesome_5
-        font-awesome_4
-	ipafont
-	kochi-substitute
+	# fonts
+	pkgs.noto-fonts
+	pkgs.noto-fonts-cjk-sans
+	pkgs.noto-fonts-emoji
+	pkgs.liberation_ttf
+	pkgs.fira-code
+	pkgs.fira-code-symbols
+	pkgs.font-awesome
+	pkgs.font-awesome_5
+	pkgs.font-awesome_4
+	pkgs.ipafont
+	pkgs.kochi-substitute
 
-        # other
-        capitaine-cursors
+	# cross compiled
+	pkgs-stable.pkgsCross.i686-embedded.buildPackages.gcc
+
+	# other
+	pkgs.capitaine-cursors
     ];
 
     fonts.packages = with pkgs; [

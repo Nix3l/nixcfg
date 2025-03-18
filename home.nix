@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 
 {
     # not sure why i also need this here but who cares
@@ -91,6 +91,11 @@
 		# screen_shader = "";
             };
 
+	    cursor = {
+		no_hardware_cursors = false;
+		use_cpu_buffer = 0;
+	    };
+
             # INPUT
             "$mod" = "SUPER";
 
@@ -136,6 +141,14 @@
                 "$mod SHIFT, S, exec, flameshot gui"
             ];
 
+            binde = [
+                ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
+                ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
+                ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+                ",XF86MonBrightnessUp, exec, brightnessctl set +15%"
+                ",XF86MonBrightnessDown, exec, brightnessctl set 15%-"
+            ];
+
             bindm = [
                 "$mod, mouse:272, movewindow"
                 "$mod, mouse:273, resizewindow"
@@ -147,6 +160,11 @@
                 "fcitx5 &"
                 "flameshot &"
             ];
+
+            misc = {
+                disable_hyprland_logo = true;
+                disable_splash_rendering = true;
+            };
         };
     };
 
@@ -200,12 +218,12 @@
         enable = true;
         theme = {
             package = pkgs.gruvbox-gtk-theme;
-            name = "Gruvbox";
+            name = "Gruvbox-Dark";
         };
 
         iconTheme = {
             package = pkgs.gruvbox-dark-icons-gtk;
-            name = "gruvbox-dark-icons-gtk";
+            name = "oomox-gruvbox-dark";
         };
     };
 
@@ -314,6 +332,15 @@
                 "K" = "hover";
             };
         };
+
+	plugins.nvim-jdtls = {
+	    enable = true;
+	    cmd = [
+		(lib.getExe pkgs.jdt-language-server)
+		"-data" "/home/nix3l/uni/temp/programming"
+		# "-configuration" "/path/to/your/configuration"
+	    ];
+	};
  
         plugins.web-devicons.enable = true;
         plugins.nvim-tree = {
@@ -346,6 +373,8 @@
             splitbelow = true;
             splitright = true;
         };
+
+	clipboard.register = "unnamedplus";
 
         extraConfigVim = ''
             set number
