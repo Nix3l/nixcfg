@@ -243,7 +243,7 @@ function MixerModule(): JSX.Element {
                 className={"Values"}
             >
                 <label
-                    label={bind(battery, "percentage").as(full => (full * 100) + "%")}
+                    label={bind(battery, "percentage").as(full => Number(full * 100).toString().slice(0, full == 1.0 ? 3 : full < 0.1 ? 1 : 2) + "%")}
                     halign={Gtk.Align.START}
                     className="value"
                 />

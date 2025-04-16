@@ -51,64 +51,64 @@
         xwayland.enable = true;
 
         settings = {
-	    # MONITOR
-	    monitor = [ ",preferred,auto,1" "HDMI-A-1,preferred,auto,1,mirror,eDP-1" ];
+			# MONITOR
+			monitor = [ ",preferred,auto,1" "HDMI-A-1,preferred,auto,1,mirror,eDP-1" ];
 
-	    # LOOK
-	    general = {
-		border_size = 2;
+			# LOOK
+			general = {
+				border_size = 2;
 
-		gaps_in = 5; # between windows
-		gaps_out = 10; # between windows and montor edge
+				gaps_in = 5; # between windows
+				gaps_out = 10; # between windows and montor edge
 
-		"col.inactive_border" = "0xff928374";
-		"col.active_border" = "0xffebdbb2";
+				"col.inactive_border" = "0xff928374";
+				"col.active_border" = "0xffebdbb2";
 
-		layout = "diwndle";
+				layout = "diwndle";
 
-		resize_on_border = false;
-	    };
+				resize_on_border = false;
+			};
 
-	    decoration = {
-		rounding = 0;
+			decoration = {
+				rounding = 0;
 
-		active_opacity = 1.0;
-		inactive_opacity = 0.92;
+				active_opacity = 1.0;
+				inactive_opacity = 0.92;
 
-		dim_inactive = false;
+				dim_inactive = false;
 
-		blur = {
-		    enabled = true;
-		    passes = 2;
-		};
+				blur = {
+					enabled = true;
+					passes = 2;
+				};
 
-		shadow = {
-		    enabled = false;
-		};
+				shadow = {
+					enabled = false;
+				};
 
-		# you can just add a custom shader wow
-		# that is actually awesome
-		# screen_shader = "";
-            };
+				# you can just add a custom shader wow
+				# that is actually awesome
+				# screen_shader = "";
+			};
 
-	    cursor = {
-		no_hardware_cursors = false;
-		use_cpu_buffer = 0;
-	    };
+			cursor = {
+				no_hardware_cursors = false;
+				use_cpu_buffer = 0;
+			};
 
-            # INPUT
-            "$mod" = "SUPER";
+			# INPUT
+			"$mod" = "SUPER";
 
-            "$terminal" = "alacritty";
-            "$browser" = "librewolf";
-            "$explorer" = "thunar";
+			"$terminal" = "alacritty";
+			"$browser" = "librewolf";
+			"$explorer" = "thunar";
 
-            input = {
-		kb_layout = "us";
-		touchpad = { natural_scroll = true; };
+			input = {
+				kb_layout = "us";
+				touchpad = { natural_scroll = true; };
 
-		repeat_rate = 45;
-		repeat_delay = 200;
+				repeat_rate = 45;
+				repeat_delay = 200;
             };
 
             bind = [
@@ -207,9 +207,10 @@
                 "~/pics/wallpapers/chinese-hills.jpg"
                 "~/pics/wallpapers/ghibli-japanese-walled-garden.png"
                 "~/pics/wallpapers/ign-waifu.png"
+                "~/pics/wallpapers/satellites.png"
             ];
 
-            wallpaper = [ "eDP-1,~/pics/wallpapers/ghibli-japanese-walled-garden.png" ];
+            wallpaper = [ "eDP-1,~/pics/wallpapers/satellites.png" ];
         };
     };
 
@@ -333,14 +334,14 @@
             };
         };
 
-	plugins.nvim-jdtls = {
-	    enable = true;
-	    cmd = [
-		(lib.getExe pkgs.jdt-language-server)
-		"-data" "/home/nix3l/uni/temp/programming"
-		# "-configuration" "/path/to/your/configuration"
-	    ];
-	};
+		plugins.nvim-jdtls = {
+			enable = true;
+			cmd = [
+				(lib.getExe pkgs.jdt-language-server)
+				"-data" "/home/nix3l/uni/temp/programming"
+				# "-configuration" "/path/to/your/configuration"
+			];
+		};
  
         plugins.web-devicons.enable = true;
         plugins.nvim-tree = {
@@ -374,12 +375,13 @@
             splitright = true;
         };
 
-	clipboard.register = "unnamedplus";
+		clipboard.register = "unnamedplus";
 
         extraConfigVim = ''
             set number
             set relativenumber
             set shiftwidth=4
+			set tabstop=4
         '';
 
         keymaps = [
@@ -393,7 +395,11 @@
         ];
 
         autoCmd = [
-            {
+			{
+                event = [ "BufEnter" "BufNewFile" "BufRead" ];
+                command = "set shiftwidth=4 tabstop=4";
+                pattern = [ "*" ];
+            } {
                 event = [ "BufEnter" "BufNewFile" "BufRead" ];
                 command = "setlocal filetype=c";
                 pattern = [ "*.h" ];
@@ -415,7 +421,7 @@
             hidePodcasts
             fullAlbumDate
             volumePercentage
-	    fullScreen
+			fullScreen
         ];
 
         theme = spicepkgs.themes.text;

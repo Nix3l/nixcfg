@@ -117,7 +117,7 @@ export class Schedule {
 
 // SCHEDULE
 export const schedule: Schedule = new Schedule();
-schedule.ramadan = true;
+schedule.ramadan = false;
 
 schedule.process_tasks([
     new TaskItem(

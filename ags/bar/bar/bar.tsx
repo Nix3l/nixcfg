@@ -76,9 +76,9 @@ function Time(): JSX.Element {
     return <box
         className="DateTime"
     >
-        <box className="Icon">
+        <centerbox className="Icon">
             <label label="" />
-        </box>
+        </centerbox>
         <box
             spacing={6}
             className="Values"
