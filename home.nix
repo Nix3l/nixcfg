@@ -136,7 +136,7 @@
                 "$mod, B, exec, $browser"
                 "$mod SHIFT, B, exec, $browser --private-window"
                 "$mod, E, exec, $explorer"
-                "$mod, G, exec, ags run ~/nixcfg/ags/dashboard/app.ts --log-file ~/nixcfg/ags/dashboard/log.txt"
+                "$mod, G, exec, ags quit -i dashboard; ags run ~/nixcfg/ags/dashboard/app.ts --log-file ~/nixcfg/ags/dashboard/log.txt"
                 # "$mod SHIFT, S, exec, gscreenshot -s -c -n -f ~/pics/screenshots/"
                 "$mod SHIFT, S, exec, flameshot gui"
             ];
@@ -272,7 +272,7 @@
             cursor.style = "beam";
 
             font.normal.family = "FiraCode";
-            font.size = 16;
+            font.size = 12;
 
             colors.primary = {
                 background = "#282828";
@@ -311,15 +311,20 @@
     # EDITOR
     programs.nixvim = {
         enable = true;
+		enableMan = true; # installs man page
 
         colorschemes.gruvbox.enable = true;
         plugins.lualine.enable = true;
-        plugins.treesitter.enable = true;
+
+        plugins.treesitter = {
+			enable = true;
+			autoLoad = true;
+		};
 
         plugins.lsp = {
             enable = true;
             servers = {
-                clangd.enable = true;
+                ccls.enable = true;
                 nixd.enable = true;
                 ts_ls.enable = true;
                 jdtls.enable = true;
@@ -332,6 +337,13 @@
                 "gi" = "implementation";
                 "K" = "hover";
             };
+        };
+
+        # FIXME
+        plugins.cmp = {
+            enable = true;
+            autoEnableSources = true;
+			autoLoad = true;
         };
 
 		plugins.nvim-jdtls = {
@@ -358,6 +370,7 @@
             softtabstop = 0;
             expandtab = true;
             smarttab = true;
+			autoindent = true;
 
             mouse = "a";
 
@@ -373,24 +386,37 @@
 
             splitbelow = true;
             splitright = true;
-        };
 
-		clipboard.register = "unnamedplus";
+			updatetime = 100;
+
+			hidden = false;
+			autoread = true;
+
+			termguicolors = true;
+
+			hlsearch = true;
+			incsearch = true;
+        };
 
         extraConfigVim = ''
             set number
             set relativenumber
             set shiftwidth=4
 			set tabstop=4
+			let g:gruvbox_contrast_dark='hard'
+			let g:gruvbox_contrast_light='hard'
+			hi LspCxxHlGroupMemberVariable guifg=#83a598
         '';
 
         keymaps = [
             {
                 key = "<esc>";
-                action = ":noh <CR>";
+                action = ":noh<CR>";
+				options.silent = true;
             } {
                 key = "<Space>e";
-                action = ":NvimTreeToggle <CR>";
+                action = ":NvimTreeToggle<CR>";
+				options.silent = true;
             }
         ];
 

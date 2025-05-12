@@ -6,10 +6,10 @@ import Notifd from "gi://AstalNotifd"
 const notifd = Notifd.get_default()
 
 function NotificationIcon(notif: Notifd.Notification): string {
-    if(notif.image != "")
+    if(notif.image != "" && notif.image != null)
         return notif.image;
 
-    if(notif.app_icon != "")
+    if(notif.app_icon != "" && notif.app_icon != null)
         return notif.image;
 
     return "../assets/notification.svg";

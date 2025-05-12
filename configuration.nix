@@ -88,11 +88,11 @@
 
     # GREETER
     services.greetd = {
-	enable = true;
+        enable = true;
 		settings = {
 			default_session = {
-			command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
-			user = "nix3l";
+			    command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
+			    user = "nix3l";
 			};
 		};
     };
@@ -139,6 +139,9 @@
 		pkgs.texinfo
 		pkgs.bochs
 		pkgs.android-tools
+		pkgs.nasm
+        pkgs.cglm
+        pkgs.glfw
 
 		# apps
 		pkgs.hyprland
