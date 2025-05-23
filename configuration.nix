@@ -153,13 +153,12 @@
 		pkgs.betterdiscordctl
 		pkgs.lutris
 		pkgs.qbittorrent
-		pkgs.feh
+		pkgs.nsxiv
 		pkgs.flameshot
 		pkgs.networkmanagerapplet
 		pkgs.blueberry
 		pkgs.steam
 		pkgs.anki
-		pkgs.eclipses.eclipse-java
 		pkgs.jetbrains.idea-community-bin
 		pkgs.libreoffice-qt6-fresh
 		pkgs.obs-studio

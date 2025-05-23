@@ -396,6 +396,8 @@
 
 			hlsearch = true;
 			incsearch = true;
+
+            cursorline = true;
         };
 
         extraConfigVim = ''
