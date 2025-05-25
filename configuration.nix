@@ -142,6 +142,7 @@
 		pkgs.nasm
         pkgs.cglm
         pkgs.glfw
+        pkgs.libGL
 
 		# apps
 		pkgs.hyprland

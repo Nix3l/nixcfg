@@ -1,11 +1,11 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, inputs, ... }:
 
 {
     # not sure why i also need this here but who cares
     nixpkgs.config.allowUnfree = true; # allow non-FOSS
 
     imports = [
-        inputs.nixvim.homeManagerModules.nixvim
+        inputs.nvf.homeManagerModules.default
         inputs.spicetify.homeManagerModules.spicetify
         inputs.ags.homeManagerModules.default
     ];
@@ -258,7 +258,7 @@
             cp = "cp -r";
         };
 
-        initExtra = ''
+        initContent = ''
             PS1="%F{#689d6a}[%B%n%b@%B%m%b]%f %F{#458588}%1~%f %B%F{#689d6a}>%f%b "
         '';
     };
@@ -309,134 +309,91 @@
     };
 
     # EDITOR
-    programs.nixvim = {
+    programs.nvf = {
         enable = true;
-		enableMan = true; # installs man page
+        enableManpages = true;
 
-        colorschemes.gruvbox.enable = true;
-        plugins.lualine.enable = true;
+        settings.vim = {
+            viAlias = true;
+            vimAlias = true;
 
-        plugins.treesitter = {
-			enable = true;
-			autoLoad = true;
-		};
-
-        plugins.lsp = {
-            enable = true;
-            servers = {
-                ccls.enable = true;
-                nixd.enable = true;
-                ts_ls.enable = true;
-                jdtls.enable = true;
+            theme = {
+                enable = true;
+                name = "gruvbox";
+                style = "dark";
             };
 
-            keymaps.lspBuf = {
-                "gd" = "definition";
-                "gr" = "references";
-                "gy" = "type_definition";
-                "gi" = "implementation";
-                "K" = "hover";
+            options = {
+                signcolumn = "yes";
+
+                tabstop = 4;
+                shiftwidth = 4;
+                softtabstop = 0;
+
+                mouse = "a";
+
+                wrap = false;
             };
+
+            statusline.lualine.enable = true;
+            telescope.enable = true;
+			autocomplete.nvim-cmp.enable = true;
+            snippets.luasnip.enable = true;
+            lsp.enable = true;
+
+            languages = {
+                enableTreesitter = true;
+
+                clang = {
+                    enable = true;
+                    cHeader = true;
+                };
+
+                assembly.enable = true;
+                nix.enable = true;
+                ts.enable = true;
+                java.enable = true;
+            };
+
+            visuals = {
+                nvim-scrollbar.enable = true;
+                nvim-web-devicons.enable = true;
+                nvim-cursorline.enable = true;
+                fidget-nvim.enable = true;
+                highlight-undo.enable = true;
+
+                # TODO(nix3l): too many tablines. clutters up the screen. should i keep this?
+                indent-blankline.enable = true;
+            };
+
+            # TODO(nix3l): do i really want this here?
+            # NOTE(nix3l): for now i removed this, kinda dont need it
+            # tabline.nvimBufferline.enable = true;
+
+            presence.neocord.enable = true;
+
+            keymaps = [
+                {
+                    key = "<esc>";
+                    mode = "n";
+                    silent = true;
+                    action = ":noh<CR>";
+                }
+            ];
+
+            autocmds = [
+                {
+                    event = [ "BufEnter" "BufNewFile" "BufRead" ];
+                    command = "setlocal filetype=glsl";
+                    pattern = [ "*.comp" "*.vs" "*.fs" ];
+                }
+                {
+                    event = [ "BufEnter" "BufNewFile" "BufRead" ];
+                    command = "setlocal filetype=c";
+                    pattern = [ "*.c" "*.h" ];
+                }
+            ];
         };
-
-        # FIXME
-        plugins.cmp = {
-            enable = true;
-            autoEnableSources = true;
-			autoLoad = true;
-        };
-
-		plugins.nvim-jdtls = {
-			enable = true;
-			cmd = [
-				(lib.getExe pkgs.jdt-language-server)
-				"-data" "/home/nix3l/uni/temp/programming"
-				# "-configuration" "/path/to/your/configuration"
-			];
-		};
- 
-        plugins.web-devicons.enable = true;
-        plugins.nvim-tree = {
-            enable = true;
-            openOnSetupFile = true;
-            autoReloadOnWrite = true;
-        };
-
-        globalOpts = {
-            signcolumn = "yes";
-
-            tabstop = 4;
-            shiftwidth = 4;
-            softtabstop = 0;
-            expandtab = true;
-            smarttab = true;
-			autoindent = true;
-
-            mouse = "a";
-
-            number = true;
-            relativenumber = true;
-
-            undofile = true;
-
-            encoding = "utf-8";
-            fileencoding = "utf-8";
-
-            ruler = true;
-
-            splitbelow = true;
-            splitright = true;
-
-			updatetime = 100;
-
-			hidden = false;
-			autoread = true;
-
-			termguicolors = true;
-
-			hlsearch = true;
-			incsearch = true;
-
-            cursorline = true;
-        };
-
-        extraConfigVim = ''
-            set number
-            set relativenumber
-            set shiftwidth=4
-			set tabstop=4
-			let g:gruvbox_contrast_dark='hard'
-			let g:gruvbox_contrast_light='hard'
-			hi LspCxxHlGroupMemberVariable guifg=#83a598
-        '';
-
-        keymaps = [
-            {
-                key = "<esc>";
-                action = ":noh<CR>";
-				options.silent = true;
-            } {
-                key = "<Space>e";
-                action = ":NvimTreeToggle<CR>";
-				options.silent = true;
-            }
-        ];
-
-        autoCmd = [
-			{
-                event = [ "BufEnter" "BufNewFile" "BufRead" ];
-                command = "set shiftwidth=4 tabstop=4";
-                pattern = [ "*" ];
-            } {
-                event = [ "BufEnter" "BufNewFile" "BufRead" ];
-                command = "setlocal filetype=c";
-                pattern = [ "*.h" ];
-            } {
-                event = [ "BufEnter" "BufNewFile" "BufRead" ];
-                command = "setlocal filetype=glsl";
-                pattern = [ "*.comp" "*.vs" "*.fs" ];
-            }
-        ];
     };
 
     # SPOTFIY
@@ -453,7 +410,7 @@
         ];
 
         theme = spicepkgs.themes.text;
-        colorScheme = "gruvbox";
+        colorScheme = "Gruvbox";
     };
 
     # WHATEVER THIS IS

@@ -10,7 +10,8 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        nixvim.url = "github:nix-community/nixvim";
+		nvf.url = "github:notashelf/nvf";
+
         spicetify.url = "github:Gerg-L/spicetify-nix";
         ags.url = "github:aylur/ags";
     };
