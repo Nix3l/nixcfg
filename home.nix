@@ -366,6 +366,8 @@
                 indent-blankline.enable = true;
             };
 
+            utility.oil-nvim.enable = true;
+
             # TODO(nix3l): do i really want this here?
             # NOTE(nix3l): for now i removed this, kinda dont need it
             # tabline.nvimBufferline.enable = true;
@@ -378,6 +380,12 @@
                     mode = "n";
                     silent = true;
                     action = ":noh<CR>";
+                }
+                {
+                    key = "<leader>e";
+                    mode = "n";
+                    silent = true;
+                    action = ":e .<CR>";
                 }
             ];
 
