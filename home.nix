@@ -421,6 +421,12 @@
         colorScheme = "Gruvbox";
     };
 
+    # ZATHURA
+    programs.zathura = {
+        enable = true;
+        # TODO
+    };
+
     # WHATEVER THIS IS
     xdg = {
         enable = true;

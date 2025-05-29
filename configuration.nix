@@ -47,7 +47,7 @@
             "nix3l" = import ./home.nix;
         };
 
-        backupFileExtension = "backup";
+        backupFileExtension = "bkp";
     };
 
     # GRAPHICS
@@ -118,7 +118,7 @@
 		pkgs.gh
 		pkgs.openssl
 		pkgs.zsh
-		pkgs.dconf # needed for gtk
+        pkgs.dconf # needed for gtk
 		(pkgs.ffmpeg-full.override { withUnfree = true; withOpengl = true; })
 		pkgs.appimage-run
 		pkgs.jdk
@@ -170,6 +170,7 @@
 		pkgs.ghex
 		pkgs.media-downloader
 		pkgs.obsidian
+        pkgs.zathura
 
 		# wine 
 		pkgs.wineWowPackages.stable
@@ -361,6 +362,8 @@
         XMODIFIER = "@im=fcitx";
         GTK_IM_MODULE = "wayland";
     };
+
+    programs.dconf.enable = true;
 
     # SERVICES
     services.openssh.enable = true;
