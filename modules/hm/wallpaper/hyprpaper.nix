@@ -31,7 +31,6 @@
                     lists.forEach (filesystem.listFilesRecursive dir)
                     (p: toString p);
 
-                # TODO(nix3l): fix
                 wallpaper = with config.hm.mods.wallpaper.hyprpaper; [ "${monitor},${toString dir}/${wallpaper}" ];
             };
         };

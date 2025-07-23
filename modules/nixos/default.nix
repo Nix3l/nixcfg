@@ -11,6 +11,7 @@
         ./apps/terminal-apps.nix
         ./apps/util.nix
         ./apps/wine.nix
+        ./de/de.nix
         ./locale/en.nix
         ./locale/jp.nix
         ./system/audio.nix
