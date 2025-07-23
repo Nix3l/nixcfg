@@ -20,11 +20,6 @@
             default = pkgs.alacritty;
         };
 
-        wm = lib.mkOption {
-            type = lib.types.package;
-            default = pkgs.hyprland;
-        };
-
         discord.enable = lib.mkOption { default = true; };
         torrent.enable = lib.mkOption { default = true; };
         office.enable = lib.mkOption { default = true; };
@@ -39,7 +34,6 @@
         ]) ++ (with config.mods.apps.desktop; [
             fileExplorer
             browser
-            wm
             terminal
         ]);
     };
