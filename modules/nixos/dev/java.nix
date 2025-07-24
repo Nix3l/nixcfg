@@ -8,6 +8,6 @@
 
     config = lib.mkIf config.mods.dev.java.enable {
         programs.java.enable = true;
-        environment.systemPackages = with pkgs; [ jetbrains.idea-community ];
+        environment.systemPackages = with pkgs; [ eclipses.eclipse-java ];
     };
 }

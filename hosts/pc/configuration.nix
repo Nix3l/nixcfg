@@ -61,6 +61,9 @@
             minecraft.enable = true;
         };
 
+        dev.java.enable = true;
+        dev.java.jetbrains.enable = true;
+
         fonts.enable = true;
         ld.enable = true;
 
