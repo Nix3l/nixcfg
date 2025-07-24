@@ -23,6 +23,15 @@
                     inputs.home-manager.nixosModules.default
                 ];
             };
+
+            habib = nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                    ./hosts/habib/configuration.nix
+                    ./modules/nixos
+                    inputs.home-manager.nixosModules.default
+                ];
+            };
         };
 
         hm-modules.default = ./modules/hm;
