@@ -32,4 +32,9 @@
     environment.systemPackages = with pkgs; [
         git
     ];
+
+    nixpkgs.config.permittedInsecurePackages = [
+        # temporary until its fixed
+        "libxml2-2.13.8"
+    ];
 }
