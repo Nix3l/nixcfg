@@ -9,7 +9,7 @@
 
     config = lib.mkIf config.mods.dev.java.enable {
         programs.java.enable = true;
-        environment.systemPackages = with pkgs; [
+        environment.systemPackages = with pkgs; lib.lists.flatten [
             (lib.optional config.mods.dev.java.eclipse.enable eclipses.eclipse-java)
             (lib.optional config.mods.dev.java.jetbrains.enable jetbrains.idea-community)
         ];
