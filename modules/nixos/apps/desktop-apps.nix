@@ -1,28 +1,28 @@
 { lib, config, pkgs, ... }:
 
 {
-    options.mods.apps.desktop = {
-        enable = lib.mkEnableOption "desktop apps";
-        anki.enable = lib.mkEnableOption "anki";
+    options.mods.apps.desktop = with lib; {
+        enable = mkEnableOption "desktop apps";
+        anki.enable = mkEnableOption "anki";
 
-        fileExplorer = lib.mkOption {
-            type = lib.types.package;
+        fileExplorer = mkOption {
+            type = types.package;
             default = pkgs.xfce.thunar;
         };
 
-        browser = lib.mkOption {
-            type = lib.types.package;
+        browser = mkOption {
+            type = types.package;
             default = pkgs.librewolf-bin;
         };
 
-        terminal = lib.mkOption {
-            type = lib.types.package;
+        terminal = mkOption {
+            type = types.package;
             default = pkgs.alacritty;
         };
 
-        discord.enable = lib.mkOption { default = true; };
-        torrent.enable = lib.mkOption { default = true; };
-        office.enable = lib.mkOption { default = true; };
+        discord.enable = mkOption { default = true; };
+        torrent.enable = mkOption { default = true; };
+        office.enable = mkOption { default = true; };
     };
 
     config = lib.mkIf config.mods.apps.desktop.enable {

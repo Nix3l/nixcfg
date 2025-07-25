@@ -1,8 +1,8 @@
 { lib, config, pkgs, ... }:
 
 {
-    options.mods.apps.terminalapps = {
-        enable = lib.mkEnableOption "download terminal apps";
+    options.mods.apps.terminalapps = with lib; {
+        enable = mkEnableOption "download terminal apps";
     };
 
     config = lib.mkIf config.mods.apps.terminalapps.enable {

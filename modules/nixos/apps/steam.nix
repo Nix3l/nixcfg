@@ -1,8 +1,8 @@
 { lib, config, ... }:
 
 {
-    options.mods.apps.steam = {
-        enable = lib.mkEnableOption "steam";
+    options.mods.apps.steam = with lib; {
+        enable = mkEnableOption "steam";
     };
 
     config = lib.mkIf config.mods.apps.steam.enable {

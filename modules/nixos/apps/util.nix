@@ -1,12 +1,12 @@
 { lib, config, pkgs, ... }:
 
 {
-    options.mods.apps.util = {
-        enable = lib.mkEnableOption "util";
-        mediaDownloader = lib.mkEnableOption "media-downloader";
-        obs = lib.mkEnableOption "obs";
-        obsidian = lib.mkEnableOption "obsidian";
-        hexViewer = lib.mkEnableOption "hexviewer";
+    options.mods.apps.util = with lib; {
+        enable = mkEnableOption "util";
+        mediaDownloader = mkEnableOption "media-downloader";
+        obs = mkEnableOption "obs";
+        obsidian = mkEnableOption "obsidian";
+        hexViewer = mkEnableOption "hexviewer";
     };
 
     config = lib.mkIf config.mods.apps.util.enable {

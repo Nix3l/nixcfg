@@ -1,16 +1,16 @@
 { lib, config, pkgs, ... }:
 
 {
-    options.mods.apps.media = {
-        enable = lib.mkEnableOption "media";
+    options.mods.apps.media = with lib; {
+        enable = mkEnableOption "media";
 
-        player = lib.mkOption {
-            type = lib.types.package;
+        player = mkOption {
+            type = types.package;
             default = pkgs.mpv;
         };
 
-        imageViewer = lib.mkOption {
-            type = lib.types.package;
+        imageViewer = mkOption {
+            type = types.package;
             default = pkgs.nsxiv;
         };
     };
