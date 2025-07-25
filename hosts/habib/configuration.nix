@@ -76,7 +76,7 @@
         ld.enable = true;
 
         extraPackages = with pkgs; [
-            # any extra apps go here
+            ciscoPacketTracer8
         ];
     };
 }
