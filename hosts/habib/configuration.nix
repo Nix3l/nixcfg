@@ -68,7 +68,7 @@
         dev = {
             java = {
                 enable = true;
-                jetbrains.enable = true;
+                jetbrains.enable = false;
             };
         };
 
