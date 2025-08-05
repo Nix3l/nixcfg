@@ -20,6 +20,7 @@
         ./gtk/gtk.nix
         ./gtk/gruvbox.nix
         ./qt/qt.nix
+        ./quickshell/sleepy.nix
         ./shell/zsh.nix
         ./wallpaper/hyprpaper.nix
         ./wm/hyprland.nix
