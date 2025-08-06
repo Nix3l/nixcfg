@@ -56,7 +56,7 @@ in {
 
                     blur = {
                         enabled = true;
-                        passes = 2;
+                        passes = 1;
                     };
 
                     shadow = {
