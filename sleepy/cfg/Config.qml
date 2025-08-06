@@ -10,6 +10,7 @@ Singleton {
     property QtObject bar;
     property QtObject timing;
     property QtObject applauncher;
+    property QtObject notifs;
 
     bar: QtObject {
         property int height: barcfg.height;
@@ -21,6 +22,7 @@ Singleton {
 
     timing: QtObject {
         property int networkUpdate: timecfg.networkUpdate;
+        property int notifDisplayTimeout: timecfg.notifDisplayTimeout;
     }
 
     applauncher: QtObject {
@@ -33,6 +35,15 @@ Singleton {
         property int promptHeight: applaunchercfg.promptHeight;
         property int itemHeight: applaunchercfg.itemHeight;
         readonly property int itemWidth: width - padding * 2;
+    }
+
+    notifs: QtObject {
+        property bool placeRight: notifscfg.placeRight;
+        property int width: notifscfg.width;
+        property int minimumHeight: notifscfg.minimumHeight;
+        property int border: notifscfg.border;
+        property int padding: notifscfg.padding;
+        property int margin: notifscfg.margin;
     }
 
     FileView {
@@ -55,6 +66,7 @@ Singleton {
                 id: timecfg;
 
                 property int networkUpdate: 1000;
+                property int notifDisplayTimeout: 2400;
             }
 
             property JsonObject applauncher: JsonObject {
@@ -67,6 +79,17 @@ Singleton {
                 property int spacing: 8;
                 property int promptHeight: 36;
                 property int itemHeight: 38;
+            }
+
+            property JsonObject notifs: JsonObject {
+                id: notifscfg;
+
+                property bool placeRight: false;
+                property int width: 316;
+                property int minimumHeight: 56;
+                property int border: 1;
+                property int padding: 8;
+                property int margin: 8;
             }
         }
     }

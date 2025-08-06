@@ -23,10 +23,7 @@ Item {
     readonly property int decorationSize: Config.bar.contentHeight * root.decorationRatio;
 
     Rectangle {
-        anchors {
-            fill: parent;
-        }
-
+        anchors.fill: parent;
         color: root.bgColor;
     }
 

@@ -7,9 +7,11 @@ import QtQuick
 import "./cfg"
 import "./modules/bar"
 import "./modules/applauncher"
+import "./modules/notifosd"
 
 ShellRoot {
     Shortcuts {}
     Bar {}
     AppLauncher {}
+    NotificationsOSD {}
 }
