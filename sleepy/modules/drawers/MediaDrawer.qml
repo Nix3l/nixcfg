@@ -18,7 +18,7 @@ Drawer {
     implicitWidth: Math.max(500, implicitHeight + content.implicitWidth + padding * 2 + 12);
     implicitHeight: 120;
 
-    xoffset: 40;
+    xoffset: -40;
 
     property int padding: 8;
     readonly property int contentHeight: implicitHeight - padding * 2;
