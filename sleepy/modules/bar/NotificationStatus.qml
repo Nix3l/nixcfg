@@ -6,30 +6,20 @@ import QtQuick
 import "root:/services/notifs"
 import "root:/style"
 
-MouseArea {
-    id: root;
-    anchors.verticalCenter: parent.verticalCenter;
-    anchors.top: parent.top;
-    implicitWidth: content.implicitWidth;
-    implicitHeight: content.implicitHeight;
+BarItem {
+    id: content;
 
-    acceptedButtons: Qt.LeftButton;
+    leftClicked: () => { Notifs.clear() };
 
-    BarItem {
-        id: content;
-
-        IconImage {
-            source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;
-            mipmap: true;
-            implicitSize: 16;
-        }
-
-        Text {
-            visible: Notifs.notifs.length > 0;
-            text: Notifs.notifs.length;
-            color: Style.colors.fg;
-        }
+    IconImage {
+        source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;
+        mipmap: true;
+        implicitSize: 16;
     }
 
-    onPressed: Notifs.clear();
+    Text {
+        visible: Notifs.notifs.length > 0;
+        text: Notifs.notifs.length;
+        color: Style.colors.fg;
+    }
 }

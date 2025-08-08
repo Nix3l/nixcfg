@@ -10,7 +10,7 @@ import "root:/util"
 BarItem {
     id: root;
 
-    toggleDrawer: (on) => { GlobalState.mediaDrawerOpen = on; };
+    hovered: () => { GlobalState.mediaDrawerOpen = true; };
 
     IconWithBorder {
         visible: Media.playerOpen;

@@ -15,7 +15,9 @@ Item {
     property string leftGlyph: "[";
     property string rightGlyph: "]";
 
-    property var toggleDrawer;
+    property var hovered;
+    property var leftClicked;
+    property var rightClicked;
 
     implicitWidth: content.implicitWidth + hpadding * 4 + leftDecoration.implicitWidth + rightDecoration.implicitWidth;
     implicitHeight: Config.bar.contentHeight;
@@ -83,6 +85,13 @@ Item {
     MouseArea {
         anchors.fill: parent;
         hoverEnabled: true;
-        onEntered: if(root.toggleDrawer != undefined) root.toggleDrawer(true);
+        acceptedButtons: Qt.LeftButton | Qt.RightButton;
+        onEntered: if(root.hovered != undefined) root.hovered();
+        onPressed: event => {
+            if(event.button === Qt.LeftButton && root.leftClicked != undefined)
+                root.leftClicked();
+            else if(event.button === Qt.RightClicked && root.rightClicked != undefined)
+                root.rightClicked();
+        }
     }
 }
