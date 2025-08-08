@@ -24,6 +24,14 @@ Singleton {
         property string nixos: "root:/res/nixos.png";
     }
 
+    property QtObject media: QtObject {
+        property string music:       "root:/res/music.svg";
+        property string fastforward: "root:/res/fastforward.svg";
+        property string rewind:      "root:/res/rewind.svg";
+        property string play:        "root:/res/play.svg";
+        property string pause:       "root:/res/pause.svg";
+    }
+
     function wifiStrengthIcon(strength: int): string {
         if(strength >= 80) return root.wifi.bars_4;
         if(strength >= 60) return root.wifi.bars_3;

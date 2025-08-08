@@ -8,6 +8,7 @@ Singleton {
     id: root;
 
     property QtObject bar;
+    property QtObject drawer;
     property QtObject timing;
     property QtObject applauncher;
     property QtObject notifs;
@@ -84,7 +85,7 @@ Singleton {
             property JsonObject notifs: JsonObject {
                 id: notifscfg;
 
-                property bool placeRight: false;
+                property bool placeRight: false; // TODO: this doesnt do anything at the moment
                 property int width: 316;
                 property int minimumHeight: 56;
                 property int border: 1;

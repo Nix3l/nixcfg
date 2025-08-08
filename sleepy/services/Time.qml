@@ -21,4 +21,22 @@ Singleton {
         id: sysclock;
         precision: SystemClock.seconds;
     }
+
+    function timeFromSeconds(val: real): list<int> {
+        const minutes = Math.floor(Math.round(val) / 60);
+        const seconds = Math.round(val - minutes * 60);
+        return [minutes, seconds];
+    }
+
+    function paddedTimeStr(min: int, sec: int): string {
+        let str = "";
+
+        if(min < 10) str += "0";
+        str += min;
+        str += ":";
+        if(sec < 10) str += "0";
+        str += sec;
+
+        return str;
+    }
 }

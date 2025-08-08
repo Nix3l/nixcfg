@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import "root:/style"
 import "root:/cfg"
 import "root:/services"
+import "root:/modules/drawers"
 
 /*
  * LEFT:
@@ -76,7 +77,8 @@ PanelWindow {
             }
 
             Workspaces {}
-            MediaStatus {}
+            MediaStatus { id: media; }
+            MediaDrawer { anchorItem: media; }
         }
 
         // CENTER

@@ -15,8 +15,10 @@ Item {
     property string leftGlyph: "[";
     property string rightGlyph: "]";
 
+    property var toggleDrawer;
+
     implicitWidth: content.implicitWidth + hpadding * 4 + leftDecoration.implicitWidth + rightDecoration.implicitWidth;
-    height: Config.bar.contentHeight;
+    implicitHeight: Config.bar.contentHeight;
 
     default property alias items: content.children;
 
@@ -76,5 +78,11 @@ Item {
         }
 
         spacing: root.contentSpacing;
+    }
+
+    MouseArea {
+        anchors.fill: parent;
+        hoverEnabled: true;
+        onEntered: if(root.toggleDrawer != undefined) root.toggleDrawer(true);
     }
 }

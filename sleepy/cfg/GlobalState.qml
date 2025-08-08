@@ -7,4 +7,5 @@ Singleton {
     id: root;
 
     property bool applauncherOpen: false;
+    property bool mediaDrawerOpen: false;
 }
