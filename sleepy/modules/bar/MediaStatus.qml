@@ -22,7 +22,7 @@ BarItem {
 
     Text {
         text: {
-            if(Media.playerOpen) return Media.active.trackArtist + "・" + Media.shortenedTrackTitle;
+            if(Media.playerOpen) return (Media.active.trackArtist || Media.shortenedAlbumTitle) + "・" + Media.shortenedTrackTitle;
             else return "-- no active media --";
         }
 

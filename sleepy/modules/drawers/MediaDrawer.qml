@@ -79,7 +79,7 @@ Drawer {
 
                     Text {
                         visible: Media.playerOpen;
-                        text: Media.active.trackArtist  + "・" + Media.shortenedAlbumTitle;
+                        text: (Media.active.trackArtist == "" ? "" : (Media.active.trackArtist  + "・")) + Media.shortenedAlbumTitle;
                         color: Style.colors.fg;
                         font.pixelSize: 16;
                     }
