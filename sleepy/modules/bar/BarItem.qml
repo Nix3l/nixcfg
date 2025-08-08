@@ -92,6 +92,8 @@ Item {
                 root.leftClicked();
             else if(event.button === Qt.RightClicked && root.rightClicked != undefined)
                 root.rightClicked();
+            else
+                event.accepted = false;
         }
     }
 }
