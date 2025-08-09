@@ -22,7 +22,7 @@ import "root:/modules/drawers"
  *  => battery          [ ]
  *  => volume           [*]
  *  => systray          [*]
- *  => notif drawer     [ ]
+ *  => notif drawer     [*]
  */
 
 PanelWindow {

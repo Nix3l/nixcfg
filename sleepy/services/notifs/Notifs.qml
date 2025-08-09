@@ -15,21 +15,30 @@ Singleton {
     }
 
     property list<TimedNotif> notifs: [];
+    property int notifsSinceLastRead: 0;
     property bool read: true;
 
     NotificationServer {
         id: server;
         persistenceSupported: true;
-        keepOnReload: true;
+        keepOnReload: false;
 
         onNotification: notif => {
             notif.tracked = true;
+
+            if(!root.read) root.notifsSinceLastRead ++;
             root.read = false;
+
             root.notifs.push(timedNotifComp.createObject(root, {
                 data: notif,
                 displayTimeout: Config.timing.notifDisplayTimeout
             }));
         }
+    }
+
+    function readNotifs() {
+        notifsSinceLastRead = 0;
+        read = true;
     }
 
     function clear() {

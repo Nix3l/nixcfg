@@ -9,6 +9,8 @@ import "root:/cfg"
 Singleton {
     id: root;
 
+    // TODO: this stops working after a while
+
     property bool wifiEnabled: false;
     property bool ethernetEnabled: false;
     readonly property bool enabled: wifiEnabled || ethernetEnabled;

@@ -10,7 +10,10 @@ import "root:/style"
 BarItem {
     id: content;
 
-    hovered: () => { GlobalState.notifDrawerOpen = true; };
+    hovered: () => {
+        Notifs.readNotifs();
+        GlobalState.notifDrawerOpen = true;
+    };
 
     IconImage {
         source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;
@@ -19,8 +22,8 @@ BarItem {
     }
 
     Text {
-        visible: Notifs.notifs.length > 0;
-        text: Notifs.notifs.length;
+        visible: Notifs.notifsSinceLastRead > 0;
+        text: Notifs.notifsSinceLastRead;
         color: Style.colors.fg;
     }
 }
