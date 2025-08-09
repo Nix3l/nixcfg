@@ -20,7 +20,7 @@ Singleton {
     NotificationServer {
         id: server;
         persistenceSupported: true;
-        keepOnReload: false;
+        keepOnReload: true;
 
         onNotification: notif => {
             notif.tracked = true;
@@ -38,13 +38,14 @@ Singleton {
         read = true;
     }
 
+    // using a filter is probably very stupid but who cares
     function expireNotif(notif: TimedNotif) {
-        notif.data.expire();
+        notif.data?.expire();
         notifs = notifs.filter(n => n !== notif);
     }
 
     function dismissNotif(notif: TimedNotif) {
-        notif.data.dismiss();
+        notif.data?.dismiss();
         notifs = notifs.filter(n => n !== notif);
     }
 }

@@ -16,8 +16,9 @@ Singleton {
     }
 
     property QtObject notifs: QtObject {
-        property string unread: "root:/res/notif_unread.svg";
-        property string read:   "root:/res/notif_default.svg";
+        property string unread:  "root:/res/notif_unread.svg";
+        property string read:    "root:/res/notif_default.svg";
+        property string garbage: "root:/res/garbage.svg";
     }
 
     property QtObject os: QtObject {

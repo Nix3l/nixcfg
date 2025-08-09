@@ -8,7 +8,7 @@ import "root:/style"
 import "root:/services"
 import "root:/util"
 
-Drawer {
+BaseDrawer {
     id: root;
 
     isVisible: () => GlobalState.mediaDrawerOpen;

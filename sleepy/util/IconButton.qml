@@ -5,6 +5,8 @@ import QtQuick
 IconImage {
     id: root;
 
+    mipmap: true;
+
     property var clicked;
     property bool enable: true;
 

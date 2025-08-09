@@ -3,13 +3,14 @@ import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import QtQuick
 
+import "root:/cfg"
 import "root:/services/notifs"
 import "root:/style"
 
 BarItem {
     id: content;
 
-    leftClicked: () => { Notifs.clear() };
+    hovered: () => { GlobalState.notifDrawerOpen = true; };
 
     IconImage {
         source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;

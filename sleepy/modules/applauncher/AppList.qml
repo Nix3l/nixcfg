@@ -40,7 +40,5 @@ ClippingRectangle {
         ScrollBar.vertical: ScrollBar {
             implicitWidth: 6;
         }
-
-        focus: true;
     }
 }

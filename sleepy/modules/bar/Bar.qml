@@ -104,7 +104,8 @@ PanelWindow {
             NetworkStatus {}
             Volume {}
             SysTray {}
-            NotificationStatus {}
+            NotifStatus { id: notifstatus; }
+            NotifDrawer { anchorItem: notifstatus; }
         }
     }
 }

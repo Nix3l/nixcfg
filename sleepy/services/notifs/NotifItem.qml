@@ -14,15 +14,26 @@ Item {
 
     required property TimedNotif modelData;
 
+    property int border: Config.notifs.border;
+    property color borderCol: Style.colors.accent;
+    property color hoveredBorderCol: Style.colors.accent;
+
     implicitWidth: Config.notifs.width;
     implicitHeight: Config.notifs.padding + Math.max(Config.notifs.minimumHeight, content.implicitHeight);
+
+    MouseArea {
+        id: mouseArea;
+        anchors.fill: parent;
+        hoverEnabled: true;
+        onPressed: Notifs.dismissNotif(modelData);
+    }
 
     Rectangle {
         anchors.fill: parent;
         color: Style.colors.bg0;
         border {
-            width: Config.notifs.border;
-            color: Style.colors.accent;
+            width: root.border;
+            color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
         }
     }
 

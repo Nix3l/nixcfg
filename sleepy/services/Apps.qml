@@ -17,9 +17,9 @@ Singleton {
             app.execute();
         } else {
             Quickshell.execDetached([
-                Defaults.terminal,
+                SessionInfo.terminal,
                 // alacritty needs the -e flag to run a command
-                Defaults.terminal == "alacritty" ? "-e" : "",
+                SessionInfo.terminal == "alacritty" ? "-e" : "",
                 app.execString
             ]);
         }
