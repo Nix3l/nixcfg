@@ -41,6 +41,12 @@
             ];
         };
 
-        sleepy.enable = true;
+        sleepy = {
+            enable = true;
+            pfp = {
+                enable = true;
+                format = "jpeg";
+            };
+        };
     };
 }

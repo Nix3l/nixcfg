@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, osConfig, ... }:
 
 let
     sleepybind = b: name: "$mod ${if b.shift then "SHIFT" else ""}, ${b.key}, global, sleepy:${name}";
@@ -17,6 +17,11 @@ in
 {
     options.hm.mods.sleepy = with lib; {
         enable = mkEnableOption "sleepy";
+        pfp.enable = mkEnableOption "profile picture";
+        pfp.format = mkOption {
+            type = types.str;
+            default = "png";
+        };
 
         cfg = {
             bar = {
@@ -98,6 +103,10 @@ in
     config = lib.mkIf config.hm.mods.sleepy.enable {
         home.file.".config/sleepy/cfg.json" = {
             text = builtins.toJSON config.hm.mods.sleepy.cfg;
+        };
+
+        home.file.".config/sleepy/pfp.${config.hm.mods.sleepy.pfp.format}" = lib.mkIf config.hm.mods.sleepy.pfp.enable {
+            source = ../../../res/${osConfig.mods.mainUser.name}/pfp.${config.hm.mods.sleepy.pfp.format};
         };
 
         programs.quickshell = {
