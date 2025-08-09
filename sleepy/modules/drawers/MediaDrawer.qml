@@ -58,7 +58,7 @@ BaseDrawer {
                     Layout.alignment: Qt.AlignCenter;
                     text: {
                         if(Media.playerOpen) return Media.shortenedTrackTitle;
-                        else return "placeholder";
+                        else return "No Active Media";
                     }
 
                     color: Style.colors.fg;
@@ -102,8 +102,9 @@ BaseDrawer {
 
                     CustomSlider {
                         Layout.fillWidth: true;
-                        getPosition: () => { return Media.active.position / Media.active.length; };
+                        getPosition: () => { return Media.playerOpen ? Media.active.position / Media.active.length : 0; };
                         setPosition: (val) => {
+                            if(!Media.playerOpen) return;
                             Media.active.position = val * Media.active.length;
                             Media.active.positionChanged();
                         };
