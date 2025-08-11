@@ -154,8 +154,9 @@ BaseDrawer {
                     Layout.fillWidth: true;
                     Layout.fillHeight: true;
 
-                    icon: Icons.volIcon(Audio.volume());
+                    icon: Audio.muted() ? Icons.audio.vol_mute : Icons.volIcon(Audio.volume());
                     iconSize: 32;
+                    iconLeftClicked: () => { Audio.toggleMuted(); };
 
                     onTimer: false;
 

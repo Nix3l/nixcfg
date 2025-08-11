@@ -26,4 +26,13 @@ Singleton {
         if(sink == undefined) return;
         sink.audio.volume = volume;
     }
+
+    function setMuted(mute: bool) {
+        if(sink == undefined) return;
+        sink.audio.muted = mute;
+    }
+
+    function toggleMuted() {
+        setMuted(!muted());
+    }
 }

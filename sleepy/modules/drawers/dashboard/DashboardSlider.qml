@@ -28,6 +28,7 @@ Item {
 
     property string icon: "";
     property int iconSize: 0;
+    property var iconLeftClicked;
 
     property bool showPercentage: true;
     property int textSize: 16;
@@ -46,12 +47,26 @@ Item {
         anchors.margins: root.padding;
         spacing: root.spacing;
 
-        IconImage {
-            visible: root.icon != "";
+        Item {
             Layout.alignment: Qt.AlignLeft;
-            source: root.icon;
-            implicitSize: root.iconSize;
-            mipmap: true;
+
+            implicitWidth: sliderIcon.implicitSize;
+            implicitHeight: sliderIcon.implicitSize;
+
+            IconImage {
+                id: sliderIcon;
+                visible: root.icon != "";
+                anchors.centerIn: parent;
+                source: root.icon;
+                implicitSize: root.iconSize;
+                mipmap: true;
+            }
+
+            MouseArea {
+                anchors.fill: sliderIcon;
+                acceptedButtons: Qt.LeftButton;
+                onPressed: if(root.iconLeftClicked != undefined) root.iconLeftClicked();
+            }
         }
 
         CustomSlider {
