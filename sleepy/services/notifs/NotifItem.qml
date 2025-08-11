@@ -18,14 +18,17 @@ Item {
     property color borderCol: Style.colors.accent;
     property color hoveredBorderCol: Style.colors.accent;
 
+    property var leftClicked: () => { Notifs.dismissNotif(modelData); };
+
     implicitWidth: Config.notifs.width;
     implicitHeight: Config.notifs.padding + Math.max(Config.notifs.minimumHeight, content.implicitHeight);
 
     MouseArea {
         id: mouseArea;
         anchors.fill: parent;
+        acceptedButtons: Qt.LeftButton;
         hoverEnabled: true;
-        onPressed: Notifs.dismissNotif(modelData);
+        onPressed: root.leftClicked();
     }
 
     Rectangle {

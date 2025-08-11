@@ -11,6 +11,8 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Top;
     exclusiveZone: 0;
 
+    readonly property list<TimedNotif> notifs: Notifs.notifs.filter(n => n.display);
+
     anchors {
         top: true;
         bottom: true;
@@ -19,7 +21,12 @@ PanelWindow {
     implicitWidth: Config.notifs.width;
     color: 'transparent';
 
-    mask: Region {}
+    // NOTE(nix3l): so this would technically make the gaps between notifications also part of the mask
+    // but i highly doubt i would really notice so
+    // keeping it like this for now
+    mask: Region {
+        item: content;
+    }
 
     ColumnLayout {
         id: content;
@@ -27,10 +34,13 @@ PanelWindow {
         y: Config.notifs.margin;
 
         Repeater {
-            id: notifrepeater;
-            model: Notifs.notifs.filter(n => n.display);
+            id: repeater;
+            model: root.notifs;
 
-            NotifItem {}
+            NotifItem {
+                id: notif;
+                leftClicked: () => { notif.modelData.display = false; };
+            }
         }
     }
 }
