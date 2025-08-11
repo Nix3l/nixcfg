@@ -23,6 +23,7 @@ Singleton {
 
     timing: QtObject {
         property int networkUpdate: timecfg.networkUpdate;
+        property int brightnessUpdate: timecfg.brightnessUpdate;
         property int notifDisplayTimeout: timecfg.notifDisplayTimeout;
     }
 
@@ -67,6 +68,7 @@ Singleton {
                 id: timecfg;
 
                 property int networkUpdate: 1000;
+                property int brightnessUpdate: 1000;
                 property int notifDisplayTimeout: 2400;
             }
 

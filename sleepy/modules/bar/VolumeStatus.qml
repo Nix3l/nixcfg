@@ -8,23 +8,13 @@ import "root:/style"
 BarItem {
     id: root;
 
-    readonly property string text: {
-        return Math.floor((Audio.vol() * 100)) + "%";
-    }
-
-    readonly property string icon: {
-        if(Audio.vol() < 0.50) return "";
-        if(Audio.vol() < 0.75) return "";
-        return "";
-    }
-
     Text {
-        text: root.icon;
+        text: Icons.volTextIcon(Audio.volume());
         color: Audio.muted() ? Style.colors.fgMuted : Style.colors.fg;
     }
 
     Text {
-        text: root.text;
+        text: Math.floor((Audio.volume() * 100)) + "%";
         color: Audio.muted() ? Style.colors.fgMuted : Style.colors.fg;
     }
 }

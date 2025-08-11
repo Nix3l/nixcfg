@@ -9,4 +9,5 @@ Singleton {
     property bool applauncherOpen: false;
     property bool mediaDrawerOpen: false;
     property bool notifDrawerOpen: false;
+    property bool dashboardDrawerOpen: false;
 }

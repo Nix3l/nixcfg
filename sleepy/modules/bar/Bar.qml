@@ -7,18 +7,19 @@ import "root:/style"
 import "root:/cfg"
 import "root:/services"
 import "root:/modules/drawers"
+import "root:/modules/drawers/dashboard"
 
 /*
  * LEFT:
  *  => workspaces TODO(nix3l): animations
- *  => media TODO(nix3l): drawer, shortening
+ *  => media
  *
  * CENTER:
- *  => time TODO(nix3l): drawer
+ *  => time
  *
  * RIGHT:
  *  => bluetooth        [ ]
- *  => wifi             [*] TODO: fix the icon looking kinda weird
+ *  => wifi             [*]
  *  => battery          [ ]
  *  => volume           [*]
  *  => systray          [*]
@@ -35,7 +36,6 @@ PanelWindow {
     implicitHeight: Config.bar.height;
     color: "transparent";
 
-    // BACKGROUND
     Rectangle {
         anchors.fill: parent;
         color: Style.colors.bg0;
@@ -86,7 +86,8 @@ PanelWindow {
             anchors.centerIn: parent;
             spacing: 8;
 
-            Clock {}
+            Clock { id: clock; }
+            DashboardDrawer { anchorItem: clock; }
         }
 
         // RIGHT
@@ -102,7 +103,7 @@ PanelWindow {
 
             BluetoothStatus {}
             NetworkStatus {}
-            Volume {}
+            VolumeStatus {}
             SysTray {}
             NotifStatus { id: notifstatus; }
             NotifDrawer { anchorItem: notifstatus; }
