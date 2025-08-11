@@ -5,6 +5,7 @@
         enable = mkEnableOption "alacritty";
         shell = mkOption { default = "zsh"; };
         gruvbox = mkOption { default = true; };
+        font = mkOption { default = "FiraCode"; };
     };
 
     config = lib.mkIf config.hm.mods.alacritty.enable {
@@ -14,7 +15,7 @@
                 terminal.shell = shell;
                 cursor.style = "beam";
 
-                font.normal.family = "FiraCode";
+                font.normal.family = font;
                 font.size = 12;
 
                 colors = lib.mkIf gruvbox {

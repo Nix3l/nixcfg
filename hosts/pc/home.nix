@@ -4,7 +4,11 @@
     home.stateVersion = "25.05";
     hm.mods = {
         defaults.enable = true;
-        alacritty.enable = true;
+        alacritty = {
+            enable = true;
+            font = "Tamzen";
+        };
+
         git.enable = true;
 
         nvim = {
@@ -45,7 +49,7 @@
             enable = true;
             pfp = {
                 enable = true;
-                format = "jpeg";
+                format = "png";
             };
         };
     };

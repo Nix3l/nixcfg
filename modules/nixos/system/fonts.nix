@@ -21,6 +21,7 @@
                 font-awesome_4
                 ipafont
                 kochi-substitute
+                tamzen
             ];
         };
 
