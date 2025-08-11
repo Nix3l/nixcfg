@@ -6,7 +6,7 @@ import QtQuick.Layouts
 import "root:/cfg"
 import "root:/style"
 import "root:/services"
-import "root:/util"
+import "root:/components"
 
 Item {
     id: root;

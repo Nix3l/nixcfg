@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
 
-import "root:/util"
+import "root:/components"
 
 Scope {
     id: root;

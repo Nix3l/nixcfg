@@ -3,7 +3,7 @@ import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
 
-import "root:/util"
+import "root:/components"
 
 BarItem {
     Item {

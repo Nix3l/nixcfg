@@ -5,7 +5,7 @@ import QtQuick
 import "root:/cfg"
 import "root:/services"
 import "root:/style"
-import "root:/util"
+import "root:/components"
 
 BarItem {
     id: root;

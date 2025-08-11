@@ -10,7 +10,7 @@ import "root:/cfg"
 import "root:/style"
 import "root:/services/notifs"
 import "root:/modules/osd/notif"
-import "root:/util"
+import "root:/components"
 
 BaseDrawer {
     id: root;
