@@ -20,7 +20,7 @@ Item {
     property var leftClicked;
     property var rightClicked;
 
-    property bool selected: containsMouse; //|| ListView.isCurrentItem;
+    property bool selected: containsMouse || ListView.isCurrentItem;
 
     Rectangle {
         visible: root.selected;

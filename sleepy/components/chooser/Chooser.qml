@@ -32,6 +32,7 @@ PanelWindow {
 
     function close() {
         searchPrompt.field.text = "";
+        listview.currentIndex = 0;
         root.toggle(false);
     }
 
@@ -75,6 +76,7 @@ PanelWindow {
         ChooserPrompt {
             id: searchPrompt;
             visible: root.usePrompt;
+            Keys.onPressed: event => processKeys(event);
         }
 
         ClippingRectangle {
@@ -93,8 +95,29 @@ PanelWindow {
                 delegate: root.modelItem;
 
                 keyNavigationEnabled: true;
-                keyNavigationWraps: true;
+
+                boundsBehavior: Flickable.StopAtBounds;
+                flickDeceleration: 10;
+
+                Keys.onPressed: event => processKeys(event);
             }
+        }
+    }
+
+    function toggleFocus(listFocus: bool, promptFocus: bool) {
+        searchPrompt.field.focus = promptFocus;
+        listview.focus = listFocus;
+    }
+
+    function processKeys(event: KeyEvent) {
+        if(event.key == Qt.Key_Down && !listview.focus) {
+            toggleFocus(true, false);
+            listview.incrementCurrentIndex();
+        }
+
+        if(event.key == Qt.Key_Up && !listview.focus) {
+            toggleFocus(true, false);
+            listview.decrementCurrentIndex();
         }
     }
 }
