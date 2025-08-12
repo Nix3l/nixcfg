@@ -30,6 +30,17 @@ PanelWindow {
     property bool usePrompt: true;
     property string promptText: searchPrompt.field.text ?? "";
 
+    // kinda stupid but it works
+    onVisibleChanged: {
+        if(visible) open();
+        else close();
+    }
+
+    function open() {
+        toggleFocus(false);
+        toggle(true);
+    }
+
     function close() {
         searchPrompt.field.text = "";
         listview.currentIndex = 0;
@@ -104,20 +115,24 @@ PanelWindow {
         }
     }
 
-    function toggleFocus(listFocus: bool, promptFocus: bool) {
-        searchPrompt.field.focus = promptFocus;
+    function toggleFocus(listFocus: bool) {
+        searchPrompt.field.focus = !listFocus;
         listview.focus = listFocus;
     }
 
     function processKeys(event: KeyEvent) {
         if(event.key == Qt.Key_Down && !listview.focus) {
-            toggleFocus(true, false);
+            toggleFocus(true);
             listview.incrementCurrentIndex();
         }
 
         if(event.key == Qt.Key_Up && !listview.focus) {
-            toggleFocus(true, false);
+            toggleFocus(true);
             listview.decrementCurrentIndex();
+        }
+
+        if(event.key == Qt.Key_Return) {
+            listview.currentItem.activate();
         }
     }
 }

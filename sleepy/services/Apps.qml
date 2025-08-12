@@ -24,8 +24,4 @@ Singleton {
             ]);
         }
     }
-
-    function query(search: string): list<DesktopEntry> {
-        return entries.filter(app => app.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
-    }
 }

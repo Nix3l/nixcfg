@@ -12,9 +12,13 @@ import "root:/components/chooser"
 ChooserItem {
     id: root;
 
-    leftClicked: () => {
+    activate: () => {
         Apps.run(root.modelData);
         root.chooser.close();
+    }
+
+    leftClicked: () => {
+        activate();
     }
 
     RowLayout {

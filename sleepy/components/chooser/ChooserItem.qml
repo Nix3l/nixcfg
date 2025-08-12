@@ -15,6 +15,8 @@ Item {
 
     property bool containsMouse: mouseArea.containsMouse;
 
+    property var activate;
+
     property var mouseEntered;
     property var mouseExited;
     property var leftClicked;
