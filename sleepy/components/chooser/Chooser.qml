@@ -44,6 +44,7 @@ PanelWindow {
     function close() {
         searchPrompt.field.text = "";
         listview.currentIndex = 0;
+        listview.positionViewAtBeginning();
         root.toggle(false);
     }
 
