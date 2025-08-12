@@ -74,6 +74,11 @@ PanelWindow {
         anchors.fill: parent;
         color: root.bg;
         opacity: root.bgOpacity;
+    }
+
+    Rectangle {
+        anchors.fill: parent;
+        color: 'transparent';
         border {
             width: root.border;
             color: root.borderColor;
