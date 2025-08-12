@@ -49,14 +49,25 @@ in {
                 decoration = {
                     rounding = 0;
 
-                    active_opacity = 1.0;
-                    inactive_opacity = 0.92;
+                    active_opacity = 0.96;
+                    inactive_opacity = 0.90;
 
                     dim_inactive = false;
 
                     blur = {
                         enabled = true;
-                        passes = 1;
+                        xray = true;
+                        special = false;
+                        new_optimizations = true;
+                        size = 10;
+                        passes = 2;
+                        brightness = 1;
+                        noise = 0.01;
+                        contrast = 1;
+                        popups = true;
+                        popups_ignorealpha = 0.6;
+                        input_methods = true;
+                        input_methods_ignorealpha = 0.8;
                     };
 
                     shadow = {
