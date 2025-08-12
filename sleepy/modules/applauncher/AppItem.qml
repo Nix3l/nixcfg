@@ -7,51 +7,37 @@ import QtQuick.Controls
 import "root:/cfg"
 import "root:/style"
 import "root:/services"
+import "root:/components/chooser"
 
-MouseArea {
+ChooserItem {
     id: root;
 
-    required property DesktopEntry modelData;
-    property bool selected: ListView.isCurrentItem;
-
-    acceptedButtons: Qt.LeftButton;
-    hoverEnabled: true;
-
-    implicitWidth: Config.applauncher.itemWidth;
-    implicitHeight: Config.applauncher.itemHeight;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: root.selected ? Style.colors.bg1 : Style.colors.bg0;
+    leftClicked: () => {
+        Apps.run(root.modelData);
+        root.chooser.close();
     }
 
     RowLayout {
-        id: content;
-
         anchors {
             left: parent.left;
             verticalCenter: parent.verticalCenter;
-            leftMargin: Config.applauncher.padding;
+            margins: Config.chooser.itemPadding;
         }
 
+        spacing: 8;
+
         IconImage {
-            source: Quickshell.iconPath(root.modelData?.icon, "image-missing");
-            implicitSize: 28;
+            Layout.alignment: Qt.AlignLeft;
+            source: Quickshell.iconPath(modelData.icon ?? "");
+            implicitSize: Config.chooser.contentHeight * 0.77;
             mipmap: true;
         }
 
         Text {
+            Layout.alignment: Qt.AlignLeft;
             text: modelData?.name;
-            color: Style.colors.fg;
-            font.pixelSize: 14;
+            color: selected ? Style.colors.bg0 : Style.colors.fg;
+            font.pixelSize: Config.chooser.itemFontSize;
         }
-    }
-
-    onEntered: { selected = true; }
-    onExited: { selected = ListView.isCurrentItem; }
-
-    onPressed: {
-        Apps.run(root.modelData);
-        GlobalState.applauncherOpen = false;
     }
 }

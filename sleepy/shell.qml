@@ -8,6 +8,7 @@ import "./cfg"
 import "./modules/bar"
 import "./modules/applauncher"
 import "./modules/osd/notif"
+import "./components/chooser"
 
 ShellRoot {
     Shortcuts {}

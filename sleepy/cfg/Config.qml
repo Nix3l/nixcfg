@@ -7,13 +7,7 @@ import QtQuick
 Singleton {
     id: root;
 
-    property QtObject bar;
-    property QtObject drawer;
-    property QtObject timing;
-    property QtObject applauncher;
-    property QtObject notifs;
-
-    bar: QtObject {
+    property JsonObject bar: JsonObject {
         property int height: barcfg.height;
         property int vpadding: barcfg.vpadding;
         property int hpadding: barcfg.hpadding;
@@ -21,25 +15,30 @@ Singleton {
         property int numWorkspacesShown: barcfg.numWorkspacesShown;
     }
 
-    timing: QtObject {
+    property JsonObject timing: JsonObject {
         property int networkUpdate: timecfg.networkUpdate;
         property int brightnessUpdate: timecfg.brightnessUpdate;
         property int notifDisplayTimeout: timecfg.notifDisplayTimeout;
     }
 
-    applauncher: QtObject {
-        property int width: applaunchercfg.width;
-        property int height: applaunchercfg.height;
-        property int border: applaunchercfg.border;
-        property int padding: applaunchercfg.padding;
-        property int spacing: applaunchercfg.spacing;
-
-        property int promptHeight: applaunchercfg.promptHeight;
-        property int itemHeight: applaunchercfg.itemHeight;
-        readonly property int itemWidth: width - padding * 2;
+    property JsonObject chooser: JsonObject {
+        property int contentWidth: choosercfg.contentWidth;
+        property int itemHeight: choosercfg.itemHeight;
+        property int itemSpacing: choosercfg.itemSpacing;
+        property int maxShownItems: choosercfg.maxShownItems;
+        property int itemPadding: choosercfg.itemPadding;
+        readonly property int contentHeight: itemHeight - itemPadding * 2;
+        property int contentSpacing: choosercfg.contentSpacing;
+        property int promptPadding: choosercfg.promptPadding;
+        property int promptFontSize: choosercfg.promptFontSize;
+        property int itemFontSize: choosercfg.itemFontSize;
     }
 
-    notifs: QtObject {
+    property JsonObject applauncher: JsonObject {
+        property bool showIcons: applaunchercfg.showIcons;
+    }
+
+    property JsonObject notifs: JsonObject {
         property bool placeRight: notifscfg.placeRight;
         property int width: notifscfg.width;
         property int minimumHeight: notifscfg.minimumHeight;
@@ -72,16 +71,27 @@ Singleton {
                 property int notifDisplayTimeout: 2400;
             }
 
+            property JsonObject chooser: JsonObject {
+                id: choosercfg;
+
+                property int contentWidth: 800;
+                property int itemHeight: 64;
+                property int itemSpacing: 8;
+                property int maxShownItems: 6;
+
+                property int itemPadding: 12;
+
+                property int contentSpacing: 24;
+                property int promptPadding: 24;
+
+                property int promptFontSize: 18;
+                property int itemFontSize: 22;
+            }
+
             property JsonObject applauncher: JsonObject {
                 id: applaunchercfg;
 
-                property int width: 480;
-                property int height: 320;
-                property int border: 2;
-                property int padding: 8;
-                property int spacing: 8;
-                property int promptHeight: 36;
-                property int itemHeight: 38;
+                property bool showIcons: true;
             }
 
             property JsonObject notifs: JsonObject {
