@@ -25,69 +25,40 @@ in
 
         cfg = {
             bar = {
-                height = mkOption {
-                    type = types.int;
-                    default = 28;
-                };
+                height = mkOption { default = 28; };
+                vpadding = mkOption { default = 4; };
+                hpadding = mkOption { default = 0; };
+                numWorkspacesShown = mkOption { default = 4; };
+            };
 
-                vpadding = mkOption {
-                    type = types.int;
-                    default = 4;
-                };
-
-                hpadding = mkOption {
-                    type = types.int;
-                    default = 0;
-                };
-
-                numWorkspacesShown = mkOption {
-                    type = types.int;
-                    default = 4;
-                };
+            chooser = {
+                contentWidth = mkOption { default = 800; };
+                itemHeight = mkOption { default = 64; };
+                itemSpacing = mkOption { default = 8; };
+                maxShownItems = mkOption { default = 6; };
+                itemPadding = mkOption { default = 12; };
+                contentSpacing = mkOption { default = 24; };
+                promptPadding = mkOption { default = 24; };
+                promptFontSize = mkOption { default = 18; };
+                itemFontSize = mkOption { default = 22; };
             };
 
             timing = {
-                networkUpdate = mkOption {
-                    type = types.int;
-                    default = 1000;
-                };
+                networkUpdate = mkOption { default = 1000; };
+                notifDisplayTimeout = mkOption { default = 2400; };
             };
 
             applauncher = {
-                width = mkOption {
-                    type = types.int;
-                    default = 480;
-                };
+                showIcons = mkOption { default = false; };
+            };
 
-                height = mkOption {
-                    type = types.int;
-                    default = 320;
-                };
-
-                border = mkOption {
-                    type = types.int;
-                    default = 2;
-                };
-
-                padding = mkOption {
-                    type = types.int;
-                    default = 8;
-                };
-
-                spacing = mkOption {
-                    type = types.int;
-                    default = 8;
-                };
-
-                promptHeight = mkOption {
-                    type = types.int;
-                    default = 36;
-                };
-
-                itemHeight = mkOption {
-                    type = types.int;
-                    default = 38;
-                };
+            notifs = {
+                placeRight = mkOption { default = false; };
+                width = mkOption { default = 316; };
+                minimumHeight = mkOption { default = 56; };
+                border = mkOption { default = 1; };
+                padding = mkOption { default = 8; };
+                margin = mkOption { default = 8; };
             };
         };
 
