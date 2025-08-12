@@ -141,7 +141,6 @@ in {
                 ];
 
                 exec-once = lib.lists.flatten [
-                    (lib.optional osConfig.mods.networking.enable "nm-applet &")
                     (lib.optional osConfig.mods.apps.util.enable "flameshot &")
                     (lib.optional osConfig.mods.input.ime.enable "fcitx5 &")
                     # fixes cursor themes in gnome apps under hyprland
