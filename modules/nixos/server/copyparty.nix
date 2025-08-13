@@ -11,6 +11,7 @@
         systemd.tmpfiles.rules = [
             "d /run/keys/copyparty 0755 copyparty copyparty -"
             "d /srv/copyparty 0755 copyparty copyparty -"
+            "f /srv/copyparty/nix3l_password 0644 copyparty copyparty -"
         ];
 
         services.copyparty = {
