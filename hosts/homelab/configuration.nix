@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
     imports = [ ./hardware-configuration.nix ];
@@ -31,5 +31,7 @@
         server = {
             copyparty.enable = true;
         };
+
+        extraPackages = [ pkgs.cloudflared ];
     };
 }
