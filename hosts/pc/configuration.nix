@@ -24,6 +24,10 @@
 
         nvidia.enable = true;
 
+        kernel = {
+            ddcci.enable = true;
+        };
+
         mainUser = {
             name = "nix3l";
             email = "momanianas123@gmail.com";

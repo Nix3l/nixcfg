@@ -13,6 +13,7 @@
         ./apps/wine.nix
         ./desktopenv/de.nix
         ./dev/java.nix
+        ./kernelmodules/ddcci.nix
         ./locale/en.nix
         ./locale/jp.nix
         ./system/audio.nix

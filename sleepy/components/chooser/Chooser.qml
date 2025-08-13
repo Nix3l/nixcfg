@@ -138,7 +138,7 @@ PanelWindow {
         }
 
         if(event.key == Qt.Key_Return) {
-            listview.currentItem.activate();
+            if(listview.currentItem.activate != undefined) listview.currentItem.activate();
         }
     }
 }
