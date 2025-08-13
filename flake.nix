@@ -11,6 +11,8 @@
         nvf.url = "github:notashelf/nvf";
         spicetify.url = "github:Gerg-L/spicetify-nix";
         polymc.url = "github:PolyMC/PolyMC";
+
+        copyparty.url = "github:9001/copyparty";
     };
 
     outputs = { self, nixpkgs, ... } @ inputs: {
@@ -19,6 +21,15 @@
                 specialArgs = { inherit inputs; };
                 modules = [
                     ./hosts/pc/configuration.nix
+                    ./modules/nixos
+                    inputs.home-manager.nixosModules.default
+                ];
+            };
+
+            homelab = nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                    ./hosts/homelab/configuration.nix
                     ./modules/nixos
                     inputs.home-manager.nixosModules.default
                 ];

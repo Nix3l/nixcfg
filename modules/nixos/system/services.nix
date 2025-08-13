@@ -1,26 +1,40 @@
 { lib, config, ... }:
 
+let
+    cfg = config.mods;
+in
 {
-    options.mods = {
-        bluetooth.enable = lib.mkEnableOption "bluetooth";
-        autoUSBMount.enable = lib.mkEnableOption "auto usb mounting";
-        dconf.enable = lib.mkEnableOption "dconf";
-        ssh.enable = lib.mkEnableOption "ssh";
-        printing.enable = lib.mkEnableOption "printing service";
+    options.mods = with lib; {
+        bluetooth.enable = mkEnableOption "bluetooth";
+        autoUSBMount.enable = mkEnableOption "auto usb mounting";
+        dconf.enable = mkEnableOption "dconf";
+
+        ssh = {
+            enable = mkEnableOption "ssh";
+            rootAuthorizedKeys = mkOption {
+                type = with types; listOf str;
+                default = [];
+            };
+        };
+
+        printing.enable = mkEnableOption "printing service";
     };
 
     config = {
         hardware.bluetooth = {
-            enable = config.mods.bluetooth.enable;
-            powerOnBoot = config.mods.bluetooth.enable;
+            enable = cfg.bluetooth.enable;
+            powerOnBoot = cfg.bluetooth.enable;
         };
 
         # yeah i probably shouldnt be grouping these together but who cares
-        services.gvfs.enable = config.mods.autoUSBMount.enable;
-        services.udisks2.enable = config.mods.autoUSBMount.enable;
+        services.gvfs.enable = cfg.autoUSBMount.enable;
+        services.udisks2.enable = cfg.autoUSBMount.enable;
 
-        programs.dconf.enable = config.mods.dconf.enable;
-        services.openssh.enable = config.mods.ssh.enable;
-        services.printing.enable = config.mods.printing.enable;
+        programs.dconf.enable = cfg.dconf.enable;
+
+        services.openssh.enable = cfg.ssh.enable;
+        users.users.root.openssh.authorizedKeys.keys = lib.mkIf cfg.ssh.enable cfg.ssh.rootAuthorizedKeys;
+
+        services.printing.enable = cfg.printing.enable;
     };
 }

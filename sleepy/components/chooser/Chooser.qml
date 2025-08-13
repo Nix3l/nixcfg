@@ -21,7 +21,7 @@ PanelWindow {
     property color bg: Style.colors.bg0;
     property real bgOpacity: 0.8;
 
-    property int border: 2;
+    property int border: 4;
     property color borderColor: Style.colors.accent;
 
     required property var model;

@@ -14,7 +14,7 @@ BarItem {
     }
 
     Text {
-        text: Math.floor((Audio.volume() * 100)) + "%";
+        text: Math.round((Audio.volume() * 100)) + "%";
         color: Audio.muted() ? Style.colors.fgMuted : Style.colors.fg;
     }
 }

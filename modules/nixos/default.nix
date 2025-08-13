@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
     imports = [
+        # flakes
+        inputs.copyparty.nixosModules.default
+
+        # modules
         ./apps/desktop-apps.nix
         ./apps/electron.nix
         ./apps/extra.nix
@@ -11,14 +15,16 @@
         ./apps/terminal-apps.nix
         ./apps/util.nix
         ./apps/wine.nix
-        ./desktopenv/de.nix
+        ./desktop-env/de.nix
         ./dev/java.nix
-        ./kernelmodules/ddcci.nix
+        ./kernel-modules/ddcci.nix
         ./locale/en.nix
         ./locale/jp.nix
+        ./server/copyparty.nix
         ./system/audio.nix
         ./system/fonts.nix
         ./system/input.nix
+        ./system/laptop-lid.nix
         ./system/ld.nix
         ./system/networking.nix
         ./system/nvidia.nix
