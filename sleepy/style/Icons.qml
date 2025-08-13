@@ -47,6 +47,10 @@ Singleton {
         property string vol_high:   "root:/res/vol_high.svg";
     }
 
+    property QtObject display: QtObject {
+        property string brightness: "root:/res/brightness.svg";
+    }
+
     function volIcon(vol: real): string {
         if(vol < 0.4) return root.audio.vol_low;
         if(vol < 0.7) return root.audio.vol_medium;

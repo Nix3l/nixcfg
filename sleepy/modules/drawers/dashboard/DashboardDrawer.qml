@@ -158,10 +158,22 @@ BaseDrawer {
                     iconSize: 32;
                     iconLeftClicked: () => { Audio.toggleMuted(); };
 
-                    onTimer: false;
-
                     getPosition: () => Audio.volume();
                     setPosition: (val) => { Audio.setVolume(val); };
+                }
+
+                DashboardSlider {
+                    Layout.row: 1;
+                    Layout.column: 2;
+                    Layout.fillWidth: true;
+                    Layout.fillHeight: true;
+
+                    icon: Icons.display.brightness;
+                    iconSize: 32;
+
+                    sliderStepSize: 0.05;
+                    getPosition: () => Brightness.brightness / Brightness.maxBrightness;
+                    setPosition: (val) => { Brightness.setBrightness(val * Brightness.maxBrightness); };
                 }
             }
         }

@@ -20,11 +20,12 @@ Item {
 
     required property var getPosition;
     required property var setPosition;
+    property real sliderStepSize: 0.0;
     property int sliderHeight: 6;
     property int sliderRadius: 2;
     property color sliderBg: Style.colors.bg1;
     property color sliderHighlight: Style.colors.fg;
-    property bool onTimer: true;
+    property bool onTimer: false;
 
     property string icon: "";
     property int iconSize: 0;
@@ -73,6 +74,8 @@ Item {
             id: slider;
             Layout.fillWidth: true;
 
+            stepSize: root.sliderStepSize;
+
             radius: root.sliderRadius;
             sliderHeight: root.sliderHeight;
 
@@ -85,12 +88,17 @@ Item {
             setPosition: root.setPosition;
         }
 
-        Text {
+        Item {
             visible: root.showPercentage;
             Layout.alignment: Qt.AlignRight;
-            text: Math.floor(root.getPosition() * 100) + "%";
-            color: Style.colors.fg;
-            font.pixelSize: root.textSize;
+            implicitWidth: root.iconSize;
+            Text {
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+                text: Math.floor(root.getPosition() * 100) + "%";
+                color: Style.colors.fg;
+                font.pixelSize: root.textSize;
+            }
         }
     }
 }

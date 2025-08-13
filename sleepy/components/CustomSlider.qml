@@ -21,6 +21,8 @@ Slider {
 
     value: getPosition();
 
+    snapMode: Slider.SnapAlways;
+
     background: Rectangle {
         x: root.leftPadding;
         y: root.topPadding + (root.availableHeight - height) / 2;
