@@ -159,7 +159,7 @@ BaseDrawer {
                     iconLeftClicked: () => { Audio.toggleMuted(); };
 
                     getPosition: () => Audio.volume();
-                    setPosition: (val) => { Audio.setVolume(val); };
+                    setPosition: (val) => { Audio.setVolume(Math.round(val * 100) / 100); };
                 }
 
                 DashboardSlider {

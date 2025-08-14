@@ -11,15 +11,15 @@ Singleton {
     readonly property PwNode sink: Pipewire.defaultAudioSink;
 
     PwObjectTracker {
-        objects: [sink];
+        objects: [ sink ];
     }
 
     function volume(): real {
-        return sink?.audio.volume;
+        return sink?.audio.volume ?? 0.0;
     }
 
     function muted(): bool {
-        return sink?.audio.muted;
+        return sink?.audio.muted ?? false;
     }
 
     function setVolume(volume: real) {
