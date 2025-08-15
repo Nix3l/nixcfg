@@ -32,6 +32,6 @@
             copyparty.enable = true;
         };
 
-        extraPackages = [ pkgs.cloudflared ];
+        extraPackages = with pkgs; [ cloudflared btop ];
     };
 }

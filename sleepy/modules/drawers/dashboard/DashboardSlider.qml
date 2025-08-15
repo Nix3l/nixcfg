@@ -95,7 +95,7 @@ Item {
             Text {
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
-                text: Math.floor(root.getPosition() * 100) + "%";
+                text: Math.round(root.getPosition() * 100) + "%";
                 color: Style.colors.fg;
                 font.pixelSize: root.textSize;
             }

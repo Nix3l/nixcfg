@@ -76,6 +76,7 @@
                     gtk4
                 ];
             })
+            pysolfc
             renderdoc
         ];
     };
