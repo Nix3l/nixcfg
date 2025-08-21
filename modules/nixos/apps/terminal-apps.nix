@@ -10,6 +10,7 @@
             neofetch
             unzip
             unrar
+            p7zip
             eza
             wget
             brightnessctl
