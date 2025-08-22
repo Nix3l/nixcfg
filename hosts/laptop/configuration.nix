@@ -49,6 +49,7 @@
         dconf.enable = true;
         ssh.enable = true;
         printing.enable = true;
+        bluetooth.enable = true;
 
         apps = {
             electron.wayland.enable = true;
@@ -76,13 +77,6 @@
         ld.enable = true;
 
         extraPackages = with pkgs; [
-            quickshell
-            (lutris.override {
-                extraLibraries = pkgs: with pkgs; [
-                    libadwaita
-                    gtk4
-                ];
-            })
             pysolfc
             renderdoc
         ];
