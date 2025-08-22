@@ -26,6 +26,15 @@
                 ];
             };
 
+            laptop = nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                    ./hosts/laptop/configuration.nix
+                    ./modules/nixos
+                    inputs.home-manager.nixosModules.default
+                ];
+            };
+
             homelab = nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs; };
                 modules = [
