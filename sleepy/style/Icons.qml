@@ -51,6 +51,12 @@ Singleton {
         property string brightness: "root:/res/brightness.svg";
     }
 
+    property QtObject bluetooth: QtObject {
+        property string enabled: "root:/res/bluetooth_enabled.svg";
+        property string disabled: "root:/res/bluetooth_disabled.svg";
+        property string connected: "root:/res/bluetooth_connected.svg";
+    }
+
     function volIcon(vol: real): string {
         if(vol < 0.4) return root.audio.vol_low;
         if(vol < 0.7) return root.audio.vol_medium;

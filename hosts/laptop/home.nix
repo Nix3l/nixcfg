@@ -30,6 +30,7 @@
         wallpaper.hyprpaper = {
             enable = true;
             wallpaper = "wall.png";
+            monitor = "eDP-1";
         };
 
         cursors.capitaine.enable = true;
@@ -38,9 +39,9 @@
             enable = true;
             monitors = [
                 {
-                    name = "DP-1";
+                    name = "eDP-1";
                     resolution = "1920x1080";
-                    refreshRate = 165;
+                    refreshRate = 144;
                 }
             ];
         };

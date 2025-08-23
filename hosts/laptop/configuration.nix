@@ -31,10 +31,6 @@
 
         nvidia.enable = true;
 
-        kernel = {
-            ddcci.enable = true;
-        };
-
         mainUser = {
             name = "nix3l";
             email = "momanianas123@gmail.com";
@@ -50,6 +46,15 @@
         ssh.enable = true;
         printing.enable = true;
         bluetooth.enable = true;
+
+        dev = {
+            java = {
+                enable = true;
+                jetbrains.enable = true;
+            };
+
+            arduino.enable = true;
+        };
 
         apps = {
             electron.wayland.enable = true;

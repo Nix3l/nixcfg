@@ -16,6 +16,7 @@
         ./apps/util.nix
         ./apps/wine.nix
         ./desktop-env/de.nix
+        ./dev/arduino.nix
         ./dev/java.nix
         ./kernel-modules/ddcci.nix
         ./locale/en.nix
