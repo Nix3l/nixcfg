@@ -7,6 +7,8 @@ import QtQuick
 Singleton {
     id: root;
 
+    // TODO
+
     function poweroff() {
         Quickshell.execDetached([
             "systemctl",
