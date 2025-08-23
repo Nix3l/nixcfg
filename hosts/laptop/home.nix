@@ -49,7 +49,7 @@
         sleepy = {
             enable = true;
             cfg = {
-                modules.bluetoothStatus.enable = true;
+                modules.bluetoothStatus = true;
             };
 
             pfp = {
