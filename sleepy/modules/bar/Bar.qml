@@ -18,7 +18,7 @@ import "root:/modules/drawers/dashboard"
  *  => time
  *
  * RIGHT:
- *  => bluetooth        [ ]
+ *  => bluetooth        [*]
  *  => wifi             [*]
  *  => battery          [ ]
  *  => volume           [*]
@@ -27,6 +27,8 @@ import "root:/modules/drawers/dashboard"
  */
 
 PanelWindow {
+    id: root;
+
     anchors {
         top: true;
         right: true;
@@ -101,7 +103,7 @@ PanelWindow {
 
             spacing: 8;
 
-            BluetoothStatus {}
+            BluetoothStatus { visible: Config.modules.bluetoothStatus; }
             NetworkStatus {}
             VolumeStatus {}
             SysTray {}

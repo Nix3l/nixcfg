@@ -7,6 +7,10 @@ import QtQuick
 Singleton {
     id: root;
 
+    property JsonObject modules: JsonObject {
+        property bool bluetoothStatus: modulescfg.bluetoothStatus;
+    }
+
     property JsonObject bar: JsonObject {
         property int height: barcfg.height;
         property int vpadding: barcfg.vpadding;
@@ -54,6 +58,12 @@ Singleton {
         onFileChanged: reload();
 
         JsonAdapter {
+            property JsonObject modules: JsonObject {
+                id: modulescfg;
+
+                property bool bluetoothStatus: false;
+            }
+
             property JsonObject bar: JsonObject {
                 id: barcfg;
 

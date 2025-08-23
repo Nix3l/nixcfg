@@ -24,6 +24,10 @@ in
         };
 
         cfg = {
+            modules = {
+                bluetoothStatus = mkOption { default = false; };
+            };
+
             bar = {
                 height = mkOption { default = 28; };
                 vpadding = mkOption { default = 4; };
@@ -32,19 +36,19 @@ in
             };
 
             chooser = {
-                contentWidth = mkOption { default = 800; };
-                itemHeight = mkOption { default = 64; };
-                itemSpacing = mkOption { default = 8; };
-                maxShownItems = mkOption { default = 6; };
-                itemPadding = mkOption { default = 12; };
-                contentSpacing = mkOption { default = 24; };
-                promptPadding = mkOption { default = 24; };
-                promptFontSize = mkOption { default = 18; };
-                itemFontSize = mkOption { default = 22; };
+                contentWidth   = mkOption { default = 800; };
+                itemHeight     = mkOption { default = 64;  };
+                itemSpacing    = mkOption { default = 8;   };
+                maxShownItems  = mkOption { default = 6;   };
+                itemPadding    = mkOption { default = 12;  };
+                contentSpacing = mkOption { default = 24;  };
+                promptPadding  = mkOption { default = 24;  };
+                promptFontSize = mkOption { default = 18;  };
+                itemFontSize   = mkOption { default = 22;  };
             };
 
             timing = {
-                networkUpdate = mkOption { default = 1000; };
+                networkUpdate       = mkOption { default = 1000; };
                 notifDisplayTimeout = mkOption { default = 2400; };
             };
 
@@ -53,12 +57,12 @@ in
             };
 
             notifs = {
-                placeRight = mkOption { default = false; };
-                width = mkOption { default = 316; };
-                minimumHeight = mkOption { default = 56; };
-                border = mkOption { default = 1; };
-                padding = mkOption { default = 8; };
-                margin = mkOption { default = 8; };
+                placeRight    = mkOption { default = false; };
+                width         = mkOption { default = 316;   };
+                minimumHeight = mkOption { default = 56;    };
+                border        = mkOption { default = 1;     };
+                padding       = mkOption { default = 8;     };
+                margin        = mkOption { default = 8;     };
             };
         };
 

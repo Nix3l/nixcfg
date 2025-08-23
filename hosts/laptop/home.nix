@@ -48,6 +48,10 @@
 
         sleepy = {
             enable = true;
+            cfg = {
+                modules.bluetoothStatus.enable = true;
+            };
+
             pfp = {
                 enable = true;
                 format = "png";
