@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, osConfig, ... }:
 
 {
     options.hm.mods.zsh = with lib; {
@@ -18,6 +18,7 @@
                 mkdir = "mkdir -p";
                 rm = "rm -r";
                 cp = "cp -r";
+                arduino-wayland = if osConfig.mods.dev.arduino.enable then "arduino-ide --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu" else "";
             };
 
             initContent = ''

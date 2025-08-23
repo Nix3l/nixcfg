@@ -43,6 +43,15 @@
                     resolution = "1920x1080";
                     refreshRate = 144;
                 }
+                {
+                    name = "HDMI-A-1";
+                    resolution = "1920x1080";
+                    refreshRate = 60;
+                    mirror = {
+                        enable = true;
+                        from = "eDP-1";
+                    };
+                }
             ];
         };
 

@@ -26,8 +26,8 @@ Singleton {
         onNotification: notif => {
             notif.tracked = true;
 
-            if(!root.read) root.notifsSinceLastRead ++;
             root.read = false;
+            if(!root.read) root.notifsSinceLastRead ++;
 
             root.notifs.push(timedNotifComp.createObject(root, {
                 data: notif,
