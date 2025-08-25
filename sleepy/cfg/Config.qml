@@ -9,6 +9,7 @@ Singleton {
 
     property JsonObject modules: JsonObject {
         property bool bluetoothStatus: modulescfg.bluetoothStatus;
+        property bool powerStatus: modulescfg.powerStatus;
     }
 
     property JsonObject bar: JsonObject {
@@ -62,6 +63,7 @@ Singleton {
                 id: modulescfg;
 
                 property bool bluetoothStatus: false;
+                property bool powerStatus: false;
             }
 
             property JsonObject bar: JsonObject {

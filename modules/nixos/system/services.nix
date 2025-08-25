@@ -8,6 +8,7 @@ in
         bluetooth.enable = mkEnableOption "bluetooth";
         autoUSBMount.enable = mkEnableOption "auto usb mounting";
         dconf.enable = mkEnableOption "dconf";
+        upower.enable = mkEnableOption "upower";
 
         ssh = {
             enable = mkEnableOption "ssh";
@@ -31,6 +32,8 @@ in
         services.udisks2.enable = cfg.autoUSBMount.enable;
 
         programs.dconf.enable = cfg.dconf.enable;
+
+        services.upower.enable = cfg.upower.enable;
 
         services.openssh.enable = cfg.ssh.enable;
         users.users.root.openssh.authorizedKeys.keys = lib.mkIf cfg.ssh.enable cfg.ssh.rootAuthorizedKeys;

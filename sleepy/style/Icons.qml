@@ -34,10 +34,19 @@ Singleton {
     }
 
     property QtObject power: QtObject {
-        property string poweroff: "root:/res/poweroff.svg";
-        property string reboot:   "root:/res/reboot.svg";
-        property string logout:   "root:/res/logout.svg";
-        property string sleep:    "root:/res/sleep.svg";
+        property string battery_0bar:     "root:/res/battery_0bar.svg";
+        property string battery_1bar:     "root:/res/battery_1bar.svg";
+        property string battery_2bar:     "root:/res/battery_2bar.svg";
+        property string battery_3bar:     "root:/res/battery_3bar.svg";
+        property string battery_4bar:     "root:/res/battery_4bar.svg";
+        property string battery_5bar:     "root:/res/battery_5bar.svg";
+        property string battery_6bar:     "root:/res/battery_6bar.svg";
+        property string battery_7bar:     "root:/res/battery_7bar.svg";
+        property string battery_charging: "root:/res/battery_charging.svg";
+        property string poweroff:         "root:/res/poweroff.svg";
+        property string reboot:           "root:/res/reboot.svg";
+        property string logout:           "root:/res/logout.svg";
+        property string sleep:            "root:/res/sleep.svg";
     }
 
     property QtObject audio: QtObject {
@@ -55,6 +64,17 @@ Singleton {
         property string enabled: "root:/res/bluetooth_enabled.svg";
         property string disabled: "root:/res/bluetooth_disabled.svg";
         property string connected: "root:/res/bluetooth_connected.svg";
+    }
+
+    function batteryIcon(per: real): string {
+        if(per < 0.12) return root.power.battery_0bar;
+        if(per < 0.24) return root.power.battery_1bar;
+        if(per < 0.36) return root.power.battery_2bar;
+        if(per < 0.48) return root.power.battery_3bar;
+        if(per < 0.60) return root.power.battery_4bar;
+        if(per < 0.72) return root.power.battery_5bar;
+        if(per < 0.84) return root.power.battery_6bar;
+        return root.power.battery_7bar;
     }
 
     function volIcon(vol: real): string {

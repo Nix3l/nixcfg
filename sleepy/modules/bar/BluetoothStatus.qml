@@ -7,6 +7,8 @@ import "root:/style"
 import "root:/services"
 
 BarItem {
+    visible: Config.modules.bluetoothStatus;
+
     IconImage {
         source: {
             if(!Bluetooth.enabled) return Icons.bluetooth.disabled;

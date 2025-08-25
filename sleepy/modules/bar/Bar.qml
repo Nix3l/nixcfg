@@ -79,7 +79,7 @@ PanelWindow {
             }
 
             Workspaces {}
-            MediaStatus { id: media; }
+            MediaStatus { id: media; visible: Media.playerOpen; }
             MediaDrawer { anchorItem: media; }
         }
 
@@ -103,9 +103,10 @@ PanelWindow {
 
             spacing: 8;
 
-            BluetoothStatus { visible: Config.modules.bluetoothStatus; }
+            BluetoothStatus {}
             NetworkStatus {}
             VolumeStatus {}
+            PowerStatus {}
             SysTray {}
             NotifStatus { id: notifstatus; }
             NotifDrawer { anchorItem: notifstatus; }

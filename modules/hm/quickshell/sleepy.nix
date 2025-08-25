@@ -26,6 +26,7 @@ in
         cfg = {
             modules = {
                 bluetoothStatus = mkOption { default = false; };
+                powerStatus = mkOption { default = false; };
             };
 
             bar = {
