@@ -18,7 +18,6 @@
             android-tools
             qemu
             quickemu
-            bluejay
 
             (lib.optional config.mods.apps.util.mediaDownloader media-downloader)
             (lib.optional config.mods.apps.util.obs obs-studio)

@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
     cfg = config.mods;
@@ -26,6 +26,10 @@ in
             enable = cfg.bluetooth.enable;
             powerOnBoot = cfg.bluetooth.enable;
         };
+
+        environment.systemPackages = lib.mkIf cfg.bluetooth.enable (with pkgs; [
+            bluejay
+        ]);
 
         # yeah i probably shouldnt be grouping these together but who cares
         services.gvfs.enable = cfg.autoUSBMount.enable;
