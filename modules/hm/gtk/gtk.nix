@@ -26,5 +26,7 @@
                 config.common.default = [ "gtk" ];
             };
         };
+
+        home.packages = [ pkgs.glib ];
     };
 }
