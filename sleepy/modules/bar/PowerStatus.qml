@@ -22,7 +22,7 @@ BarItem {
     }
 
     Text {
-        text: Power.percentage * 100 + "%";
+        text: Math.floor(Power.percentage) * 100 + "%";
         color: Style.colors.fg;
     }
 }
