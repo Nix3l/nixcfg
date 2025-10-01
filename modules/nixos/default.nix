@@ -31,6 +31,7 @@
         ./system/nvidia.nix
         ./system/services.nix
         ./user/main-user.nix
+        ./virt/virtualisation.nix
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

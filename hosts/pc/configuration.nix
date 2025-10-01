@@ -72,6 +72,11 @@
             minecraft.enable = true;
         };
 
+        virt = {
+            libvirtd.enable = true;
+            android.enable = true;
+        };
+
         fonts.enable = true;
         ld.enable = true;
 

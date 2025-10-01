@@ -11,6 +11,7 @@
             unzip
             unrar
             p7zip
+            lzip
             eza
             wget
             brightnessctl
