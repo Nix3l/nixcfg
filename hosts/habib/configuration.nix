@@ -45,7 +45,6 @@
 
             desktop = {
                 enable = true;
-                anki.enable = true;
             };
 
             util = {
@@ -58,11 +57,6 @@
             steam.enable = true;
             wine.enable = true;
             terminalapps.enable = true;
-        };
-
-        desktopenv = {
-            enable = true;
-            env = "gnome";
         };
 
         dev = {

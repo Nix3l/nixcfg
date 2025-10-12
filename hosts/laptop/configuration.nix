@@ -69,6 +69,7 @@
                 enable = true;
                 mediaDownloader = true;
                 obs = true;
+                obsidian = true;
                 hexViewer = true;
             };
 
