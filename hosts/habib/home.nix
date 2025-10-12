@@ -29,7 +29,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "wall.png";
+            wallpaper = "habibbg.jpeg";
             monitor = "eDP-1";
         };
 
@@ -66,7 +66,7 @@
 
             pfp = {
                 enable = true;
-                format = "png";
+                format = "jpeg";
             };
         };
     };
