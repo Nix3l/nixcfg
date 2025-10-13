@@ -13,7 +13,7 @@
     mods = {
         locale.en = true;
         input.ime = {
-            enable = true;
+            enable = false;
             jp = false;
         };
 
@@ -64,7 +64,7 @@
         dev = {
             java = {
                 enable = true;
-                jetbrains.enable = false;
+                jetbrains.enable = true;
             };
         };
 
