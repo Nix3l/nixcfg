@@ -81,15 +81,12 @@
         ld.enable = true;
 
         extraPackages = with pkgs; [
-            quickshell
             (lutris.override {
                 extraLibraries = pkgs: with pkgs; [
                     libadwaita
                     gtk4
                 ];
             })
-            pysolfc
-            renderdoc
         ];
     };
 }

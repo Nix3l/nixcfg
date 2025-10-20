@@ -20,7 +20,7 @@
             default = pkgs.alacritty;
         };
 
-        discord.enable = mkOption { default = true; };
+        discord.enable = mkOption { default = false; };
         torrent.enable = mkOption { default = true; };
         office.enable = mkOption { default = true; };
     };

@@ -7,6 +7,7 @@
         obs = mkEnableOption "obs";
         obsidian = mkEnableOption "obsidian";
         hexViewer = mkEnableOption "hexviewer";
+        figma = mkEnableOption "figma";
     };
 
     config = lib.mkIf config.mods.apps.util.enable {
@@ -23,6 +24,7 @@
             (lib.optional config.mods.apps.util.obs obs-studio)
             (lib.optional config.mods.apps.util.obsidian obsidian)
             (lib.optional config.mods.apps.util.hexViewer ghex)
+            (lib.optional config.mods.apps.util.figma figma-linux)
         ]);
     };
 }

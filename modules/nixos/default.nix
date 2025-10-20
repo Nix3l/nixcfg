@@ -44,6 +44,6 @@
 
     nixpkgs.config.permittedInsecurePackages = [
         # temporary until its fixed
-        "libxml2-2.13.8"
+        "qtwebengine-5.15.19"
     ];
 }

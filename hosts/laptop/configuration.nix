@@ -10,13 +10,6 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    services.xserver.enable = true;
-    services.xserver.displayManager.startx = {
-        enable = true;
-        generateScript = true;
-    };
-    services.xserver.windowManager.awesome.enable = true;
-
     mods = {
         locale.jp = true;
         input.ime = {
@@ -53,8 +46,6 @@
                 enable = true;
                 jetbrains.enable = true;
             };
-
-            arduino.enable = true;
         };
 
         apps = {
@@ -71,6 +62,7 @@
                 obs = true;
                 obsidian = true;
                 hexViewer = true;
+                figma = true;
             };
 
             media.enable = true;
@@ -84,8 +76,7 @@
         ld.enable = true;
 
         extraPackages = with pkgs; [
-            pysolfc
-            renderdoc
+            # renderdoc
         ];
     };
 }

@@ -51,6 +51,8 @@
                 enable = true;
                 mediaDownloader = true;
                 obs = true;
+                obsidian = true;
+                figma = true;
             };
 
             media.enable = true;

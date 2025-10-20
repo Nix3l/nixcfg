@@ -123,8 +123,6 @@
                 libxkbcommon
                 # needed to run, via virtualenv + pip, matplotlib & tikzplotlib
                 stdenv.cc.cc.lib
-
-                libsForQt5.full
             ];
         };
     };

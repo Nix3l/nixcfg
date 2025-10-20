@@ -8,9 +8,12 @@
     config = lib.mkIf config.hm.mods.git.enable {
         programs.git = {
             enable = true;
-            userName = osConfig.mods.mainUser.name;
-            userEmail = osConfig.mods.mainUser.email;
-            extraConfig = {
+            settings = {
+                user = {
+                    name = osConfig.mods.mainUser.name;
+                    email = osConfig.mods.mainUser.email;
+                };
+
                 init.defaultBranch = "master";
             };
         };
