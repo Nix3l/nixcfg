@@ -22,8 +22,22 @@
             enable = true;
             portal = {
                 enable = true;
-                extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-                config.common.default = [ "gtk" ];
+                extraPortals = with pkgs; [
+                    xdg-desktop-portal-gtk
+                    xdg-desktop-portal-hyprland
+                    xdg-desktop-portal-gnome
+                ];
+
+                config = {
+                    hyprland = {
+                        default = [ "hyprland" "gtk" ];
+                        "org.freedesktop.impl.portal.ScreenCast" = [
+                            "gnome"
+                        ];
+                    };
+
+                    common.default = [ "gtk" ];
+                };
             };
         };
 
