@@ -11,6 +11,7 @@ in
 
     config = {
         virtualisation = {
+            # TODO: add waydroid-helper
             waydroid.enable = cfg.android.enable;
             libvirtd.enable = cfg.libvirtd.enable;
         };
