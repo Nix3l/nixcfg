@@ -10,13 +10,6 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    services.xserver.enable = true;
-    services.xserver.displayManager.startx = {
-        enable = true;
-        generateScript = true;
-    };
-    services.xserver.windowManager.awesome.enable = true;
-
     mods = {
         locale.jp = true;
         input.ime = {
@@ -63,6 +56,7 @@
                 mediaDownloader = true;
                 obs = true;
                 hexViewer = true;
+                obsidian = true;
             };
 
             media.enable = true;
