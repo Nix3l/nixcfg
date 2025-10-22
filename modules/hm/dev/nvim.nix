@@ -1,12 +1,12 @@
 { lib, config, ... }:
 
 {
-    options.hm.mods.nvim = with lib; {
+    options.hm.mods.dev.nvim = with lib; {
         enable = mkEnableOption "nvim";
         discord = mkEnableOption "discord presence";
     };
 
-    config = lib.mkIf config.hm.mods.nvim.enable {
+    config = lib.mkIf config.hm.mods.dev.nvim.enable {
         programs.nvf = {
             enable = true;
             enableManpages = true;
@@ -64,7 +64,7 @@
 
                 utility.oil-nvim.enable = true;
 
-                presence.neocord.enable = config.hm.mods.nvim.discord;
+                presence.neocord.enable = config.hm.mods.dev.nvim.discord;
 
                 keymaps = [
                     {

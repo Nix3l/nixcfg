@@ -13,10 +13,11 @@
         ./apps/alacritty.nix
         ./apps/defaults.nix
         ./apps/git.nix
-        ./apps/nvim.nix
         ./apps/spotify.nix
         ./cursor/cursor.nix
         ./cursor/capitaine.nix
+        ./dev/vscode.nix
+        ./dev/nvim.nix
         ./gtk/gtk.nix
         ./gtk/gruvbox.nix
         ./qt/qt.nix

@@ -11,9 +11,13 @@
 
         git.enable = true;
 
-        nvim = {
-            enable = true;
-            discord = true;
+        dev = {
+            nvim = {
+                enable = true;
+                discord = true;
+            };
+
+            vscode.enable = true;
         };
 
         spotify.enable = true;
