@@ -9,6 +9,8 @@ import "root:/services"
 BarItem {
     visible: Config.modules.bluetoothStatus;
 
+    leftClicked: () => Quickshell.execDetached("bluejay");
+
     IconImage {
         source: {
             if(!Bluetooth.enabled) return Icons.bluetooth.disabled;
