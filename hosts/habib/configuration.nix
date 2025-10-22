@@ -39,6 +39,7 @@
         ssh.enable = true;
         printing.enable = true;
         bluetooth.enable = true;
+        upower.enable = true;
 
         apps = {
             electron.wayland.enable = true;
