@@ -3,6 +3,7 @@ import Quickshell.Hyprland
 import QtQuick
 
 import "root:/cfg"
+import "root:/style"
 
 PopupWindow {
     id: root;
@@ -12,6 +13,10 @@ PopupWindow {
     required property var isVisible;
     required property var toggle;
     property int xoffset: 0;
+
+    property color bgColor: Style.colors.bg0;
+    property color borderColor: Style.colors.acc1;
+    property int borderSize: 1;
 
     color: 'transparent';
 
@@ -28,6 +33,15 @@ PopupWindow {
         windows: [ root ];
         onCleared: {
             root.toggle(false);
+        }
+    }
+
+    Rectangle {
+        anchors.fill: parent;
+        color: root.bgColor;
+        border {
+            color: root.borderColor;
+            width: root.borderSize;
         }
     }
 }

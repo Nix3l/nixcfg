@@ -28,7 +28,7 @@ BaseDrawer {
         color: Style.colors.bg0;
         border {
             width: 1;
-            color: Style.colors.accent;
+            color: Style.colors.acc1;
         }
     }
 
@@ -49,7 +49,7 @@ BaseDrawer {
                 id: titleText;
                 anchors.left: parent.left;
                 text: "Notifications";
-                color: Style.colors.fg;
+                color: Style.colors.fg1;
                 font.pixelSize: 16;
             }
 
@@ -79,7 +79,7 @@ BaseDrawer {
                 model: Notifs.notifs;
                 delegate: NotifItem {
                     borderCol: Style.colors.bg1;
-                    hoveredBorderCol: Style.colors.fgMuted;
+                    hoveredBorderCol: Style.colors.fg0;
                 }
             }
         }

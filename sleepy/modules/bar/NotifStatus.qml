@@ -8,7 +8,9 @@ import "root:/services/notifs"
 import "root:/style"
 
 BarItem {
-    id: content;
+    id: root;
+
+    borderColor: Style.colors.fg0;
 
     hovered: () => {
         Notifs.readNotifs();
@@ -24,6 +26,6 @@ BarItem {
     Text {
         visible: Notifs.notifsSinceLastRead > 0;
         text: Notifs.notifsSinceLastRead;
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 }

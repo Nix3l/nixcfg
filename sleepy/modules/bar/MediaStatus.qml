@@ -17,7 +17,7 @@ BarItem {
         source: Media.active.trackArtUrl;
         iconSize: 16;
         border: 2;
-        borderColor: Style.colors.accent;
+        borderColor: Style.colors.acc1;
     }
 
     Text {
@@ -26,6 +26,6 @@ BarItem {
             else return "-- no active media --";
         }
 
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 }

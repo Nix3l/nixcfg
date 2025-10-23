@@ -4,82 +4,50 @@ import QtQuick.Layouts
 
 import "root:/cfg"
 import "root:/style"
+import "root:/components"
 
 Item {
     id: root;
 
-    property int hpadding: 4;
+    property int hpadding: 10;
+
     property color bgColor: Style.colors.bg1;
+    property color borderColor: Style.colors.acc0;
+
     property int contentSpacing: 4;
-    property real decorationRatio: 0.75;
-    property string leftGlyph: "[";
-    property string rightGlyph: "]";
 
     property var hovered;
     property var leftClicked;
     property var rightClicked;
 
-    implicitWidth: content.implicitWidth + hpadding * 4 + leftDecoration.implicitWidth + rightDecoration.implicitWidth;
+    implicitWidth: content.implicitWidth + hpadding * 2;
     implicitHeight: Config.bar.contentHeight;
 
     default property alias items: content.children;
 
-    readonly property int decorationSize: Config.bar.contentHeight * root.decorationRatio;
-
     Rectangle {
         anchors.fill: parent;
         color: root.bgColor;
-    }
-
-    Text {
-        id: leftDecoration;
-
-        anchors {
-            top: parent.top;
-            bottom: parent.bottom;
-            left: parent.left;
-            topMargin: (Config.bar.contentHeight - root.decorationSize) / 2.0;
-            leftMargin: root.hpadding;
-        }
-
-        text: root.leftGlyph;
-        color: Style.colors.accent;
-        font {
-            pixelSize: root.decorationSize;
-            bold: true;
+        border {
+            width: 2;
+            color: root.borderColor;
         }
     }
 
-    Text {
-        id: rightDecoration;
-
-        anchors {
-            top: parent.top;
-            bottom: parent.bottom;
-            right: parent.right;
-            topMargin: (Config.bar.contentHeight - root.decorationSize) / 2.0;
-            rightMargin: root.hpadding;
-        }
-
-        text: root.rightGlyph;
-        color: Style.colors.accent;
-        font {
-            pixelSize: root.decorationSize;
-            bold: true;
-        }
-    }
-
-    RowLayout {
-        id: content;
+    Item {
         anchors {
             verticalCenter: parent.verticalCenter;
-            left: leftDecoration.right;
-            right: rightDecoration.left;
-            leftMargin: root.hpadding;
-            rightMargin: root.hpadding;
+            fill: parent;
         }
 
-        spacing: root.contentSpacing;
+        RowLayout {
+            id: content;
+            anchors {
+                centerIn: parent;
+            }
+
+            spacing: root.contentSpacing;
+        }
     }
 
     MouseArea {

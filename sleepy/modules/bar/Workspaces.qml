@@ -6,6 +6,8 @@ import "root:/services"
 import "root:/style"
 
 BarItem {
+    borderColor: Style.colors.fg0;
+
     Item {
         id: root;
 
@@ -50,8 +52,8 @@ BarItem {
                         radius: root.workspaceSize / 2.0;
 
                         color: {
-                            if(ws.focused()) return Style.colors.fg;
-                            else return Style.colors.fgMuted;
+                            if(ws.focused()) return Style.colors.fg1;
+                            else return Style.colors.fg0;
                         }
                     }
                 }

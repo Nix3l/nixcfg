@@ -19,7 +19,7 @@ Item {
     property color hoveredBg: Style.colors.bg1;
     property int border: 1;
     property color borderCol: Style.colors.Style.colors.bg1;
-    property color hoveredBorderCol: Style.colors.accent;
+    property color hoveredBorderCol: Style.colors.acc1;
 
     property var leftClicked;
 

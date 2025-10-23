@@ -53,7 +53,7 @@ Singleton {
     }
 
     FileView {
-        path: Paths.configFile;
+        path: "";//Paths.configFile;
         blockLoading: true;
         watchChanges: true;
         onFileChanged: reload();
@@ -69,7 +69,7 @@ Singleton {
             property JsonObject bar: JsonObject {
                 id: barcfg;
 
-                property int height: 28;
+                property int height: 32;
                 property int vpadding: 4;
                 property int hpadding: 0;
                 property int numWorkspacesShown: 4;

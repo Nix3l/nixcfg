@@ -15,8 +15,8 @@ Item {
     required property TimedNotif modelData;
 
     property int border: Config.notifs.border;
-    property color borderCol: Style.colors.accent;
-    property color hoveredBorderCol: Style.colors.accent;
+    property color borderCol: Style.colors.acc1;
+    property color hoveredBorderCol: Style.colors.acc1;
 
     property var leftClicked: () => { Notifs.dismissNotif(modelData); };
 
@@ -64,7 +64,7 @@ Item {
 
             Text {
                 text: modelData.header;
-                color: Style.colors.fg;
+                color: Style.colors.fg1;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
                 font.pixelSize: 14;
                 wrapMode: Text.Wrap;
@@ -73,7 +73,7 @@ Item {
 
             Text {
                 text: modelData.body;
-                color: Style.colors.fg;
+                color: Style.colors.fg1;
                 font.pixelSize: 11;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
                 maximumLineCount: 3;

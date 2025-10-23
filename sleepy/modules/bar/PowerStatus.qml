@@ -23,6 +23,6 @@ BarItem {
 
     Text {
         text: Math.floor(Power.percentage * 100) + "%";
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 }

@@ -25,6 +25,6 @@ BarItem {
         visible: Bluetooth.enabled && Bluetooth.connected;
         text: Bluetooth.connectedDevice?.name ?? "";
 
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 }

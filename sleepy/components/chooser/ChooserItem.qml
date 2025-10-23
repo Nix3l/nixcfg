@@ -29,7 +29,7 @@ Item {
         z: 0;
         anchors.fill: parent;
         anchors.verticalCenter: parent.verticalCenter;
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 
     MouseArea {

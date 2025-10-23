@@ -61,8 +61,8 @@ Singleton {
     }
 
     property QtObject bluetooth: QtObject {
-        property string enabled: "root:/res/bluetooth_enabled.svg";
-        property string disabled: "root:/res/bluetooth_disabled.svg";
+        property string enabled:   "root:/res/bluetooth_enabled.svg";
+        property string disabled:  "root:/res/bluetooth_disabled.svg";
         property string connected: "root:/res/bluetooth_connected.svg";
     }
 

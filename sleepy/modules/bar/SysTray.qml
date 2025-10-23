@@ -3,9 +3,12 @@ import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
 
+import "root:/style"
 import "root:/components"
 
 BarItem {
+    borderColor: Style.colors.fg0;
+
     Item {
         id: root;
 

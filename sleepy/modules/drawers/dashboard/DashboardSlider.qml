@@ -24,7 +24,7 @@ Item {
     property int sliderHeight: 6;
     property int sliderRadius: 2;
     property color sliderBg: Style.colors.bg1;
-    property color sliderHighlight: Style.colors.fg;
+    property color sliderHighlight: Style.colors.fg1;
     property bool onTimer: false;
 
     property string icon: "";
@@ -91,12 +91,13 @@ Item {
         Item {
             visible: root.showPercentage;
             Layout.alignment: Qt.AlignRight;
-            implicitWidth: root.iconSize;
-            Text {
+            // pad it a bit to make the spacing more regular
+            implicitWidth: root.iconSize + root.spacing * 4;
+            StyledText {
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
                 text: Math.round(root.getPosition() * 100) + "%";
-                color: Style.colors.fg;
+                color: Style.colors.fg1;
                 font.pixelSize: root.textSize;
             }
         }

@@ -22,6 +22,7 @@
                 ipafont
                 kochi-substitute
                 tamzen
+                rubik
             ];
         };
 

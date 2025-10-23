@@ -9,23 +9,6 @@ import "root:/services"
 import "root:/modules/drawers"
 import "root:/modules/drawers/dashboard"
 
-/*
- * LEFT:
- *  => workspaces TODO(nix3l): animations
- *  => media
- *
- * CENTER:
- *  => time
- *
- * RIGHT:
- *  => bluetooth        [*]
- *  => wifi             [*]
- *  => battery          [ ]
- *  => volume           [*]
- *  => systray          [*]
- *  => notif drawer     [*]
- */
-
 PanelWindow {
     id: root;
 
@@ -66,17 +49,6 @@ PanelWindow {
             }
 
             spacing: 8;
-
-            BarItem {
-                leftGlyph: "|[";
-                rightGlyph: "]|";
-
-                IconImage {
-                    source: Icons.os.nixos;
-                    mipmap: true;
-                    implicitSize: 16;
-                }
-            }
 
             Workspaces {}
             MediaStatus { id: media; visible: Media.playerOpen; }

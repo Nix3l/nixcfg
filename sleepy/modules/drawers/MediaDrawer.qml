@@ -29,7 +29,7 @@ BaseDrawer {
         color: Style.colors.bg0;
         border {
             width: 1;
-            color: Style.colors.accent;
+            color: Style.colors.acc1;
         }
     }
 
@@ -61,7 +61,7 @@ BaseDrawer {
                         else return "No Active Media";
                     }
 
-                    color: Style.colors.fg;
+                    color: Style.colors.fg1;
                     font.pixelSize: 22;
                 }
 
@@ -72,7 +72,7 @@ BaseDrawer {
 
                     Text {
                         text: "・[";
-                        color: Style.colors.accent;
+                        color: Style.colors.acc1;
                         font.pixelSize: 12;
                         font.bold: true;
                     }
@@ -80,13 +80,13 @@ BaseDrawer {
                     Text {
                         visible: Media.playerOpen;
                         text: (Media.active.trackArtist == "" ? "" : (Media.active.trackArtist  + "・")) + Media.shortenedAlbumTitle;
-                        color: Style.colors.fg;
+                        color: Style.colors.fg1;
                         font.pixelSize: 16;
                     }
 
                     Text {
                         text: "]・";
-                        color: Style.colors.accent;
+                        color: Style.colors.acc1;
                         font.pixelSize: 12;
                         font.bold: true;
                     }
@@ -96,7 +96,7 @@ BaseDrawer {
                     spacing: 4;
                     Text {
                         text: Media.cursorTimeText;
-                        color: Style.colors.fgMuted;
+                        color: Style.colors.fg0;
                         font.pixelSize: 11;
                     }
 
@@ -112,7 +112,7 @@ BaseDrawer {
 
                     Text {
                         text: Media.lengthText;
-                        color: Style.colors.fgMuted;
+                        color: Style.colors.fg0;
                         font.pixelSize: 11;
                     }
                 }

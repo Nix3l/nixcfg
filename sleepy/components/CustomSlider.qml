@@ -15,7 +15,7 @@ Slider {
     property int sliderHeight: 4;
 
     property color bg: Style.colors.bg1;
-    property color highlight: Style.colors.fg;
+    property color highlight: Style.colors.fg1;
 
     property bool onTimer: true;
 

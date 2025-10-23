@@ -29,7 +29,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter;
             implicitWidth: Config.chooser.contentWidth - Config.chooser.promptPadding * 2;
 
-            color: Style.colors.fg;
+            color: Style.colors.fg1;
             font.pixelSize: Config.chooser.promptFontSize;
 
             placeholderText: "Search...";

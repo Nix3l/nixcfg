@@ -18,19 +18,10 @@ BaseDrawer {
 
     xoffset: anchorItem.width / 2;
 
-    implicitWidth: 480;
-    implicitHeight: content.implicitHeight + root.padding * 2;
-
     property int padding: 8;
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: 1;
-            color: Style.colors.accent;
-        }
-    }
+    implicitWidth: 480;
+    implicitHeight: content.implicitHeight + root.padding * 2;
 
     ColumnLayout {
         id: content;
@@ -61,11 +52,11 @@ BaseDrawer {
                     rows: 2;
                     columns: 2;
 
-                    Text {
+                    StyledText {
                         Layout.row: 0;
                         Layout.column: 0;
                         text: Time.format("hh:mm");
-                        color: Style.colors.fg;
+                        color: Style.colors.fg1;
                         font.pixelSize: 52;
                     }
 
@@ -74,27 +65,27 @@ BaseDrawer {
                         Layout.column: 1;
                         Layout.alignment: Qt.AlignLeft;
 
-                        Text {
+                        StyledText {
                             text: Time.format("ap");
-                            color: Style.colors.fg;
+                            color: Style.colors.fg1;
                             font.pixelSize: 12;
                         }
 
-                        Text {
+                        StyledText {
                             text: Time.format("ss");
-                            color: Style.colors.fg;
+                            color: Style.colors.fg1;
                             font.pixelSize: 22;
                         }
                     }
 
-                    Text {
+                    StyledText {
                         Layout.row: 1;
                         Layout.column: 0;
                         Layout.columnSpan: 2;
                         Layout.alignment: Qt.AlignCenter;
 
                         text: Time.format("dddd, dd/MM/yy");
-                        color: Style.colors.fg;
+                        color: Style.colors.fg1;
                         font.pixelSize: 14;
                     }
                 }

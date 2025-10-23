@@ -41,7 +41,7 @@ ChooserItem {
         Text {
             Layout.alignment: Qt.AlignLeft;
             text: modelData?.name;
-            color: selected ? Style.colors.bg0 : Style.colors.fg;
+            color: selected ? Style.colors.bg0 : Style.colors.fg1;
             font.pixelSize: Config.chooser.itemFontSize;
         }
     }

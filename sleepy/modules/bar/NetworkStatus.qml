@@ -4,8 +4,11 @@ import QtQuick
 
 import "root:/services"
 import "root:/style"
+import "root:/components"
 
 BarItem {
+    borderColor: Style.colors.fg0;
+
     IconImage {
         visible: Network.enabled;
         source: Icons.wifiStrengthIcon(Network.strength);
@@ -13,10 +16,10 @@ BarItem {
         implicitSize: 14;
     }
 
-    Text {
+    StyledText {
         visible: Network.enabled;
         text: Network.ssid;
-        color: Style.colors.fg;
+        color: Style.colors.fg1;
     }
 
     IconImage {
@@ -26,9 +29,8 @@ BarItem {
         implicitSize: 14;
     }
 
-    Text {
+    StyledText {
         visible: !Network.enabled;
         text: "Disconnected";
-        color: Style.colors.fg;
     }
 }

@@ -22,7 +22,7 @@ PanelWindow {
     property real bgOpacity: 0.8;
 
     property int border: 4;
-    property color borderColor: Style.colors.accent;
+    property color borderColor: Style.colors.a1;
 
     required property var model;
     required property Component modelItem;
