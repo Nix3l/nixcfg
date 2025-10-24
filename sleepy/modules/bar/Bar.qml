@@ -75,10 +75,19 @@ PanelWindow {
 
             spacing: 8;
 
-            BluetoothStatus {}
+            Loader {
+                active: Config.modules.bluetoothStatus;
+                BluetoothStatus {}
+            }
+
             NetworkStatus {}
             VolumeStatus {}
-            PowerStatus {}
+
+            Loader {
+                active: Config.modules.powerStatus;
+                PowerStatus {}
+            }
+
             SysTray {}
             NotifStatus { id: notifstatus; }
             NotifDrawer { anchorItem: notifstatus; }
