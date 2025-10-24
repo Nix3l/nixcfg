@@ -51,7 +51,7 @@ PanelWindow {
             spacing: 8;
 
             Workspaces {}
-            MediaStatus { id: media; visible: Media.playerOpen; }
+            MediaStatus { id: media; }
             MediaDrawer { anchorItem: media; }
         }
 

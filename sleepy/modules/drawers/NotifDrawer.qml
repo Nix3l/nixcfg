@@ -23,15 +23,6 @@ BaseDrawer {
     implicitWidth: Config.notifs.width + padding * 2;
     implicitHeight: Config.notifs.minimumHeight * 8 + header.implicitHeight + padding * 2;
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: 1;
-            color: Style.colors.acc1;
-        }
-    }
-
     ColumnLayout {
         id: content;
         anchors.fill: parent;

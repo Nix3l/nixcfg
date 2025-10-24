@@ -28,7 +28,7 @@ BaseDrawer {
         anchors.fill: parent;
         color: Style.colors.bg0;
         border {
-            width: 1;
+            width: Style.border.size;
             color: Style.colors.acc1;
         }
     }

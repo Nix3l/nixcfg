@@ -10,14 +10,15 @@ import "root:/components"
 BarItem {
     id: root;
 
+    visible: Media.playerOpen && Media.active.trackArtUrl;
     hovered: () => { GlobalState.mediaDrawerOpen = true; };
 
-    IconWithBorder {
+    IconImage {
         visible: Media.playerOpen;
         source: Media.active.trackArtUrl;
-        iconSize: 16;
-        border: 2;
-        borderColor: Style.colors.acc1;
+        mipmap: true;
+        antialiasing: true;
+        implicitSize: 16;
     }
 
     Text {

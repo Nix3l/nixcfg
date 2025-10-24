@@ -1,6 +1,7 @@
 { lib, config, osConfig, ... }:
 
 let
+    cfg = config.hm.mods.sleepy;
     sleepybind = b: name: "$mod ${if b.shift then "SHIFT" else ""}, ${b.key}, global, sleepy:${name}";
     bindOption = s: k: with lib; {
         shift = mkOption {
@@ -26,11 +27,11 @@ in
         cfg = {
             modules = {
                 bluetoothStatus = mkOption { default = false; };
-                powerStatus = mkOption { default = false; };
+                powerStatus     = mkOption { default = false; };
             };
 
             bar = {
-                height = mkOption { default = 28; };
+                height   = mkOption { default = 28; };
                 vpadding = mkOption { default = 4; };
                 hpadding = mkOption { default = 0; };
                 numWorkspacesShown = mkOption { default = 4; };
@@ -67,6 +68,7 @@ in
             };
         };
 
+        # TODO(nix3l): redo this, make sleepybind a type
         binds = {
             reload = bindOption true "R";
 
@@ -76,12 +78,12 @@ in
         };
     };
 
-    config = lib.mkIf config.hm.mods.sleepy.enable {
+    config = lib.mkIf cfg.enable {
         home.file.".config/sleepy/cfg.json" = {
             text = builtins.toJSON config.hm.mods.sleepy.cfg;
         };
 
-        home.file.".config/sleepy/pfp.${config.hm.mods.sleepy.pfp.format}" = lib.mkIf config.hm.mods.sleepy.pfp.enable {
+        home.file.".config/sleepy/pfp.${cfg.pfp.format}" = lib.mkIf cfg.pfp.enable {
             source = ../../../res/${osConfig.mods.mainUser.name}/pfp.${config.hm.mods.sleepy.pfp.format};
         };
 
@@ -95,7 +97,7 @@ in
             activeConfig = "sleepy";
         };
 
-        wayland.windowManager.hyprland.settings.bind = with config.hm.mods.sleepy.binds; [
+        wayland.windowManager.hyprland.settings.bind = with cfg.binds; [
             (sleepybind reload "reload")
             (sleepybind applauncher.open "applauncher_open")
         ];
