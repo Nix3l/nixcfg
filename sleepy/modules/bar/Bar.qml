@@ -5,6 +5,7 @@ import QtQuick.Layouts
 
 import "root:/style"
 import "root:/cfg"
+import "root:/components"
 import "root:/services"
 import "root:/modules/drawers"
 import "root:/modules/drawers/dashboard"
@@ -21,9 +22,8 @@ PanelWindow {
     implicitHeight: Config.bar.height;
     color: "transparent";
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
+    StyledBg {
+        borderSize: 0;
     }
 
     Item {
@@ -75,19 +75,10 @@ PanelWindow {
 
             spacing: 8;
 
-            Loader {
-                active: Config.modules.bluetoothStatus;
-                BluetoothStatus {}
-            }
-
+            BluetoothStatus {}
             NetworkStatus {}
             VolumeStatus {}
-
-            Loader {
-                active: Config.modules.powerStatus;
-                PowerStatus {}
-            }
-
+            PowerStatus {}
             SysTray {}
             NotifStatus { id: notifstatus; }
             NotifDrawer { anchorItem: notifstatus; }

@@ -24,14 +24,7 @@ BaseDrawer {
     readonly property int contentHeight: implicitHeight - padding * 2;
     readonly property int contentWidth: implicitWidth - padding * 2;
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: Style.border.size;
-            color: Style.colors.acc1;
-        }
-    }
+    StyledBg {}
 
     Item {
         anchors.fill: parent;

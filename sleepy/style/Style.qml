@@ -7,7 +7,8 @@ import QtQuick
 import "root:/cfg"
 
 Singleton {
-    property Colorscheme gruvbox: Colorscheme {
+    property Colorscheme colors: Colorscheme {
+        // gruvbox
         bg0:  "#1d2021";
         bg1:  "#3c3836";
         fg0:  "#a89984";
@@ -18,6 +19,7 @@ Singleton {
         alt1: "#83a598";
     }
 
-    property Colorscheme colors: gruvbox;
     property var border: Config.style.border;
+    property var fonts: Config.style.fonts;
+    property var text: Config.style.text;
 }

@@ -5,8 +5,9 @@ import QtQuick
 import QtQuick.Layouts
 
 import "root:/cfg"
-import "root:/services/notifs"
 import "root:/style"
+import "root:/components"
+import "root:/services/notifs"
 
 Item {
     id: root;
@@ -14,7 +15,7 @@ Item {
 
     required property TimedNotif modelData;
 
-    property int border: Config.notifs.border;
+    property int border: Style.border.thin;
     property color borderCol: Style.colors.acc1;
     property color hoveredBorderCol: Style.colors.acc1;
 
@@ -31,13 +32,9 @@ Item {
         onPressed: root.leftClicked();
     }
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: root.border;
-            color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
-        }
+    StyledBg {
+        borderSize: root.border;
+        borderColor: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
     }
 
     RowLayout {

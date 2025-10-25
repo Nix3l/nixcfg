@@ -1,9 +1,6 @@
 import Quickshell
-import Quickshell.Widgets
 import QtQuick
 
-import "root:/cfg"
-import "root:/services"
 import "root:/style"
 
 Text {
@@ -12,7 +9,7 @@ Text {
     color: Style.colors.fg1;
 
     font {
-        family: "Rubik";
-        pointSize: 8;
+        family: Style.fonts.normal;
+        pointSize: Style.text.small;
     }
 }
