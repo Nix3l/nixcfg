@@ -33,7 +33,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "habibbg.jpeg";
+            wallpaper = "my-neighbor-totoro-sunflowers.png";
             monitor = "eDP-1";
         };
 
