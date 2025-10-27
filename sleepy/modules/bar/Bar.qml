@@ -23,7 +23,7 @@ PanelWindow {
     color: "transparent";
 
     StyledBg {
-        borderSize: 0;
+        border.width: 0;
     }
 
     Item {

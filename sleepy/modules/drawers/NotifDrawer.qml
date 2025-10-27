@@ -18,7 +18,7 @@ BaseDrawer {
     isVisible: () => GlobalState.notifDrawerOpen;
     toggle: (on) => { GlobalState.notifDrawerOpen = on };
 
-    property int padding: 8;
+    property int padding: Style.padding.normal;
 
     implicitWidth: Config.notifs.width + padding * 2;
     implicitHeight: Config.notifs.minimumHeight * 8 + header.implicitHeight + padding * 2;
@@ -41,14 +41,14 @@ BaseDrawer {
                 anchors.left: parent.left;
                 text: "Notifications";
                 color: Style.colors.fg1;
-                font.pixelSize: 16;
+                font.pointSize: Style.text.normal;
             }
 
             IconButton {
                 id: garbageIcon;
                 anchors.right: parent.right;
                 source: Icons.notifs.garbage;
-                implicitSize: 16;
+                implicitSize: Style.icons.normal;
                 clicked: () => { Notifs.clear(); };
             }
         }

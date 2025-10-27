@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Widgets
 import QtQuick
 
 import "root:/cfg"
@@ -10,12 +11,11 @@ Rectangle {
     z: -1;
     anchors.fill: parent;
 
-    property int borderSize: Style.border.normal;
-    property color borderColor: Style.colors.acc1;
-
     color: Style.colors.bg0;
     border {
-        width: root.borderSize;
-        color: root.borderColor;
+        width: Style.border.normal;
+        color: Style.colors.acc1;
     }
+
+    radius: Style.rounding.normal;
 }

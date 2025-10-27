@@ -33,8 +33,10 @@ Item {
     }
 
     StyledBg {
-        borderSize: root.border;
-        borderColor: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
+        border {
+            width: root.border;
+            color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
+        }
     }
 
     RowLayout {

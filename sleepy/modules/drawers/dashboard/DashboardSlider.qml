@@ -92,13 +92,12 @@ Item {
             visible: root.showPercentage;
             Layout.alignment: Qt.AlignRight;
             // pad it a bit to make the spacing more regular
-            implicitWidth: root.iconSize + root.spacing * 4;
+            implicitWidth: root.iconSize + root.spacing * 2;
             StyledText {
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
                 text: Math.round(root.getPosition() * 100) + "%";
-                color: Style.colors.fg1;
-                font.pixelSize: root.textSize;
+                font.pointSize: Style.text.normal;
             }
         }
     }

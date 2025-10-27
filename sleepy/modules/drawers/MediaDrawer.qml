@@ -20,7 +20,7 @@ BaseDrawer {
 
     xoffset: -40;
 
-    property int padding: 8;
+    property int padding: Style.padding.small;
     readonly property int contentHeight: implicitHeight - padding * 2;
     readonly property int contentWidth: implicitWidth - padding * 2;
 
@@ -55,7 +55,7 @@ BaseDrawer {
                     }
 
                     color: Style.colors.fg1;
-                    font.pixelSize: 22;
+                    font.pointSize: Style.text.large;
                 }
 
                 RowLayout {
@@ -66,7 +66,7 @@ BaseDrawer {
                     Text {
                         text: "・[";
                         color: Style.colors.acc1;
-                        font.pixelSize: 12;
+                        font.pointSize: Style.text.small;
                         font.bold: true;
                     }
 
@@ -74,13 +74,13 @@ BaseDrawer {
                         visible: Media.playerOpen;
                         text: (Media.active.trackArtist == "" ? "" : (Media.active.trackArtist  + "・")) + Media.shortenedAlbumTitle;
                         color: Style.colors.fg1;
-                        font.pixelSize: 16;
+                        font.pointSize: Style.text.normal;
                     }
 
                     Text {
                         text: "]・";
                         color: Style.colors.acc1;
-                        font.pixelSize: 12;
+                        font.pointSize: Style.text.small;
                         font.bold: true;
                     }
                 }
@@ -90,7 +90,7 @@ BaseDrawer {
                     Text {
                         text: Media.cursorTimeText;
                         color: Style.colors.fg0;
-                        font.pixelSize: 11;
+                        font.pointSize: Style.text.smallest;
                     }
 
                     CustomSlider {
@@ -106,7 +106,7 @@ BaseDrawer {
                     Text {
                         text: Media.lengthText;
                         color: Style.colors.fg0;
-                        font.pixelSize: 11;
+                        font.pointSize: Style.text.smallest;
                     }
                 }
 
@@ -116,19 +116,19 @@ BaseDrawer {
 
                     IconButton {
                         source: Icons.media.rewind;
-                        implicitSize: 13;
+                        implicitSize: Style.icons.small;
                         clicked: () => { Media.active?.previous(); };
                     }
 
                     IconButton {
                         source: !Media.playing ? Icons.media.play : Icons.media.pause;
-                        implicitSize: 16;
+                        implicitSize: Style.icons.normal;
                         clicked: () => { Media.active?.togglePlaying(); };
                     }
 
                     IconButton {
                         source: Icons.media.fastforward;
-                        implicitSize: 13;
+                        implicitSize: Style.icons.small;
                         clicked: () => { Media.active?.next(); };
                     }
                 }

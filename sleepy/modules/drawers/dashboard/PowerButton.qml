@@ -10,7 +10,7 @@ import "root:/components"
 Item {
     id: root;
 
-    property int padding: 8;
+    property int padding: Style.padding.small;
 
     property string icon: "";
     property int iconSize: 32;
@@ -18,7 +18,7 @@ Item {
     property color bg: Style.colors.bg0;
     property color hoveredBg: Style.colors.bg1;
     property int border: 1;
-    property color borderCol: Style.colors.Style.colors.bg1;
+    property color borderCol: Style.colors.bg1;
     property color hoveredBorderCol: Style.colors.acc1;
 
     property var leftClicked;
@@ -34,13 +34,14 @@ Item {
         mipmap: true;
     }
 
-    Rectangle {
-        anchors.fill: parent;
+    StyledBg {
         color: mouseArea.containsMouse ? root.hoveredBg : root.bg;
         border {
             width: root.border;
             color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
         }
+
+        radius: 0;
     }
 
     MouseArea {

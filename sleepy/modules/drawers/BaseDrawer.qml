@@ -4,6 +4,7 @@ import QtQuick
 
 import "root:/cfg"
 import "root:/style"
+import "root:/components"
 
 PopupWindow {
     id: root;
@@ -36,12 +37,5 @@ PopupWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent;
-        color: root.bgColor;
-        border {
-            color: root.borderColor;
-            width: root.borderSize;
-        }
-    }
+    StyledBg {}
 }
