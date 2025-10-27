@@ -9,7 +9,7 @@ import "root:/components"
 Item {
     id: root;
 
-    property int hpadding: 10;
+    property int hpadding: Style.padding.small;
 
     property color bgColor: Style.colors.bg1;
     property color borderColor: Style.colors.acc0;
@@ -25,13 +25,10 @@ Item {
 
     default property alias items: content.children;
 
-    Rectangle {
-        anchors.fill: parent;
+    StyledBg {
         color: root.bgColor;
-        border {
-            width: 2;
-            color: root.borderColor;
-        }
+        border.color: root.borderColor
+        radius: 0;
     }
 
     Item {
@@ -42,10 +39,7 @@ Item {
 
         RowLayout {
             id: content;
-            anchors {
-                centerIn: parent;
-            }
-
+            anchors.centerIn: parent;
             spacing: root.contentSpacing;
         }
     }

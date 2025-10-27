@@ -16,6 +16,4 @@ Rectangle {
         width: Style.border.normal;
         color: Style.colors.acc1;
     }
-
-    radius: Style.rounding.normal;
 }

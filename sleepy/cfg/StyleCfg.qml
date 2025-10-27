@@ -41,6 +41,7 @@ JsonObject {
         property int normal: 11;
         property int large: 14;
         property int largest: 22;
+        property int colossal: 38;
     }
 
     component IconSize: JsonObject {
@@ -48,6 +49,7 @@ JsonObject {
         property int small: 14;
         property int normal: 16;
         property int large: 22;
+        property int largest: 32;
     }
 
     component Colorscheme: JsonObject {

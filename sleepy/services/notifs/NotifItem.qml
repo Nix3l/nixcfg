@@ -16,8 +16,8 @@ Item {
     required property TimedNotif modelData;
 
     property int border: Style.border.thin;
-    property color borderCol: Style.colors.acc1;
-    property color hoveredBorderCol: Style.colors.acc1;
+    property color borderColor: Style.colors.acc1;
+    property color hoveredBorderColor: Style.colors.acc1;
 
     property var leftClicked: () => { Notifs.dismissNotif(modelData); };
 
@@ -35,7 +35,7 @@ Item {
     StyledBg {
         border {
             width: root.border;
-            color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
+            color: mouseArea.containsMouse ? root.hoveredBorderColer : root.borderColor;
         }
     }
 
@@ -59,23 +59,21 @@ Item {
 
         ColumnLayout {
             id: textcol;
-            spacing: 4;
+            spacing: 2;
 
-            Text {
+            StyledText {
                 text: modelData.header;
-                color: Style.colors.fg1;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
-                font.pixelSize: 14;
+                font.pointSize: Style.text.small;
                 wrapMode: Text.Wrap;
                 elide: Text.ElideRight;
             }
 
-            Text {
+            StyledText {
                 text: modelData.body;
-                color: Style.colors.fg1;
-                font.pixelSize: 11;
+                font.pointSize: Style.text.small;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
-                maximumLineCount: 3;
+                maximumLineCount: 2;
                 wrapMode: Text.Wrap;
                 elide: Text.ElideRight;
             }

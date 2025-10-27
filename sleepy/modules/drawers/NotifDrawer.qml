@@ -69,8 +69,8 @@ BaseDrawer {
 
                 model: Notifs.notifs;
                 delegate: NotifItem {
-                    borderCol: Style.colors.bg1;
-                    hoveredBorderCol: Style.colors.fg0;
+                    borderColor: Style.colors.bg1;
+                    hoveredBorderColor: Style.colors.fg0;
                 }
             }
         }

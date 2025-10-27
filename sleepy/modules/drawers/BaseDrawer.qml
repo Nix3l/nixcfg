@@ -37,5 +37,7 @@ PopupWindow {
         }
     }
 
-    StyledBg {}
+    StyledBg {
+        radius: Style.rounding.normal;
+    }
 }

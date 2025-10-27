@@ -57,7 +57,7 @@ BaseDrawer {
                         Layout.column: 0;
                         text: Time.format("hh:mm");
                         color: Style.colors.fg1;
-                        font.pixelSize: 52;
+                        font.pointSize: Style.text.colossal;
                     }
 
                     ColumnLayout {
@@ -68,13 +68,13 @@ BaseDrawer {
                         StyledText {
                             text: Time.format("ap");
                             color: Style.colors.fg1;
-                            font.pixelSize: 12;
+                            font.pointSize: Style.text.small;
                         }
 
                         StyledText {
                             text: Time.format("ss");
                             color: Style.colors.fg1;
-                            font.pixelSize: 22;
+                            font.pointSize: Style.text.large;
                         }
                     }
 
@@ -86,7 +86,7 @@ BaseDrawer {
 
                         text: Time.format("dddd, dd/MM/yy");
                         color: Style.colors.fg1;
-                        font.pixelSize: 14;
+                        font.pointSize: Style.text.normal;
                     }
                 }
             }
@@ -146,7 +146,7 @@ BaseDrawer {
                     Layout.fillHeight: true;
 
                     icon: Audio.muted() ? Icons.audio.vol_mute : Icons.volIcon(Audio.volume());
-                    iconSize: 32;
+                    iconSize: Style.icons.largest;
                     iconLeftClicked: () => { Audio.toggleMuted(); };
 
                     getPosition: () => Audio.volume();
@@ -160,7 +160,7 @@ BaseDrawer {
                     Layout.fillHeight: true;
 
                     icon: Icons.display.brightness;
-                    iconSize: 32;
+                    iconSize: Style.icons.largest;
 
                     sliderStepSize: 0.05;
                     getPosition: () => Brightness.brightness / Brightness.maxBrightness;
