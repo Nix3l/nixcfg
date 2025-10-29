@@ -8,6 +8,7 @@ import QtQuick.Layouts
 
 import "root:/cfg"
 import "root:/style"
+import "root:/components"
 
 PanelWindow {
     id: root;
@@ -19,7 +20,7 @@ PanelWindow {
     required property var toggle;
 
     property color bg: Style.colors.bg0;
-    property real bgOpacity: 0.8;
+    property real bgOpacity: 0.96;
 
     property int border: 4;
     property color borderColor: Style.colors.acc1;
@@ -70,19 +71,10 @@ PanelWindow {
         onActivated: root.close();
     }
 
-    Rectangle {
-        anchors.fill: parent;
+    StyledBg {
         color: root.bg;
         opacity: root.bgOpacity;
-    }
-
-    Rectangle {
-        anchors.fill: parent;
-        color: 'transparent';
-        border {
-            width: root.border;
-            color: root.borderColor;
-        }
+        border.width: root.border;
     }
 
     ColumnLayout {
@@ -96,26 +88,16 @@ PanelWindow {
             Keys.onPressed: event => processKeys(event);
         }
 
-        ClippingRectangle {
+        StyledList {
             implicitWidth: Config.chooser.contentWidth;
             implicitHeight: Config.chooser.maxShownItems * (Config.chooser.itemHeight + Config.chooser.itemSpacing) - Config.chooser.itemSpacing;
+            spacing: Config.chooser.itemSpacing;
 
-            color: 'transparent';
-
-            ListView {
+            items {
                 id: listview;
-                anchors.fill: parent;
-                orientation: Qt.Vertical;
-                spacing: Config.chooser.itemSpacing;
-
                 model: root.model;
                 delegate: root.modelItem;
-
                 keyNavigationEnabled: true;
-
-                boundsBehavior: Flickable.StopAtBounds;
-                flickDeceleration: 10;
-
                 Keys.onPressed: event => processKeys(event);
             }
         }

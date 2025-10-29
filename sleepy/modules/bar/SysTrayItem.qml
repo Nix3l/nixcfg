@@ -10,16 +10,15 @@ MouseArea {
 
     acceptedButtons: Qt.LeftButton | Qt.RightButton;
 
-    required property SystemTrayItem item;
-    property int iconSize: 12;
+    required property SystemTrayItem modelData;
+    property int iconSize: Style.icons.smallest;
 
     implicitWidth: icon.implicitSize;
     implicitHeight: icon.implicitSize;
 
     QsMenuAnchor {
         id: menu;
-
-        menu: root.item.menu;
+        menu: root.modelData.menu;
 
         anchor {
             item: root;
@@ -34,17 +33,14 @@ MouseArea {
     }
 
     onClicked: event => {
-        if(event.button === Qt.LeftButton) item.activate();
+        if(event.button === Qt.LeftButton) modelData.activate();
         if(event.button === Qt.RightButton) menu.open();
     }
 
     IconImage {
         id: icon;
-        anchors {
-            verticalCenter: parent.verticalCenter;
-        }
-
-        source: root.item.icon;
+        anchors.verticalCenter: parent.verticalCenter;
+        source: root.modelData.icon;
         mipmap: true;
         implicitSize: root.iconSize;
     }

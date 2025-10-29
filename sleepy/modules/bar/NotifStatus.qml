@@ -5,17 +5,16 @@ import QtQuick
 
 import "root:/cfg"
 import "root:/services/notifs"
+import "root:/components"
 import "root:/style"
 
 BarItem {
     id: root;
 
-    borderColor: Style.colors.fg0;
-
     hovered: () => {
         Notifs.readNotifs();
         GlobalState.notifDrawerOpen = true;
-    };
+    }
 
     IconImage {
         source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;
@@ -23,7 +22,7 @@ BarItem {
         implicitSize: 16;
     }
 
-    Text {
+    StyledText {
         visible: Notifs.notifsSinceLastRead > 0;
         text: Notifs.notifsSinceLastRead;
         color: Style.colors.fg1;

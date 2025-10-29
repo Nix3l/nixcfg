@@ -16,7 +16,7 @@ Item {
     required property TimedNotif modelData;
 
     property int border: Style.border.thin;
-    property color borderColor: Style.colors.acc1;
+    property color borderColor: Style.colors.acc0;
     property color hoveredBorderColor: Style.colors.acc1;
 
     property var leftClicked: () => { Notifs.dismissNotif(modelData); };
@@ -35,7 +35,7 @@ Item {
     StyledBg {
         border {
             width: root.border;
-            color: mouseArea.containsMouse ? root.hoveredBorderColer : root.borderColor;
+            color: mouseArea.containsMouse ? root.hoveredBorderColor : root.borderColor;
         }
     }
 

@@ -18,15 +18,13 @@ BarItem {
         source: Media.active.trackArtUrl;
         mipmap: true;
         antialiasing: true;
-        implicitSize: 16;
+        implicitSize: Style.icons.normal;
     }
 
-    Text {
+    StyledText {
         text: {
             if(Media.playerOpen) return (Media.active.trackArtist || Media.shortenedAlbumTitle) + "・" + Media.shortenedTrackTitle;
             else return "-- no active media --";
         }
-
-        color: Style.colors.fg1;
     }
 }

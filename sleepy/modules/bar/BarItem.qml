@@ -12,7 +12,8 @@ Item {
     property int hpadding: Style.padding.small;
 
     property color bgColor: Style.colors.bg1;
-    property color borderColor: Style.colors.acc0;
+    property color borderColor: Style.colors.fg0;
+    property int borderWidth: 2;
 
     property int contentSpacing: 4;
 
@@ -28,6 +29,7 @@ Item {
     StyledBg {
         color: root.bgColor;
         border.color: root.borderColor
+        border.width: root.borderWidth;
         radius: 0;
     }
 

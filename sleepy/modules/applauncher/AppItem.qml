@@ -7,6 +7,7 @@ import QtQuick.Controls
 import "root:/cfg"
 import "root:/style"
 import "root:/services"
+import "root:/components"
 import "root:/components/chooser"
 
 ChooserItem {
@@ -38,7 +39,7 @@ ChooserItem {
             mipmap: true;
         }
 
-        Text {
+        StyledText {
             Layout.alignment: Qt.AlignLeft;
             text: modelData?.name;
             color: selected ? Style.colors.bg0 : Style.colors.fg1;

@@ -36,11 +36,10 @@ BaseDrawer {
 
             implicitHeight: Math.max(titleText.implicitHeight, garbageIcon.implicitSize);
 
-            Text {
+            StyledText {
                 id: titleText;
                 anchors.left: parent.left;
                 text: "Notifications";
-                color: Style.colors.fg1;
                 font.pointSize: Style.text.normal;
             }
 
@@ -53,25 +52,13 @@ BaseDrawer {
             }
         }
 
-        ClippingRectangle {
+        StyledList {
             Layout.fillWidth: true;
             Layout.fillHeight: true;
-            color: 'transparent';
-
-            implicitHeight: notiflist.implicitHeight;
-
-            ListView {
-                id: notiflist;
-                anchors.fill: parent;
-
-                orientation: Qt.Vertical;
-                spacing: root.padding;
-
-                model: Notifs.notifs;
-                delegate: NotifItem {
-                    borderColor: Style.colors.bg1;
-                    hoveredBorderColor: Style.colors.fg0;
-                }
+            items.model: Notifs.notifs;
+            items.delegate: NotifItem {
+                borderColor: Style.colors.bg1;
+                hoveredBorderColor: Style.colors.fg0;
             }
         }
     }

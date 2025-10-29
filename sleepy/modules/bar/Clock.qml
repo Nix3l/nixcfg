@@ -9,8 +9,6 @@ import "root:/components"
 BarItem {
     id: root;
 
-    borderColor: Style.colors.alt1;
-
     hovered: () => { GlobalState.dashboardDrawerOpen = true; };
 
     StyledText {
