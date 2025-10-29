@@ -13,6 +13,7 @@
         ./apps/alacritty.nix
         ./apps/defaults.nix
         ./apps/git.nix
+        ./apps/kitty.nix
         ./apps/spotify.nix
         ./cursor/cursor.nix
         ./cursor/capitaine.nix

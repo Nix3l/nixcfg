@@ -9,6 +9,8 @@
             font = "Tamzen";
         };
 
+        kitty.enable = true;
+
         git.enable = true;
 
         dev = {
