@@ -1,5 +1,8 @@
 { lib, config, osConfig, ... }:
 
+let
+    cfg = config.hm.mods.zsh;
+in
 {
     options.hm.mods.zsh = with lib; {
         enable = mkEnableOption "zsh";
@@ -7,18 +10,19 @@
         highlighting = mkOption { default = true; };
     };
 
-    config = lib.mkIf config.hm.mods.zsh.enable {
+    config = lib.mkIf cfg.enable {
         programs.zsh = {
             enable = true;
-            enableCompletion = config.hm.mods.zsh.completion;
-            syntaxHighlighting.enable = config.hm.mods.zsh.highlighting;
+            enableCompletion = cfg.completion;
+            syntaxHighlighting.enable = cfg.highlighting;
 
             shellAliases = {
                 ls = "eza -lah --color=auto --group-directories-first";
                 mkdir = "mkdir -p";
                 rm = "rm -r";
                 cp = "cp -r";
-                arduino-wayland = if osConfig.mods.dev.arduino.enable then "arduino-ide --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu" else "";
+                cat = "cat -v";
+                arduino-wayland = lib.mkIf osConfig.mods.dev.arduino.enable "arduino-ide --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu";
             };
 
             initContent = ''
