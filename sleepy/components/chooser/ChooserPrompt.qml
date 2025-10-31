@@ -14,13 +14,9 @@ Item {
     implicitWidth: Config.chooser.contentWidth;
     implicitHeight: Config.chooser.itemHeight;
 
-    property color bg: Style.colors.acc1;
-
-    StyledBg {
-        color: root.bg;
-        border.width: 2;
-        border.color: Style.colors.acc1;
-    }
+    property color bg: Style.colors.bg1;
+    property color textColor: Style.colors.fg1;
+    property color placeholderColor: Style.colors.fg0;
 
     Item {
         anchors {
@@ -33,12 +29,12 @@ Item {
             anchors.verticalCenter: parent.verticalCenter;
             implicitWidth: Config.chooser.contentWidth - Config.chooser.promptPadding * 2;
 
-            color: Style.colors.bg0;
-            font.pixelSize: Config.chooser.promptFontSize;
+            color: root.textColor;
+            font.pointSize: Config.chooser.promptFontSize;
             font.family: Style.fonts.normal;
 
             placeholderText: "Search...";
-            placeholderTextColor: Style.colors.bg0;
+            placeholderTextColor: root.placeholderColor;
 
             background: null;
             focus: true;

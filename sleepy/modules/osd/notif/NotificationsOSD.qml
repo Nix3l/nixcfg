@@ -20,7 +20,7 @@ PanelWindow {
     }
 
     implicitWidth: Config.notifs.width;
-    color: 'transparent';
+    color: "transparent";
 
     // NOTE(nix3l): so this would technically make the gaps between notifications also part of the mask
     // but i highly doubt i would really notice so

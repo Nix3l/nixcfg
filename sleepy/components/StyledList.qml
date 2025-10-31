@@ -14,10 +14,11 @@ import "root:/components"
 
 ClippingRectangle {
     id: root;
-    color: 'transparent';
 
     property alias items: listviewItem;
     property int spacing: Style.spacing.small;
+
+    color: "transparent";
 
     implicitHeight: listviewItem.implicitHeight;
 

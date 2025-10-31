@@ -22,7 +22,7 @@ PanelWindow {
     property color bg: Style.colors.bg0;
     property real bgOpacity: 0.96;
 
-    property int border: 4;
+    property int border: Style.border.thick;
     property color borderColor: Style.colors.acc1;
 
     required property var model;
@@ -56,7 +56,7 @@ PanelWindow {
         left: true;
     }
 
-    color: 'transparent';
+    color: "transparent";
 
     WlrLayershell.layer: WlrLayer.Overlay;
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand;

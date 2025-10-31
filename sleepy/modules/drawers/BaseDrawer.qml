@@ -19,7 +19,7 @@ PopupWindow {
     property color borderColor: Style.colors.acc1;
     property int borderSize: Style.border.thin;
 
-    color: 'transparent';
+    color: "transparent";
 
     anchor {
         item: root.anchorItem;
