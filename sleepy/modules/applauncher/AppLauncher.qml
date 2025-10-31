@@ -13,7 +13,7 @@ Chooser {
     id: root;
 
     isVisible: () => GlobalState.applauncherOpen;
-    toggle: (on) => { GlobalState.applauncherOpen = on; };
+    toggle: (on) => { GlobalState.applauncherOpen = on; }
 
     model: Apps.entries.filter(app => app.name.toLocaleLowerCase().includes(promptText.toLocaleLowerCase()));
     modelItem: Component {

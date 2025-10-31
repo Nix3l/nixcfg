@@ -44,7 +44,7 @@ Item {
             } else if(event.button === Qt.RightButton && root.rightClicked != undefined) {
                 root.rightClicked();
             }
-        };
+        }
 
         onEntered: if(mouseEntered != undefined) root.mouseEntered();
         onExited: if(mouseExited != undefined) root.mouseExited();

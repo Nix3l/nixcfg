@@ -17,7 +17,7 @@ PopupWindow {
 
     property color bgColor: Style.colors.bg0;
     property color borderColor: Style.colors.acc1;
-    property int borderSize: 1;
+    property int borderSize: Style.border.thin;
 
     color: 'transparent';
 

@@ -13,7 +13,7 @@ BaseDrawer {
     id: root;
 
     isVisible: () => GlobalState.bluetoothDrawerOpen;
-    toggle: (on) => { GlobalState.bluetoothDrawerOpen = on };
+    toggle: (on) => { GlobalState.bluetoothDrawerOpen = on }
 
     property int padding: 8;
 

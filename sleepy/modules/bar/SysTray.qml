@@ -12,7 +12,7 @@ BarItem {
 
         Row {
             id: content;
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
             anchors {
                 fill: parent;

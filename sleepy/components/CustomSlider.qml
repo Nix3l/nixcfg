@@ -11,7 +11,7 @@ Slider {
     required property var getPosition;
     required property var setPosition;
 
-    property int radius: 2;
+    property int radius: Style.rounding.normal;
     property int sliderHeight: 4;
 
     property color bg: Style.colors.bg1;

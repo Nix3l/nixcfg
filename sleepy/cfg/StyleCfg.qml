@@ -6,6 +6,7 @@ JsonObject {
     property Border border: Border {};
     property Rounding rounding: Rounding {};
     property Padding padding: Padding {};
+    property Spacing spacing: Spacing {};
     property Fonts fonts: Fonts {};
     property TextSize text: TextSize {};
     property IconSize icons: IconSize {};
@@ -26,6 +27,14 @@ JsonObject {
         property int smallest: 4;
         property int small: 8;
         property int normal: 12;
+        property int large: 16;
+        property int largest: 24;
+    }
+
+    component Spacing: JsonObject {
+        property int smallest: 2;
+        property int small: 4;
+        property int normal: 8;
         property int large: 16;
         property int largest: 24;
     }

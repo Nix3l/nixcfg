@@ -16,7 +16,7 @@ BaseDrawer {
     id: root;
 
     isVisible: () => GlobalState.notifDrawerOpen;
-    toggle: (on) => { GlobalState.notifDrawerOpen = on };
+    toggle: (on) => { GlobalState.notifDrawerOpen = on }
 
     property int padding: Style.padding.normal;
 
@@ -48,7 +48,7 @@ BaseDrawer {
                 anchors.right: parent.right;
                 source: Icons.notifs.garbage;
                 implicitSize: Style.icons.normal;
-                clicked: () => { Notifs.clear(); };
+                clicked: () => { Notifs.clear(); }
             }
         }
 

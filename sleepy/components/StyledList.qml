@@ -17,7 +17,7 @@ ClippingRectangle {
     color: 'transparent';
 
     property alias items: listviewItem;
-    property int spacing: 8;
+    property int spacing: Style.spacing.small;
 
     implicitHeight: listviewItem.implicitHeight;
 

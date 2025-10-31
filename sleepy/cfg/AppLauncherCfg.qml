@@ -1,5 +1,5 @@
 import Quickshell.Io
 
 JsonObject {
-    property bool showIcons: true;
+    property bool showIcons: false; //true;
 }

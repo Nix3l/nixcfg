@@ -9,7 +9,7 @@ import "root:/components"
 BarItem {
     id: root;
 
-    hovered: () => { GlobalState.dashboardDrawerOpen = true; };
+    hovered: () => { GlobalState.dashboardDrawerOpen = true; }
 
     StyledText {
         text: Time.format("ddd hh:mm");

@@ -14,11 +14,11 @@ BaseDrawer {
     id: root;
 
     isVisible: () => GlobalState.dashboardDrawerOpen;
-    toggle: (on) => { GlobalState.dashboardDrawerOpen = on };
+    toggle: (on) => { GlobalState.dashboardDrawerOpen = on }
 
     xoffset: anchorItem.width / 2;
 
-    property int padding: 8;
+    property int padding: Style.padding.small;
 
     implicitWidth: 480;
     implicitHeight: content.implicitHeight + root.padding * 2;
@@ -112,7 +112,7 @@ BaseDrawer {
                     Layout.column: 0;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.poweroff;
-                    leftClicked: () => { Power.poweroff(); };
+                    leftClicked: () => { Power.poweroff(); }
                 }
 
                 PowerButton {
@@ -120,7 +120,7 @@ BaseDrawer {
                     Layout.column: 1;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.reboot;
-                    leftClicked: () => { Power.reboot(); };
+                    leftClicked: () => { Power.reboot(); }
                 }
 
                 PowerButton {
@@ -128,7 +128,7 @@ BaseDrawer {
                     Layout.column: 0;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.logout;
-                    leftClicked: () => { Power.logout(); };
+                    leftClicked: () => { Power.logout(); }
                 }
 
                 PowerButton {
@@ -136,7 +136,7 @@ BaseDrawer {
                     Layout.column: 1;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.sleep;
-                    leftClicked: () => { Power.sleep(); };
+                    leftClicked: () => { Power.sleep(); }
                 }
 
                 DashboardSlider {
@@ -147,10 +147,10 @@ BaseDrawer {
 
                     icon: Audio.muted() ? Icons.audio.vol_mute : Icons.volIcon(Audio.volume());
                     iconSize: Style.icons.largest;
-                    iconLeftClicked: () => { Audio.toggleMuted(); };
+                    iconLeftClicked: () => { Audio.toggleMuted(); }
 
-                    getPosition: () => Audio.volume();
-                    setPosition: (val) => { Audio.setVolume(Math.round(val * 100) / 100); };
+                    getPosition: () => Audio.volume()
+                    setPosition: (val) => { Audio.setVolume(Math.round(val * 100) / 100); }
                 }
 
                 DashboardSlider {
@@ -164,7 +164,7 @@ BaseDrawer {
 
                     sliderStepSize: 0.05;
                     getPosition: () => Brightness.brightness / Brightness.maxBrightness;
-                    setPosition: (val) => { Brightness.setBrightness(val * Brightness.maxBrightness); };
+                    setPosition: (val) => { Brightness.setBrightness(val * Brightness.maxBrightness); }
                 }
             }
         }

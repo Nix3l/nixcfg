@@ -29,7 +29,7 @@ ChooserItem {
             margins: Config.chooser.itemPadding;
         }
 
-        spacing: 8;
+        spacing: Style.spacing.normal;
 
         IconImage {
             Layout.alignment: Qt.AlignLeft;
@@ -43,7 +43,7 @@ ChooserItem {
             Layout.alignment: Qt.AlignLeft;
             text: modelData?.name;
             color: selected ? Style.colors.bg0 : Style.colors.fg1;
-            font.pixelSize: Config.chooser.itemFontSize;
+            font.pointSize: Config.chooser.itemFontSize;
         }
     }
 }

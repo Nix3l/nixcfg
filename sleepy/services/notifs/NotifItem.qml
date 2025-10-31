@@ -19,7 +19,7 @@ Item {
     property color borderColor: Style.colors.acc0;
     property color hoveredBorderColor: Style.colors.acc1;
 
-    property var leftClicked: () => { Notifs.dismissNotif(modelData); };
+    property var leftClicked: () => { Notifs.dismissNotif(modelData); }
 
     implicitWidth: Config.notifs.width;
     implicitHeight: Config.notifs.padding + Math.max(Config.notifs.minimumHeight, content.implicitHeight);
@@ -59,7 +59,7 @@ Item {
 
         ColumnLayout {
             id: textcol;
-            spacing: 2;
+            spacing: Style.spacing.smallest;
 
             StyledText {
                 text: modelData.header;

@@ -6,56 +6,42 @@ import "root:/services"
 import "root:/style"
 
 BarItem {
+    id: root;
+
+    property real workspaceSize: 8;
+    property real workspaceSpacing: Style.spacing.normal;
+    property real focusScale: 3.0;
+
     borderColor: Style.colors.fg0;
 
-    Item {
-        id: root;
+    Row {
+        id: content;
+        spacing: root.workspaceSpacing;
 
-        property real workspaceSize: 8;
-        property real workspaceSpacing: 8;
-        property real focusScale: 3.0;
+        Repeater {
+            model: Config.bar.numWorkspacesShown;
 
-        implicitWidth: content.implicitWidth;
+            Item {
+                id: ws;
 
-        Row {
-            id: content;
-            anchors {
-                fill: parent;
-                centerIn: parent;
-            }
+                anchors.verticalCenter: content.verticalCenter;
 
-            spacing: root.workspaceSpacing;
+                implicitWidth: bg.implicitWidth;
+                implicitHeight: bg.implicitHeight;
 
-            Repeater {
-                model: Config.bar.numWorkspacesShown;
+                function focused(): bool {
+                    return Hyprland.activeWorkspace?.id == index + 1;
+                }
 
-                Item {
-                    id: ws;
+                Rectangle {
+                    id: bg;
 
-                    function focused(): bool {
-                        return Hyprland.activeWorkspace?.id == index + 1;
-                    }
+                    implicitWidth: root.workspaceSize * (ws.focused() ? root.focusScale : 1.0);
+                    implicitHeight: root.workspaceSize;
 
-                    anchors {
-                        verticalCenter: content.verticalCenter;
-                    }
+                    radius: Style.rounding.full;
 
-                    implicitWidth: bg.implicitWidth;
-                    implicitHeight: bg.implicitHeight;
-
-                    Rectangle {
-                        id: bg;
-
-                        implicitWidth: root.workspaceSize * (ws.focused() ? root.focusScale : 1);
-                        implicitHeight: root.workspaceSize;
-
-                        radius: root.workspaceSize / 2.0;
-
-                        color: {
-                            if(ws.focused()) return Style.colors.fg1;
-                            else return Style.colors.fg0;
-                        }
-                    }
+                    color: ws.focused() ? Style.colors.fg1 : Style.colors.fg0;
                 }
             }
         }

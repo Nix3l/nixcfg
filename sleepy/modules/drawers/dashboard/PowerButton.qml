@@ -17,7 +17,7 @@ Item {
 
     property color bg: Style.colors.bg0;
     property color hoveredBg: Style.colors.bg1;
-    property int border: 1;
+    property int border: Style.border.thin;
     property color borderCol: Style.colors.bg1;
     property color hoveredBorderCol: Style.colors.acc1;
 

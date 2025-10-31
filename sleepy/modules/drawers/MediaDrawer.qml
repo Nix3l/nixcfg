@@ -12,7 +12,7 @@ BaseDrawer {
     id: root;
 
     isVisible: () => GlobalState.mediaDrawerOpen;
-    toggle: (on) => { GlobalState.mediaDrawerOpen = on };
+    toggle: (on) => { GlobalState.mediaDrawerOpen = on }
 
     // TODO: this is temporary. change this.
     implicitWidth: Math.max(500, implicitHeight + content.implicitWidth + padding * 2 + 12);
@@ -32,7 +32,7 @@ BaseDrawer {
 
         RowLayout {
             anchors.fill: parent;
-            spacing: 16;
+            spacing: Style.spacing.large;
 
             IconImage {
                 source: Media.playerOpen ? Media.active.trackArtUrl : Icons.media.music;
@@ -58,7 +58,7 @@ BaseDrawer {
 
                 RowLayout {
                     visible: Media.playerOpen;
-                    spacing: 2;
+                    spacing: Style.spacing.smallest;
                     Layout.alignment: Qt.AlignCenter;
 
                     StyledText {
@@ -83,7 +83,7 @@ BaseDrawer {
                 }
 
                 RowLayout {
-                    spacing: 4;
+                    spacing: Style.spacing.small;
                     StyledText {
                         text: Media.cursorTimeText;
                         color: Style.colors.fg0;
@@ -92,12 +92,12 @@ BaseDrawer {
 
                     CustomSlider {
                         Layout.fillWidth: true;
-                        getPosition: () => { return Media.playerOpen ? Media.active.position / Media.active.length : 0; };
+                        getPosition: () => { return Media.playerOpen ? Media.active.position / Media.active.length : 0; }
                         setPosition: (val) => {
                             if(!Media.playerOpen) return;
                             Media.active.position = val * Media.active.length;
                             Media.active.positionChanged();
-                        };
+                        }
                     }
 
                     StyledText {
@@ -108,25 +108,25 @@ BaseDrawer {
                 }
 
                 RowLayout {
-                    spacing: 4;
+                    spacing: Style.spacing.small;
                     Layout.alignment: Qt.AlignCenter;
 
                     IconButton {
                         source: Icons.media.rewind;
                         implicitSize: Style.icons.small;
-                        clicked: () => { Media.active?.previous(); };
+                        clicked: () => { Media.active?.previous(); }
                     }
 
                     IconButton {
                         source: !Media.playing ? Icons.media.play : Icons.media.pause;
                         implicitSize: Style.icons.normal;
-                        clicked: () => { Media.active?.togglePlaying(); };
+                        clicked: () => { Media.active?.togglePlaying(); }
                     }
 
                     IconButton {
                         source: Icons.media.fastforward;
                         implicitSize: Style.icons.small;
-                        clicked: () => { Media.active?.next(); };
+                        clicked: () => { Media.active?.next(); }
                     }
                 }
             }

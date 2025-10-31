@@ -11,6 +11,7 @@ Singleton {
     property var border: Config.style.border;
     property var rounding: Config.style.rounding;
     property var padding: Config.style.padding;
+    property var spacing: Config.style.spacing;
     property var fonts: Config.style.fonts;
     property var text: Config.style.text;
     property var icons: Config.style.icons;

@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import "root:/cfg"
+import "root:/style"
 import "root:/services/notifs"
 
 PanelWindow {
@@ -30,7 +31,7 @@ PanelWindow {
 
     ColumnLayout {
         id: content;
-        spacing: 12;
+        spacing: Style.spacing.large;
         y: Config.notifs.margin;
 
         Repeater {
@@ -39,7 +40,7 @@ PanelWindow {
 
             NotifItem {
                 id: notif;
-                leftClicked: () => { notif.modelData.display = false; };
+                leftClicked: () => { notif.modelData.display = false; }
             }
         }
     }

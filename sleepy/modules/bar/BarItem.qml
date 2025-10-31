@@ -13,9 +13,9 @@ Item {
 
     property color bgColor: Style.colors.bg1;
     property color borderColor: Style.colors.fg0;
-    property int borderWidth: 2;
+    property int borderSize: Style.border.thin;
 
-    property int contentSpacing: 4;
+    property int contentSpacing: Style.spacing.small;
 
     property var hovered;
     property var leftClicked;
@@ -29,7 +29,7 @@ Item {
     StyledBg {
         color: root.bgColor;
         border.color: root.borderColor
-        border.width: root.borderWidth;
+        border.width: root.borderSize;
         radius: 0;
     }
 

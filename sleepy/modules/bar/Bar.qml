@@ -44,11 +44,9 @@ PanelWindow {
                 top: parent.top;
                 bottom: parent.bottom;
                 left: parent.left;
-
-                leftMargin: 4;
             }
 
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
             Workspaces {}
             MediaStatus { id: media; }
@@ -58,7 +56,7 @@ PanelWindow {
         // CENTER
         RowLayout {
             anchors.centerIn: parent;
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
             Clock { id: clock; }
             DashboardDrawer { anchorItem: clock; }
@@ -70,10 +68,9 @@ PanelWindow {
                 top: parent.top;
                 right: parent.right;
                 bottom: parent.bottom;
-                rightMargin: 4;
             }
 
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
             BluetoothStatus {}
             NetworkStatus {}
