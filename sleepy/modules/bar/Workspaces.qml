@@ -12,8 +12,6 @@ BarItem {
     property real workspaceSpacing: Style.spacing.normal;
     property real focusScale: 3.0;
 
-    borderColor: Style.colors.fg0;
-
     Row {
         id: content;
         spacing: root.workspaceSpacing;
