@@ -72,6 +72,7 @@ PanelWindow {
     }
 
     StyledBg {
+        id: bg;
         color: root.bg;
         opacity: root.bgOpacity;
         border.width: root.border;

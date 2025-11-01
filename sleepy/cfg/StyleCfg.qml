@@ -10,6 +10,7 @@ JsonObject {
     property Fonts fonts: Fonts {};
     property TextSize text: TextSize {};
     property IconSize icons: IconSize {};
+    property Animations anim: Animations {};
 
     component Border: JsonObject {
         property int thin: 1;
@@ -70,5 +71,31 @@ JsonObject {
         property color acc1: "#8ec07c";
         property color alt0: "#458588";
         property color alt1: "#83a598";
+    }
+
+    // shamelessly stolen from https://github.com/caelestia-dots/shell/blob/main/config/AppearanceConfig.qml
+    // woo
+    component AnimationCurve: JsonObject {
+        property list<real> emphasized: [0.05, 0, 2 / 15, 0.06, 1 / 6, 0.4, 5 / 24, 0.82, 0.25, 1, 1, 1];
+        property list<real> emphasizedAccel: [0.3, 0, 0.8, 0.15, 1, 1];
+        property list<real> emphasizedDecel: [0.05, 0.7, 0.1, 1, 1, 1];
+        property list<real> standard: [0.2, 0, 0, 1, 1, 1];
+        property list<real> standardAccel: [0.3, 0, 1, 1, 1, 1];
+        property list<real> standardDecel: [0, 0, 0, 1, 1, 1];
+        property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.9, 1, 1];
+        property list<real> expressiveDefaultSpatial: [0.38, 1.21, 0.22, 1, 1, 1];
+        property list<real> expressiveEffects: [0.34, 0.8, 0.34, 1, 1, 1];
+    }
+
+    component AnimationDuration: JsonObject {
+        property int small: 200;
+        property int normal: 400;
+        property int large: 600;
+        property int largest: 1000;
+    }
+
+    component Animations: JsonObject {
+        property AnimationDuration durations: AnimationDuration {};
+        property AnimationCurve curves: AnimationCurve {};
     }
 }

@@ -15,4 +15,5 @@ Singleton {
     property var fonts: Config.style.fonts;
     property var text: Config.style.text;
     property var icons: Config.style.icons;
+    property var anim: Config.style.anim;
 }

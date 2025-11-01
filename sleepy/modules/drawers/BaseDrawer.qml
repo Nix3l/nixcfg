@@ -13,7 +13,9 @@ PopupWindow {
     required property var anchorItem;
     required property var isVisible;
     required property var toggle;
-    property int xoffset: 0;
+
+    property real xoffset: 0;
+    property real yoffset: Config.bar.contentHeight * 1.33;
 
     property color bgColor: Style.colors.bg0;
     property color borderColor: Style.colors.acc1;
@@ -25,7 +27,7 @@ PopupWindow {
         item: root.anchorItem;
         edges: Edges.Bottom;
         gravity: Edges.Bottom;
-        rect.height: Config.bar.contentHeight + 6;
+        rect.y: root.anchorItem.y + root.yoffset;
         rect.x: root.anchorItem.x + root.xoffset;
     }
 
