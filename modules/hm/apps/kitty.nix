@@ -11,24 +11,7 @@ in
             size = mkOption { default = 12; };
         };
 
-        colors = {
-            black.dull     = mkOption { default = "#282828"; };
-            black.bright   = mkOption { default = "#928374"; };
-            red.dull       = mkOption { default = "#cc241d"; };
-            red.bright     = mkOption { default = "#fb4934"; };
-            green.dull     = mkOption { default = "#98971a"; };
-            green.bright   = mkOption { default = "#b8bb26"; };
-            yellow.dull    = mkOption { default = "#d79921"; };
-            yellow.bright  = mkOption { default = "#fabd2f"; };
-            blue.dull      = mkOption { default = "#458588"; };
-            blue.bright    = mkOption { default = "#83a598"; };
-            magenta.dull   = mkOption { default = "#b16286"; };
-            magenta.bright = mkOption { default = "#d3869b"; };
-            cyan.dull      = mkOption { default = "#689d6a"; };
-            cyan.bright    = mkOption { default = "#8ec07c"; };
-            white.dull     = mkOption { default = "#a89984"; };
-            white.bright   = mkOption { default = "#ebdbb2"; };
-        };
+        shell = mkOption { default = config.home.sessionVariables.SHELL; };
     };
 
     config = lib.mkIf cfg.enable {
@@ -45,28 +28,60 @@ in
                 update_check_interval = 0;
                 confirm_os_window_close = 0;
 
-                window_padding_width = 8;
+                window_padding_width = 4;
 
-                background = cfg.colors.black.dull;
-                foreground = cfg.colors.white.dull;
+                shell = cfg.shell;
 
-                color0  = cfg.colors.white.dull;
-                color8  = cfg.colors.white.bright;
-                color1  = cfg.colors.black.dull;
-                color9  = cfg.colors.black.bright;
-                color2  = cfg.colors.red.dull;
-                color10 = cfg.colors.red.bright;
-                color3  = cfg.colors.green.dull;
-                color11 = cfg.colors.green.bright;
-                color4  = cfg.colors.yellow.dull;
-                color12 = cfg.colors.yellow.bright;
-                color5  = cfg.colors.blue.dull;
-                color13 = cfg.colors.blue.bright;
-                color6  = cfg.colors.magenta.dull;
-                color14 = cfg.colors.magenta.bright;
-                color7  = cfg.colors.cyan.dull;
-                color15 = cfg.colors.cyan.bright;
+                # yes im hard coding the colors sue me
+                # 235_bg, 223_fg1
+                background = "#282828";
+                foreground = "#ebdbb2";
+
+                # 245_gray, 237_bg1
+                selection_foreground = "#928374";
+                selection_background = "#3c3836";
+
+                # 229_fg0, 236_bg0_s
+                cursor = "#fbf1c7";
+                cursor_text_color = "#32302f";
+
+                # 208_orange
+                url_color = "#fe8019";
+
+                # 235_bg, 241_bg3
+                color0  = "#282828";
+                color8  = "#665c54";
+
+                # 124_red, 167_red
+                color1  = "#cc241d";
+                color9  = "#fb4934";
+
+                # 106_green, 142_green
+                color2  = "#98971a";
+                color10 = "#b8bb26";
+
+                # 172_yellow, 214_yellow
+                color3  = "#d79921";
+                color11 = "#fabd2f";
+
+                # 72_aqua, 109_blue
+                color4  = "#689d6a";
+                color12 = "#83a598";
+
+                # 132_purple, 175_purple
+                color5  = "#b16286";
+                color13 = "#d3869b";
+
+                # 72_aqua, 108_aqua
+                color6  = "#689d6a";
+                color14 = "#8ec07c";
+
+                # 246_gray, 245_gray
+                color7  = "#a89984";
+                color15 = "#928374";
             };
         };
+
+        hm.mods.session.terminal = lib.mkForce "kitty";
     };
 }

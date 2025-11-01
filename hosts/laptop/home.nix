@@ -3,13 +3,10 @@
 {
     home.stateVersion = "25.05";
     hm.mods = {
-        defaults.enable = true;
-        alacritty = {
-            enable = true;
-            font = "Tamzen";
-        };
+        session.enable = true;
 
         kitty.enable = true;
+        fish.enable = true;
 
         git.enable = true;
 
@@ -30,8 +27,6 @@
         };
 
         qt.enable = true;
-
-        zsh.enable = true;
 
         wallpaper.hyprpaper = {
             enable = true;

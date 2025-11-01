@@ -3,7 +3,7 @@
 {
     home.stateVersion = "25.05";
     hm.mods = {
-        defaults.enable = true;
+        session.enable = true;
         alacritty = {
             enable = true;
             font = "Tamzen";

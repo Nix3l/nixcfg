@@ -88,7 +88,7 @@ in {
                 "$mod" = "SUPER";
 
                 "$terminal" = config.home.sessionVariables.TERMINAL;
-                "$browser" = config.home.sessionVariables.BROWSER;
+                "$browser"  = config.home.sessionVariables.BROWSER;
                 "$explorer" = config.home.sessionVariables.EXPLORER;
 
                 input = {
@@ -143,7 +143,7 @@ in {
                 exec-once = lib.lists.flatten [
                     (lib.optional osConfig.mods.apps.util.enable "flameshot &")
                     (lib.optional osConfig.mods.input.ime.enable "fcitx5 &")
-                    # fixes cursor themes in gnome apps under hyprland
+                    # (supposedly) fixes cursor themes in gnome apps under hyprland
                     "gsettings set org.gnome.desktop.interface cursor-theme '${config.home.pointerCursor.name}'"
                     "gsettings set org.gnome.desktop.interface cursor-size ${toString config.home.pointerCursor.size}"
                 ];
