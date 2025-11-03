@@ -9,6 +9,7 @@ import "root:/components"
 import "root:/services"
 import "root:/modules/drawers"
 import "root:/modules/drawers/dashboard"
+import "root:/modules/drawers/bluetooth"
 
 PanelWindow {
     id: root;
@@ -72,7 +73,8 @@ PanelWindow {
 
             spacing: Style.spacing.normal;
 
-            BluetoothStatus {}
+            BluetoothStatus { id: bluetoothstatus; }
+            BluetoothDrawer { anchorItem: bluetoothstatus; }
             NetworkStatus {}
             VolumeStatus {}
             PowerStatus {}

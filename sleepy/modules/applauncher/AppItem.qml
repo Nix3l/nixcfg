@@ -31,12 +31,11 @@ ChooserItem {
 
         spacing: Style.spacing.normal;
 
-        IconImage {
+        StyledIcon {
             Layout.alignment: Qt.AlignLeft;
             visible: Config.applauncher.showIcons;
             source: Quickshell.iconPath(modelData.icon ?? "");
             implicitSize: Config.chooser.contentHeight * 0.77;
-            mipmap: true;
         }
 
         StyledText {

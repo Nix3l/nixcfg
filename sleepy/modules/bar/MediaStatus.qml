@@ -13,12 +13,9 @@ BarItem {
     visible: Media.playerOpen && Media.active.trackArtUrl;
     hovered: () => { GlobalState.mediaDrawerOpen = true; }
 
-    IconImage {
+    StyledIcon {
         visible: Media.playerOpen;
         source: Media.active.trackArtUrl;
-        mipmap: true;
-        antialiasing: true;
-        implicitSize: Style.icons.normal;
     }
 
     StyledText {

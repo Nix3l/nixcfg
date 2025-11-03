@@ -16,8 +16,6 @@ BaseDrawer {
     isVisible: () => GlobalState.dashboardDrawerOpen;
     toggle: (on) => { GlobalState.dashboardDrawerOpen = on }
 
-    xoffset: anchorItem.width / 2;
-
     property int padding: Style.padding.small;
 
     implicitWidth: 480;
@@ -33,12 +31,11 @@ BaseDrawer {
             Layout.alignment: Qt.AlignTop;
             spacing: root.padding;
 
-            IconImage {
+            StyledIcon {
                 id: pfp;
                 Layout.alignment: Qt.AlignLeft;
                 source: Paths.pfpFile;
                 implicitSize: powerGrid.implicitWidth;
-                mipmap: true;
                 onStatusChanged: if(pfp.status == Image.Error) pfp.visible = false;
             }
 

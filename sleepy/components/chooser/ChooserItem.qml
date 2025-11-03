@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 
 import "root:/cfg"
+import "root:/components"
 import "root:/style"
 
 Item {
@@ -24,12 +25,10 @@ Item {
 
     property bool selected: containsMouse || ListView.isCurrentItem;
 
-    Rectangle {
+    StyledBg {
         visible: root.selected;
-        z: 0;
-        anchors.fill: parent;
-        anchors.verticalCenter: parent.verticalCenter;
         color: Style.colors.fg1;
+        border.width: 0;
     }
 
     MouseArea {

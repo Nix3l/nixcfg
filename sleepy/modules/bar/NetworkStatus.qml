@@ -9,11 +9,10 @@ import "root:/components"
 BarItem {
     borderColor: Style.colors.fg0;
 
-    IconImage {
+    StyledIcon {
         visible: Network.enabled;
         source: Icons.wifiStrengthIcon(Network.strength);
-        mipmap: true;
-        implicitSize: 14;
+        implicitSize: Style.icons.small;
     }
 
     StyledText {
@@ -22,11 +21,10 @@ BarItem {
         color: Style.colors.fg1;
     }
 
-    IconImage {
+    StyledIcon {
         visible: !Network.enabled;
         source: Icons.wifi.off;
-        mipmap: true;
-        implicitSize: 14;
+        implicitSize: Style.icons.small;
     }
 
     StyledText {

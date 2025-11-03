@@ -49,12 +49,11 @@ Item {
             margins: Config.notifs.padding;
         }
 
-        IconImage {
+        StyledIcon {
             id: icon;
             visible: modelData.hasImage;
             source: modelData.image;
             implicitSize: Config.notifs.minimumHeight - Config.notifs.padding;
-            mipmap: true;
         }
 
         ColumnLayout {

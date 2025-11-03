@@ -66,6 +66,15 @@ Singleton {
         property string connected: "root:/res/bluetooth_connected.svg";
     }
 
+    property QtObject controls: QtObject {
+        property string menu: "root:/res/menu.svg";   
+    }
+
+    property QtObject other: QtObject {
+        property string unknown: "root:/res/unknown.svg";
+        property string loading: "root:/res/loading.svg";
+    }
+
     function batteryIcon(per: real): string {
         if(per < 0.12) return root.power.battery_0bar;
         if(per < 0.24) return root.power.battery_1bar;

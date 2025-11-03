@@ -26,12 +26,11 @@ Item {
     implicitWidth: iconSize + padding * 2;
     implicitHeight: iconSize + padding * 2;
 
-    IconImage {
+    StyledIcon {
         z: 1;
         anchors.centerIn: parent;
         source: root.icon;
-        implicitSize: iconSize;
-        mipmap: true;
+        implicitSize: root.iconSize;
     }
 
     StyledBg {

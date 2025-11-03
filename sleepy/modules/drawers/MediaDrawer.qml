@@ -32,11 +32,10 @@ BaseDrawer {
 
         RowLayout {
             anchors.fill: parent;
-            spacing: Style.spacing.large;
+            spacing: Style.spacing.largest;
 
-            IconImage {
+            StyledIcon {
                 source: Media.playerOpen ? Media.active.trackArtUrl : Icons.media.music;
-                mipmap: true;
                 implicitSize: root.contentHeight;
             }
 
@@ -112,20 +111,20 @@ BaseDrawer {
                     Layout.alignment: Qt.AlignCenter;
 
                     IconButton {
-                        source: Icons.media.rewind;
-                        implicitSize: Style.icons.small;
+                        icon: Icons.media.rewind;
+                        iconSize: Style.icons.small;
                         clicked: () => { Media.active?.previous(); }
                     }
 
                     IconButton {
-                        source: !Media.playing ? Icons.media.play : Icons.media.pause;
-                        implicitSize: Style.icons.normal;
+                        icon: !Media.playing ? Icons.media.play : Icons.media.pause;
+                        iconSize: Style.icons.normal;
                         clicked: () => { Media.active?.togglePlaying(); }
                     }
 
                     IconButton {
-                        source: Icons.media.fastforward;
-                        implicitSize: Style.icons.small;
+                        icon: Icons.media.fastforward;
+                        iconSize: Style.icons.small;
                         clicked: () => { Media.active?.next(); }
                     }
                 }

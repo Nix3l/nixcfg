@@ -29,7 +29,7 @@ BaseDrawer {
         anchors.margins: root.padding;
         spacing: root.padding;
 
-        Item {
+        RowLayout {
             id: header;
             Layout.fillWidth: true;
             Layout.alignment: Qt.AlignTop;
@@ -38,16 +38,21 @@ BaseDrawer {
 
             StyledText {
                 id: titleText;
-                anchors.left: parent.left;
+                Layout.alignment: Qt.AlignLeft;
                 text: "Notifications";
                 font.pointSize: Style.text.normal;
             }
 
+            Rectangle {
+                Layout.fillWidth: true;
+                color: Style.colors.fg1;
+                implicitHeight: Style.border.thin;
+            }
+
             IconButton {
                 id: garbageIcon;
-                anchors.right: parent.right;
-                source: Icons.notifs.garbage;
-                implicitSize: Style.icons.normal;
+                Layout.alignment: Qt.AlignRight;
+                icon: Icons.notifs.garbage;
                 clicked: () => { Notifs.clear(); }
             }
         }

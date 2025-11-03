@@ -4,6 +4,7 @@ import Quickshell.Widgets
 import QtQuick
 
 import "root:/style"
+import "root:/components"
 
 MouseArea {
     id: root;
@@ -37,11 +38,10 @@ MouseArea {
         if(event.button === Qt.RightButton) menu.open();
     }
 
-    IconImage {
+    StyledIcon {
         id: icon;
         anchors.verticalCenter: parent.verticalCenter;
         source: root.modelData.icon;
-        mipmap: true;
         implicitSize: root.iconSize;
     }
 }

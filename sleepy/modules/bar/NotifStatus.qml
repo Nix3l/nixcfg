@@ -16,10 +16,9 @@ BarItem {
         GlobalState.notifDrawerOpen = true;
     }
 
-    IconImage {
+    StyledIcon {
         source: Notifs.read ? Icons.notifs.read : Icons.notifs.unread;
-        mipmap: true;
-        implicitSize: 16;
+        implicitSize: Style.icons.normal;
     }
 
     StyledText {

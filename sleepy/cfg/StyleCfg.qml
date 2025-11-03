@@ -36,8 +36,8 @@ JsonObject {
         property int smallest: 2;
         property int small: 4;
         property int normal: 8;
-        property int large: 16;
-        property int largest: 24;
+        property int large: 12;
+        property int largest: 16;
     }
 
     component Fonts: JsonObject {

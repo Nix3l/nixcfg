@@ -52,12 +52,11 @@ Item {
             implicitWidth: sliderIcon.implicitSize;
             implicitHeight: sliderIcon.implicitSize;
 
-            IconImage {
+            StyledIcon {
                 id: sliderIcon;
                 anchors.centerIn: parent;
                 source: root.icon;
                 implicitSize: root.iconSize;
-                mipmap: true;
             }
 
             MouseArea {

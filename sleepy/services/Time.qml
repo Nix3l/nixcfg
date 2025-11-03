@@ -13,6 +13,7 @@ Singleton {
     }
 
     readonly property date date: sysclock.date;
+    readonly property int millis: sysclock.seconds;
     readonly property int seconds: sysclock.seconds;
     readonly property int minutes: sysclock.minutes;
     readonly property int hours: sysclock.hours;

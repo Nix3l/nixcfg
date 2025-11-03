@@ -27,8 +27,8 @@ PopupWindow {
         item: root.anchorItem;
         edges: Edges.Bottom;
         gravity: Edges.Bottom;
+        rect.x: root.anchorItem.x + root.xoffset + root.anchorItem.width / 2;
         rect.y: root.anchorItem.y + root.yoffset;
-        rect.x: root.anchorItem.x + root.xoffset;
     }
 
     HyprlandFocusGrab {

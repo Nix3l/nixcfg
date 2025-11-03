@@ -31,7 +31,7 @@ PanelWindow {
 
     ColumnLayout {
         id: content;
-        spacing: Style.spacing.large;
+        spacing: Style.spacing.largest;
         y: Config.notifs.margin;
 
         Repeater {
