@@ -14,7 +14,7 @@ Singleton {
     readonly property bool discovering: adapter.discovering;
 
     readonly property list<BluetoothDevice> devices: adapter.devices.values
-        .filter((d) => d.deviceName != "")
+        .filter((d) => d.deviceName != "") // filter out the weird stuff that comes up when discovering
         .sort((a,b) => (b.bonded + b.paired + b.connected) - (a.bonded + a.paired + a.connected));
 
     readonly property list<BluetoothDevice> connectedDevices: devices.filter(d => d.connected);
