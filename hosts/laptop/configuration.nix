@@ -46,6 +46,8 @@
                 enable = true;
                 jetbrains.enable = true;
             };
+
+            arduino.enable = true;
         };
 
         apps = {
