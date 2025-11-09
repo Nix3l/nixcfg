@@ -18,7 +18,7 @@ Scope {
         name: "applauncher_open";
         description: "Opens the application launcher";
         onReleased: {
-            GlobalState.applauncherOpen = true;
+            GlobalState.choosers.applauncher = true;
         }
     }
 }

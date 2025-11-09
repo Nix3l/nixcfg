@@ -13,10 +13,8 @@ import "root:/modules/drawers"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.dashboardDrawerOpen;
-    toggle: (on) => { GlobalState.dashboardDrawerOpen = on }
-
-    property int padding: Style.padding.small;
+    isVisible: () => GlobalState.drawers.dashboard;
+    toggle: (on) => { GlobalState.drawers.dashboard = on }
 
     implicitWidth: 480;
     implicitHeight: content.implicitHeight + root.padding * 2;

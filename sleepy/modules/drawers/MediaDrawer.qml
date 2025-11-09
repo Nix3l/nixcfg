@@ -11,8 +11,8 @@ import "root:/components"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.mediaDrawerOpen;
-    toggle: (on) => { GlobalState.mediaDrawerOpen = on }
+    isVisible: () => GlobalState.drawers.media;
+    toggle: (on) => { GlobalState.drawers.media = on }
 
     // TODO: this is temporary. change this.
     implicitWidth: Math.max(500, implicitHeight + content.implicitWidth + padding * 2 + 12);
@@ -20,7 +20,6 @@ BaseDrawer {
 
     xoffset: -40;
 
-    property int padding: Style.padding.small;
     readonly property int contentHeight: implicitHeight - padding * 2;
     readonly property int contentWidth: implicitWidth - padding * 2;
 

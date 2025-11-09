@@ -11,7 +11,7 @@ BarItem {
     id: root;
 
     visible: Media.playerOpen && Media.active.trackArtUrl;
-    hovered: () => { GlobalState.mediaDrawerOpen = true; }
+    hovered: () => { GlobalState.drawers.media = true; }
 
     StyledIcon {
         visible: Media.playerOpen;

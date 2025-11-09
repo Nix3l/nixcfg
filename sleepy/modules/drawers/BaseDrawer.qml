@@ -14,6 +14,8 @@ PopupWindow {
     required property var isVisible;
     required property var toggle;
 
+    property int padding: Style.padding.small;
+
     property real xoffset: 0;
     property real yoffset: Config.bar.contentHeight * 1.33;
 

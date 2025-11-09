@@ -2,12 +2,16 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 
+import "root:/cfg"
 import "root:/services"
+import "root:/services/network"
 import "root:/style"
 import "root:/components"
 
 BarItem {
     borderColor: Style.colors.fg0;
+
+    hovered: () => { GlobalState.drawers.network = true; };
 
     StyledIcon {
         visible: Network.enabled;

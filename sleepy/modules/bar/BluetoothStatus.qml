@@ -10,7 +10,7 @@ import "root:/services"
 BarItem {
     visible: Config.modules.bluetoothStatus;
 
-    hovered: () => { GlobalState.bluetoothDrawerOpen = true; };
+    hovered: () => { GlobalState.drawers.bluetooth = true; };
 
     StyledIcon {
         source: {

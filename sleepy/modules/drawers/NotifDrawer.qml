@@ -15,10 +15,8 @@ import "root:/components"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.notifDrawerOpen;
-    toggle: (on) => { GlobalState.notifDrawerOpen = on }
-
-    property int padding: Style.padding.normal;
+    isVisible: () => GlobalState.drawers.notifs;
+    toggle: (on) => { GlobalState.drawers.notifs = on }
 
     implicitWidth: Config.notifs.width + padding * 2;
     implicitHeight: Config.notifs.minimumHeight * 8 + header.implicitHeight + padding * 2;

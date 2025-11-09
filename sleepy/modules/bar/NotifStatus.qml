@@ -13,7 +13,7 @@ BarItem {
 
     hovered: () => {
         Notifs.readNotifs();
-        GlobalState.notifDrawerOpen = true;
+        GlobalState.drawers.notifs = true;
     }
 
     StyledIcon {

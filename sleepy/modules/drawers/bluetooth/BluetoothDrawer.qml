@@ -15,10 +15,8 @@ import "root:/modules/drawers"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.bluetoothDrawerOpen;
-    toggle: (on) => { GlobalState.bluetoothDrawerOpen = on }
-
-    property int padding: Style.padding.small;
+    isVisible: () => GlobalState.drawers.bluetooth;
+    toggle: (on) => { GlobalState.drawers.bluetooth = on }
 
     implicitWidth: Math.max(content.implicitWidth + padding * 2, 320);
     implicitHeight: Math.max(content.implicitHeight + padding * 2, 480);

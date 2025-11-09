@@ -9,8 +9,6 @@ import "root:/cfg"
 Singleton {
     id: root;
 
-    // TODO: this stops working after a while
-
     property bool wifiEnabled: false;
     property bool ethernetEnabled: false;
     readonly property bool enabled: wifiEnabled || ethernetEnabled;
@@ -67,6 +65,27 @@ Singleton {
         }
     }
 
+    Process {
+        id: wifiUpdateProc;
+        running: true;
+
+        command: [
+            "sh",
+            "-c",
+            "nmcli -t -f SSID,RATE,BANDWIDTH,SIGNAL,SECURITY,IN-USE device wifi"
+        ];
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const networks = this.text.trim().split("\n");
+                for(let i = 0; i < networks.length; i ++) {
+                    const info = networks[i].trim().split(":");
+                    // TODO
+                }
+            }
+        }
+    }
+
     Timer {
         interval: Config.timing.networkUpdate;
         running: true;
@@ -74,6 +93,7 @@ Singleton {
         onTriggered: {
             networkUpdateProc.running = true;
             signalStrengthUpdateProc.running = true;
+            // wifiUpdateProc.running = true;
         }
     }
 }
