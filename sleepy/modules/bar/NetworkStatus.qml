@@ -15,13 +15,13 @@ BarItem {
 
     StyledIcon {
         visible: Network.enabled;
-        source: Icons.wifiStrengthIcon(Network.strength);
+        source: Icons.wifiStrengthIcon(Network.activeStrength());
         implicitSize: Style.icons.small;
     }
 
     StyledText {
         visible: Network.enabled;
-        text: Network.ssid;
+        text: Network.activeSSID();
         color: Style.colors.fg1;
     }
 

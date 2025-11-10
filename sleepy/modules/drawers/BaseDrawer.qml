@@ -11,6 +11,7 @@ PopupWindow {
     visible: isVisible();
 
     required property var anchorItem;
+    // NOTE(nix3l): i can make these an alias property but eh
     required property var isVisible;
     required property var toggle;
 

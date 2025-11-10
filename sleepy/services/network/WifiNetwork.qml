@@ -10,6 +10,6 @@ QtObject {
     property string security: "-";
     property bool connected: false;
     property int strength: 0;
-    property int bandwidth: 0;
-    property int rate: 0; // mbit/s
+    property string rate: "";
+    property string bandwidth: "";
 }

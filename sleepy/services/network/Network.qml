@@ -12,8 +12,28 @@ Singleton {
     property bool wifiEnabled: false;
     property bool ethernetEnabled: false;
     readonly property bool enabled: wifiEnabled || ethernetEnabled;
-    property string ssid: "";
-    property int strength: 0;
+
+    Component {
+        id: wifiNetworkComponent;
+        WifiNetwork {}
+    }
+
+    property list<WifiNetwork> wifiNetworks: [];
+    property WifiNetwork connectedWifi: null;
+
+    function findWifiNetwork(ssid: string): WifiNetwork {
+        let found = null;
+        wifiNetworks.forEach((n) => { if(n.ssid == ssid) found = n; });
+        return found;
+    }
+
+    function activeSSID(): string {
+        return root.wifiEnabled ? root.connectedWifi?.ssid ?? "Disconnected" : "Ethernet";
+    }
+
+    function activeStrength(): int {
+        return root.wifiEnabled ? root.connectedWifi?.strength ?? 0 : 100;
+    }
 
     Process {
         id: networkUpdateProc;
@@ -28,41 +48,32 @@ Singleton {
                 if(info[0] === "lo") {
                     root.wifiEnabled = false;
                     root.ethernetEnabled = false;
-                    root.ssid = "";
-                    root.strength = 0;
                     return;
                 }
 
-                root.ssid = info[0];
                 if(info[1].includes("wireless")) root.wifiEnabled = true;
                 else if(info[1].includes("ethernet")) root.ethernetEnabled = true;
-
-                if(root.ethernetEnabled) {
-                    root.ssid = "Ethernet";
-                    root.strength = 100;
-                }
             }
         }
     }
 
-    Process {
-        id: signalStrengthUpdateProc;
-        running: true;
+    readonly property string wifiInfoFmt: "SSID,RATE,BANDWIDTH,SIGNAL,SECURITY,IN-USE";
+    function parseWifiNetworkInfo(info: list<string>): WifiNetwork {
+        const ssid = info[0];
+        const rate = info[1];
+        const bandwidth = info[2];
+        const strength = info[3];
+        const security = info[4];
+        const connected = info[5].includes("*");
 
-        command: [ "sh", "-c", "nmcli -t -f IN-USE,SIGNAL device wifi" ];
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const info = this.text.trim().split(":");
-                // stupid but works (i will never learn awk you cant make me)
-                for(let i = 0; i < info.length; i ++) {
-                    if(info[i] == "*") {
-                        root.strength = info[i + 1];
-                        return;
-                    }
-                }
-            }
-        }
+        return wifiNetworkComponent.createObject(root, {
+            ssid: ssid,
+            rate: rate,
+            bandwidth: bandwidth,
+            strength: strength,
+            security: security,
+            connected: connected,
+        });
     }
 
     Process {
@@ -72,16 +83,38 @@ Singleton {
         command: [
             "sh",
             "-c",
-            "nmcli -t -f SSID,RATE,BANDWIDTH,SIGNAL,SECURITY,IN-USE device wifi"
+            "nmcli -t -f " + wifiInfoFmt + " device wifi"
         ];
 
         stdout: StdioCollector {
             onStreamFinished: {
-                const networks = this.text.trim().split("\n");
-                for(let i = 0; i < networks.length; i ++) {
-                    const info = networks[i].trim().split(":");
-                    // TODO
-                }
+                const networkInfo = []; // 2d array of strings in wifiInfoFmt format
+                this.text.trim().split("\n").forEach((n) => {
+                    networkInfo.push(n.trim().split(":"));
+                });
+
+                const networks = []; // WifiNetwork objs
+                networkInfo.forEach((n) => {
+                    networks.push(parseWifiNetworkInfo(n));
+                });
+
+                networks.sort((a,b) => {
+                    return b.strength - a.strength;
+                });
+
+                networks.forEach((n) => {
+                    let pair = root.findWifiNetwork(n.ssid);
+                    if(pair == null) {
+                        root.wifiNetworks.push(n);
+                    } else if(n.strength > pair.strength) {
+                        pair.strength = n.strength;
+                        pair.rate = n.rate;
+                        pair.bandwidth = n.bandwidth;
+                        pair.connected = n.connected ? true : pair.connected;
+                    }
+                });
+
+                wifiNetworks.forEach((n) => { if(n.connected) root.connectedWifi = n; });
             }
         }
     }
@@ -92,8 +125,7 @@ Singleton {
         repeat: true;
         onTriggered: {
             networkUpdateProc.running = true;
-            signalStrengthUpdateProc.running = true;
-            // wifiUpdateProc.running = true;
+            wifiUpdateProc.running = root.wifiEnabled;
         }
     }
 }
