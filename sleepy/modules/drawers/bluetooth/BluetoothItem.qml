@@ -36,23 +36,6 @@ Item {
         border.width: root.borderSize;
     }
 
-    component TextLabel: RowLayout {
-        required property string label;
-        property string text: "";
-
-        StyledText {
-            text: parent.label;
-            font.pointSize: Style.text.small;
-        }
-
-        StyledText {
-            visible: parent.text != "";
-            text: parent.text;
-            color: Style.colors.fg0;
-            font.pointSize: Style.text.small;
-        }
-    }
-
     ColumnLayout {
         id: content;
         anchors.fill: parent;

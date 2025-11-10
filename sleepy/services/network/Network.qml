@@ -59,11 +59,11 @@ Singleton {
 
     readonly property string wifiInfoFmt: "SSID,RATE,BANDWIDTH,SIGNAL,SECURITY,IN-USE";
     function parseWifiNetworkInfo(info: list<string>): WifiNetwork {
-        const ssid = info[0];
-        const rate = info[1];
+        const ssid      = info[0];
+        const rate      = info[1];
         const bandwidth = info[2];
-        const strength = info[3];
-        const security = info[4];
+        const strength  = info[3];
+        const security  = info[4];
         const connected = info[5].includes("*");
 
         return wifiNetworkComponent.createObject(root, {
@@ -114,6 +114,7 @@ Singleton {
                     }
                 });
 
+                // TODO(nix3l): sorting?
                 wifiNetworks.forEach((n) => { if(n.connected) root.connectedWifi = n; });
             }
         }

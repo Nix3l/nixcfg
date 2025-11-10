@@ -8,6 +8,7 @@ import "root:/cfg"
 import "root:/style"
 import "root:/components"
 import "root:/services"
+import "root:/services/network"
 import "root:/modules/drawers"
 
 BaseDrawer {
@@ -40,6 +41,16 @@ BaseDrawer {
                 Layout.fillWidth: true;
                 color: Style.colors.fg1;
                 implicitHeight: Style.border.thin;
+            }
+        }
+
+        StyledList {
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            items.model: Network.wifiNetworks;
+            items.delegate: NetworkItem {
+                anchors.left: parent.left;
+                anchors.right: parent.right;
             }
         }
     }
