@@ -21,6 +21,8 @@ Singleton {
     property list<WifiNetwork> wifiNetworks: [];
     property WifiNetwork connectedWifi: null;
 
+    property list<string> bonds: [];
+
     function findWifiNetwork(ssid: string): WifiNetwork {
         let found = null;
         wifiNetworks.forEach((n) => { if(n.ssid == ssid) found = n; });
@@ -33,6 +35,23 @@ Singleton {
 
     function activeStrength(): int {
         return root.wifiEnabled ? root.connectedWifi?.strength ?? 0 : 100;
+    }
+
+    Process {
+        id: connectProc;
+        // TODO
+    }
+
+    function connect(network: WifiNetwork) {
+        // TODO
+    }
+
+    function disconnect(network: WifiNetwork) {
+        // TODO
+    }
+
+    function forget(network: WifiNetwork) {
+        // TODO
     }
 
     Process {
@@ -57,6 +76,15 @@ Singleton {
         }
     }
 
+    Process {
+        id: bondsUpdateProc;
+        running: true;
+        command: [ "sh", "-c", "nmcli -t -f NAME con show" ];
+        stdout: StdioCollector {
+            onStreamFinished: root.bonds = this.text.trim().split("\n");
+        }
+    }
+
     readonly property string wifiInfoFmt: "SSID,RATE,BANDWIDTH,SIGNAL,SECURITY,IN-USE";
     function parseWifiNetworkInfo(info: list<string>): WifiNetwork {
         const ssid      = info[0];
@@ -73,6 +101,7 @@ Singleton {
             strength: strength,
             security: security,
             connected: connected,
+            bonded: root.bonds.includes(ssid),
         });
     }
 
@@ -115,7 +144,10 @@ Singleton {
                 });
 
                 // TODO(nix3l): sorting?
-                wifiNetworks.forEach((n) => { if(n.connected) root.connectedWifi = n; });
+                wifiNetworks.forEach((n) => {
+                    if(n.connected) root.connectedWifi = n;
+                    n.bonded = root.bonds.includes(n.ssid);
+                });
             }
         }
     }
@@ -127,6 +159,7 @@ Singleton {
         onTriggered: {
             networkUpdateProc.running = true;
             wifiUpdateProc.running = root.wifiEnabled;
+            bondsUpdateProc.running = true;
         }
     }
 }

@@ -22,13 +22,13 @@ Item {
     property color borderColor: Style.colors.bg1;
     property int borderSize: Style.border.thin;
 
+    implicitHeight: content.implicitHeight + padding * 2;
+
     StyledBg {
         color: root.bgColor;
         border.color: root.borderColor;
         border.width: root.borderSize;
     }
-
-    implicitHeight: content.implicitHeight + padding * 2;
 
     property bool expand: false;
 
@@ -77,6 +77,39 @@ Item {
             }
         }
 
+        RowLayout {
+            visible: root.expand;
+            Layout.fillWidth: true;
+            spacing: Style.spacing.small;
+
+            StyledButton {
+                Layout.fillWidth: true;
+                visible: !modelData.connected;
+                clicked: () => console.log("woah");
+                StyledText { text: "Connect"; }
+            }
+
+            StyledButton {
+                Layout.fillWidth: true;
+                visible: modelData.connected;
+                clicked: () => console.log("woah");
+                StyledText { text: "Disconnect"; }
+            }
+
+            StyledButton {
+                Layout.fillWidth: true;
+                visible: modelData.bonded;
+                clicked: () => console.log("woah");
+                StyledText { text: "Forget"; }
+            }
+        }
+
+        TextPrompt {
+            visible: root.expand;
+            Layout.fillWidth: true;
+            implicitHeight: 32;
+        }
+
         ColumnLayout {
             visible: root.expand;
             Layout.fillWidth: true;
@@ -95,6 +128,11 @@ Item {
             TextLabel {
                 label: "Bandwidth";
                 text: modelData.bandwidth;
+            }
+
+            TextLabel {
+                label: "Bonded:";
+                text: modelData.bonded;
             }
         }
     }

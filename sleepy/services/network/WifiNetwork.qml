@@ -12,4 +12,5 @@ QtObject {
     property int strength: 0;
     property string rate: "";
     property string bandwidth: "";
+    property bool bonded: false;
 }
