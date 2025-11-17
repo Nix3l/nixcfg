@@ -54,6 +54,7 @@ in
                     nix.enable = true;
                     ts.enable = true;
                     java.enable = true;
+                    rust.enable = true;
                 };
 
                 visuals = {
