@@ -13,24 +13,11 @@ import "root:/modules/drawers"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.dashboardDrawerOpen;
-    toggle: (on) => { GlobalState.dashboardDrawerOpen = on };
-
-    xoffset: anchorItem.width / 2;
+    isVisible: () => GlobalState.drawers.dashboard;
+    toggle: (on) => { GlobalState.drawers.dashboard = on }
 
     implicitWidth: 480;
     implicitHeight: content.implicitHeight + root.padding * 2;
-
-    property int padding: 8;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: 1;
-            color: Style.colors.accent;
-        }
-    }
 
     ColumnLayout {
         id: content;
@@ -42,12 +29,11 @@ BaseDrawer {
             Layout.alignment: Qt.AlignTop;
             spacing: root.padding;
 
-            IconImage {
+            StyledIcon {
                 id: pfp;
                 Layout.alignment: Qt.AlignLeft;
                 source: Paths.pfpFile;
                 implicitSize: powerGrid.implicitWidth;
-                mipmap: true;
                 onStatusChanged: if(pfp.status == Image.Error) pfp.visible = false;
             }
 
@@ -61,12 +47,12 @@ BaseDrawer {
                     rows: 2;
                     columns: 2;
 
-                    Text {
+                    StyledText {
                         Layout.row: 0;
                         Layout.column: 0;
                         text: Time.format("hh:mm");
-                        color: Style.colors.fg;
-                        font.pixelSize: 52;
+                        color: Style.colors.fg1;
+                        font.pointSize: Style.text.colossal;
                     }
 
                     ColumnLayout {
@@ -74,28 +60,28 @@ BaseDrawer {
                         Layout.column: 1;
                         Layout.alignment: Qt.AlignLeft;
 
-                        Text {
+                        StyledText {
                             text: Time.format("ap");
-                            color: Style.colors.fg;
-                            font.pixelSize: 12;
+                            color: Style.colors.fg1;
+                            font.pointSize: Style.text.small;
                         }
 
-                        Text {
+                        StyledText {
                             text: Time.format("ss");
-                            color: Style.colors.fg;
-                            font.pixelSize: 22;
+                            color: Style.colors.fg1;
+                            font.pointSize: Style.text.large;
                         }
                     }
 
-                    Text {
+                    StyledText {
                         Layout.row: 1;
                         Layout.column: 0;
                         Layout.columnSpan: 2;
                         Layout.alignment: Qt.AlignCenter;
 
                         text: Time.format("dddd, dd/MM/yy");
-                        color: Style.colors.fg;
-                        font.pixelSize: 14;
+                        color: Style.colors.fg1;
+                        font.pointSize: Style.text.normal;
                     }
                 }
             }
@@ -121,7 +107,7 @@ BaseDrawer {
                     Layout.column: 0;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.poweroff;
-                    leftClicked: () => { Power.poweroff(); };
+                    leftClicked: () => { Power.poweroff(); }
                 }
 
                 PowerButton {
@@ -129,7 +115,7 @@ BaseDrawer {
                     Layout.column: 1;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.reboot;
-                    leftClicked: () => { Power.reboot(); };
+                    leftClicked: () => { Power.reboot(); }
                 }
 
                 PowerButton {
@@ -137,7 +123,7 @@ BaseDrawer {
                     Layout.column: 0;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.logout;
-                    leftClicked: () => { Power.logout(); };
+                    leftClicked: () => { Power.logout(); }
                 }
 
                 PowerButton {
@@ -145,7 +131,7 @@ BaseDrawer {
                     Layout.column: 1;
                     Layout.alignment: Qt.AlignCenter;
                     icon: Icons.power.sleep;
-                    leftClicked: () => { Power.sleep(); };
+                    leftClicked: () => { Power.sleep(); }
                 }
 
                 DashboardSlider {
@@ -155,11 +141,11 @@ BaseDrawer {
                     Layout.fillHeight: true;
 
                     icon: Audio.muted() ? Icons.audio.vol_mute : Icons.volIcon(Audio.volume());
-                    iconSize: 32;
-                    iconLeftClicked: () => { Audio.toggleMuted(); };
+                    iconSize: Style.icons.largest;
+                    iconLeftClicked: () => { Audio.toggleMuted(); }
 
-                    getPosition: () => Audio.volume();
-                    setPosition: (val) => { Audio.setVolume(Math.round(val * 100) / 100); };
+                    getPosition: () => Audio.volume()
+                    setPosition: (val) => { Audio.setVolume(Math.round(val * 100) / 100); }
                 }
 
                 DashboardSlider {
@@ -169,11 +155,11 @@ BaseDrawer {
                     Layout.fillHeight: true;
 
                     icon: Icons.display.brightness;
-                    iconSize: 32;
+                    iconSize: Style.icons.largest;
 
                     sliderStepSize: 0.05;
                     getPosition: () => Brightness.brightness / Brightness.maxBrightness;
-                    setPosition: (val) => { Brightness.setBrightness(val * Brightness.maxBrightness); };
+                    setPosition: (val) => { Brightness.setBrightness(val * Brightness.maxBrightness); }
                 }
             }
         }

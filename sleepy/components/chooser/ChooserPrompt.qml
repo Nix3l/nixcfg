@@ -4,6 +4,7 @@ import QtQuick.Controls
 
 import "root:/cfg"
 import "root:/style"
+import "root:/components"
 
 Item {
     id: root;
@@ -13,27 +14,27 @@ Item {
     implicitWidth: Config.chooser.contentWidth;
     implicitHeight: Config.chooser.itemHeight;
 
-    property color bg: Style.colors.bg0;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: root.bg;
-    }
+    property color bg: Style.colors.bg1;
+    property color textColor: Style.colors.fg1;
+    property color placeholderColor: Style.colors.fg0;
 
     Item {
-        anchors.fill: parent;
-        anchors.margins: Config.chooser.promptPadding;
+        anchors {
+            fill: parent;
+            margins: Config.chooser.promptPadding;
+        }
 
         TextField {
             id: inputfield;
             anchors.verticalCenter: parent.verticalCenter;
             implicitWidth: Config.chooser.contentWidth - Config.chooser.promptPadding * 2;
 
-            color: Style.colors.fg;
-            font.pixelSize: Config.chooser.promptFontSize;
+            color: root.textColor;
+            font.pointSize: Config.chooser.promptFontSize;
+            font.family: Style.fonts.normal;
 
             placeholderText: "Search...";
-            placeholderTextColor: Style.colors.bg1;
+            placeholderTextColor: root.placeholderColor;
 
             background: null;
             focus: true;

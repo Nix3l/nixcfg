@@ -5,8 +5,9 @@ import QtQuick
 import QtQuick.Layouts
 
 import "root:/cfg"
-import "root:/services/notifs"
 import "root:/style"
+import "root:/components"
+import "root:/services/notifs"
 
 Item {
     id: root;
@@ -14,11 +15,11 @@ Item {
 
     required property TimedNotif modelData;
 
-    property int border: Config.notifs.border;
-    property color borderCol: Style.colors.accent;
-    property color hoveredBorderCol: Style.colors.accent;
+    property int border: Style.border.thin;
+    property color borderColor: Style.colors.acc0;
+    property color hoveredBorderColor: Style.colors.acc1;
 
-    property var leftClicked: () => { Notifs.dismissNotif(modelData); };
+    property var leftClicked: () => { Notifs.dismissNotif(modelData); }
 
     implicitWidth: Config.notifs.width;
     implicitHeight: Config.notifs.padding + Math.max(Config.notifs.minimumHeight, content.implicitHeight);
@@ -31,12 +32,10 @@ Item {
         onPressed: root.leftClicked();
     }
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
+    StyledBg {
         border {
             width: root.border;
-            color: mouseArea.containsMouse ? root.hoveredBorderCol : root.borderCol;
+            color: mouseArea.containsMouse ? root.hoveredBorderColor : root.borderColor;
         }
     }
 
@@ -50,33 +49,30 @@ Item {
             margins: Config.notifs.padding;
         }
 
-        IconImage {
+        StyledIcon {
             id: icon;
             visible: modelData.hasImage;
             source: modelData.image;
             implicitSize: Config.notifs.minimumHeight - Config.notifs.padding;
-            mipmap: true;
         }
 
         ColumnLayout {
             id: textcol;
-            spacing: 4;
+            spacing: Style.spacing.smallest;
 
-            Text {
+            StyledText {
                 text: modelData.header;
-                color: Style.colors.fg;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
-                font.pixelSize: 14;
+                font.pointSize: Style.text.small;
                 wrapMode: Text.Wrap;
                 elide: Text.ElideRight;
             }
 
-            Text {
+            StyledText {
                 text: modelData.body;
-                color: Style.colors.fg;
-                font.pixelSize: 11;
+                font.pointSize: Style.text.small;
                 Layout.preferredWidth: Config.notifs.width - icon.implicitWidth - Config.notifs.padding * 2;
-                maximumLineCount: 3;
+                maximumLineCount: 2;
                 wrapMode: Text.Wrap;
                 elide: Text.ElideRight;
             }

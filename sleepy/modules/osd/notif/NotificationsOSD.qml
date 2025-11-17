@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import "root:/cfg"
+import "root:/style"
 import "root:/services/notifs"
 
 PanelWindow {
@@ -19,7 +20,7 @@ PanelWindow {
     }
 
     implicitWidth: Config.notifs.width;
-    color: 'transparent';
+    color: "transparent";
 
     // NOTE(nix3l): so this would technically make the gaps between notifications also part of the mask
     // but i highly doubt i would really notice so
@@ -30,7 +31,7 @@ PanelWindow {
 
     ColumnLayout {
         id: content;
-        spacing: 12;
+        spacing: Style.spacing.largest;
         y: Config.notifs.margin;
 
         Repeater {
@@ -39,7 +40,7 @@ PanelWindow {
 
             NotifItem {
                 id: notif;
-                leftClicked: () => { notif.modelData.display = false; };
+                leftClicked: () => { notif.modelData.display = false; }
             }
         }
     }

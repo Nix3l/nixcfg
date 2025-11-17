@@ -5,26 +5,12 @@ import QtQuick.Layouts
 
 import "root:/style"
 import "root:/cfg"
+import "root:/components"
 import "root:/services"
 import "root:/modules/drawers"
 import "root:/modules/drawers/dashboard"
-
-/*
- * LEFT:
- *  => workspaces TODO(nix3l): animations
- *  => media
- *
- * CENTER:
- *  => time
- *
- * RIGHT:
- *  => bluetooth        [*]
- *  => wifi             [*]
- *  => battery          [ ]
- *  => volume           [*]
- *  => systray          [*]
- *  => notif drawer     [*]
- */
+import "root:/modules/drawers/bluetooth"
+// import "root:/modules/drawers/network"
 
 PanelWindow {
     id: root;
@@ -38,9 +24,8 @@ PanelWindow {
     implicitHeight: Config.bar.height;
     color: "transparent";
 
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
+    StyledBg {
+        border.width: 0;
     }
 
     Item {
@@ -61,32 +46,19 @@ PanelWindow {
                 top: parent.top;
                 bottom: parent.bottom;
                 left: parent.left;
-
-                leftMargin: 4;
             }
 
-            spacing: 8;
-
-            BarItem {
-                leftGlyph: "|[";
-                rightGlyph: "]|";
-
-                IconImage {
-                    source: Icons.os.nixos;
-                    mipmap: true;
-                    implicitSize: 16;
-                }
-            }
+            spacing: Style.spacing.normal;
 
             Workspaces {}
-            MediaStatus { id: media; visible: Media.playerOpen; }
+            MediaStatus { id: media; }
             MediaDrawer { anchorItem: media; }
         }
 
         // CENTER
         RowLayout {
             anchors.centerIn: parent;
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
             Clock { id: clock; }
             DashboardDrawer { anchorItem: clock; }
@@ -98,13 +70,14 @@ PanelWindow {
                 top: parent.top;
                 right: parent.right;
                 bottom: parent.bottom;
-                rightMargin: 4;
             }
 
-            spacing: 8;
+            spacing: Style.spacing.normal;
 
-            BluetoothStatus {}
-            NetworkStatus {}
+            BluetoothStatus { id: bluetoothstatus; }
+            BluetoothDrawer { anchorItem: bluetoothstatus; }
+            NetworkStatus { id: networkstatus; }
+            // NetworkDrawer { anchorItem: networkstatus; }
             VolumeStatus {}
             PowerStatus {}
             SysTray {}

@@ -7,6 +7,7 @@ import QtQuick.Controls
 import "root:/cfg"
 import "root:/style"
 import "root:/services"
+import "root:/components"
 import "root:/components/chooser"
 
 ChooserItem {
@@ -28,21 +29,20 @@ ChooserItem {
             margins: Config.chooser.itemPadding;
         }
 
-        spacing: 8;
+        spacing: Style.spacing.normal;
 
-        IconImage {
+        StyledIcon {
             Layout.alignment: Qt.AlignLeft;
             visible: Config.applauncher.showIcons;
             source: Quickshell.iconPath(modelData.icon ?? "");
             implicitSize: Config.chooser.contentHeight * 0.77;
-            mipmap: true;
         }
 
-        Text {
+        StyledText {
             Layout.alignment: Qt.AlignLeft;
             text: modelData?.name;
-            color: selected ? Style.colors.bg0 : Style.colors.fg;
-            font.pixelSize: Config.chooser.itemFontSize;
+            color: selected ? Style.colors.bg0 : Style.colors.fg1;
+            font.pointSize: Config.chooser.itemFontSize;
         }
     }
 }

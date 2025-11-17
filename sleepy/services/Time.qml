@@ -7,7 +7,13 @@ import QtQuick
 Singleton {
     id: root;
 
+    SystemClock {
+        id: sysclock;
+        precision: SystemClock.Seconds;
+    }
+
     readonly property date date: sysclock.date;
+    readonly property int millis: sysclock.seconds;
     readonly property int seconds: sysclock.seconds;
     readonly property int minutes: sysclock.minutes;
     readonly property int hours: sysclock.hours;
@@ -15,11 +21,6 @@ Singleton {
 
     function format(fmt: string): string {
         return date.toLocaleString(Qt.locale(), fmt);
-    }
-
-    SystemClock {
-        id: sysclock;
-        precision: SystemClock.seconds;
     }
 
     function timeFromSeconds(val: real): list<int> {

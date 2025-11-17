@@ -61,9 +61,18 @@ Singleton {
     }
 
     property QtObject bluetooth: QtObject {
-        property string enabled: "root:/res/bluetooth_enabled.svg";
-        property string disabled: "root:/res/bluetooth_disabled.svg";
+        property string enabled:   "root:/res/bluetooth_enabled.svg";
+        property string disabled:  "root:/res/bluetooth_disabled.svg";
         property string connected: "root:/res/bluetooth_connected.svg";
+    }
+
+    property QtObject controls: QtObject {
+        property string menu: "root:/res/menu.svg";   
+    }
+
+    property QtObject other: QtObject {
+        property string unknown: "root:/res/unknown.svg";
+        property string loading: "root:/res/loading.svg";
     }
 
     function batteryIcon(per: real): string {

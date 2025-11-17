@@ -11,8 +11,8 @@ import "root:/components"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.mediaDrawerOpen;
-    toggle: (on) => { GlobalState.mediaDrawerOpen = on };
+    isVisible: () => GlobalState.drawers.media;
+    toggle: (on) => { GlobalState.drawers.media = on }
 
     // TODO: this is temporary. change this.
     implicitWidth: Math.max(500, implicitHeight + content.implicitWidth + padding * 2 + 12);
@@ -20,31 +20,21 @@ BaseDrawer {
 
     xoffset: -40;
 
-    property int padding: 8;
     readonly property int contentHeight: implicitHeight - padding * 2;
     readonly property int contentWidth: implicitWidth - padding * 2;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: 1;
-            color: Style.colors.accent;
-        }
-    }
 
     Item {
         anchors.fill: parent;
         anchors.margins: root.padding;
         anchors.rightMargin: root.padding + 12; // so the spacing would match
+                                                // TODO(nix3l): fix this
 
         RowLayout {
             anchors.fill: parent;
-            spacing: 16;
+            spacing: Style.spacing.largest;
 
-            IconImage {
+            StyledIcon {
                 source: Media.playerOpen ? Media.active.trackArtUrl : Icons.media.music;
-                mipmap: true;
                 implicitSize: root.contentHeight;
             }
 
@@ -54,89 +44,87 @@ BaseDrawer {
                 Layout.fillHeight: true;
                 Layout.fillWidth: true;
 
-                Text {
+                StyledText {
                     Layout.alignment: Qt.AlignCenter;
                     text: {
                         if(Media.playerOpen) return Media.shortenedTrackTitle;
                         else return "No Active Media";
                     }
 
-                    color: Style.colors.fg;
-                    font.pixelSize: 22;
+                    font.pointSize: Style.text.large;
                 }
 
                 RowLayout {
                     visible: Media.playerOpen;
-                    spacing: 2;
+                    spacing: Style.spacing.smallest;
                     Layout.alignment: Qt.AlignCenter;
 
-                    Text {
+                    StyledText {
                         text: "・[";
-                        color: Style.colors.accent;
-                        font.pixelSize: 12;
+                        color: Style.colors.acc1;
+                        font.pointSize: Style.text.small;
                         font.bold: true;
                     }
 
-                    Text {
+                    StyledText {
                         visible: Media.playerOpen;
                         text: (Media.active.trackArtist == "" ? "" : (Media.active.trackArtist  + "・")) + Media.shortenedAlbumTitle;
-                        color: Style.colors.fg;
-                        font.pixelSize: 16;
+                        font.pointSize: Style.text.normal;
                     }
 
-                    Text {
+                    StyledText {
                         text: "]・";
-                        color: Style.colors.accent;
-                        font.pixelSize: 12;
+                        color: Style.colors.acc1;
+                        font.pointSize: Style.text.small;
                         font.bold: true;
                     }
                 }
 
                 RowLayout {
-                    spacing: 4;
-                    Text {
+                    spacing: Style.spacing.small;
+                    StyledText {
                         text: Media.cursorTimeText;
-                        color: Style.colors.fgMuted;
-                        font.pixelSize: 11;
+                        color: Style.colors.fg0;
+                        font.pointSize: Style.text.smallest;
                     }
 
                     CustomSlider {
                         Layout.fillWidth: true;
-                        getPosition: () => { return Media.playerOpen ? Media.active.position / Media.active.length : 0; };
+                        getPosition: () => { return Media.playerOpen ? Media.active.position / Media.active.length : 0; }
                         setPosition: (val) => {
                             if(!Media.playerOpen) return;
                             Media.active.position = val * Media.active.length;
                             Media.active.positionChanged();
-                        };
+                        }
                     }
 
-                    Text {
+                    StyledText {
                         text: Media.lengthText;
-                        color: Style.colors.fgMuted;
-                        font.pixelSize: 11;
+                        color: Style.colors.fg0;
+                        font.pointSize: Style.text.smallest;
                     }
                 }
 
                 RowLayout {
-                    spacing: 4;
+                    spacing: Style.spacing.small;
                     Layout.alignment: Qt.AlignCenter;
 
                     IconButton {
-                        source: Icons.media.rewind;
-                        implicitSize: 13;
-                        clicked: () => { Media.active?.previous(); };
+                        icon: Icons.media.rewind;
+                        iconSize: Style.icons.small;
+                        clicked: () => { Media.active?.previous(); }
                     }
 
                     IconButton {
-                        source: !Media.playing ? Icons.media.play : Icons.media.pause;
-                        implicitSize: 16;
-                        clicked: () => { Media.active?.togglePlaying(); };
+                        icon: !Media.playing ? Icons.media.play : Icons.media.pause;
+                        iconSize: Style.icons.normal;
+                        clicked: () => { Media.active?.togglePlaying(); }
                     }
 
                     IconButton {
-                        source: Icons.media.fastforward;
-                        implicitSize: 13;
-                        clicked: () => { Media.active?.next(); };
+                        icon: Icons.media.fastforward;
+                        iconSize: Style.icons.small;
+                        clicked: () => { Media.active?.next(); }
                     }
                 }
             }

@@ -12,8 +12,8 @@ import "root:/components/chooser"
 Chooser {
     id: root;
 
-    isVisible: () => GlobalState.applauncherOpen;
-    toggle: (on) => { GlobalState.applauncherOpen = on; };
+    isVisible: () => GlobalState.choosers.applauncher;
+    toggle: (on) => { GlobalState.choosers.applauncher = on; }
 
     model: Apps.entries.filter(app => app.name.toLocaleLowerCase().includes(promptText.toLocaleLowerCase()));
     modelItem: Component {

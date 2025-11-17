@@ -10,22 +10,18 @@ import "root:/components"
 BarItem {
     id: root;
 
-    hovered: () => { GlobalState.mediaDrawerOpen = true; };
+    visible: Media.playerOpen && Media.active.trackArtUrl;
+    hovered: () => { GlobalState.drawers.media = true; }
 
-    IconWithBorder {
+    StyledIcon {
         visible: Media.playerOpen;
         source: Media.active.trackArtUrl;
-        iconSize: 16;
-        border: 2;
-        borderColor: Style.colors.accent;
     }
 
-    Text {
+    StyledText {
         text: {
             if(Media.playerOpen) return (Media.active.trackArtist || Media.shortenedAlbumTitle) + "・" + Media.shortenedTrackTitle;
             else return "-- no active media --";
         }
-
-        color: Style.colors.fg;
     }
 }

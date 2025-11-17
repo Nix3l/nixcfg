@@ -11,20 +11,20 @@ import "root:/components"
 Item {
     id: root;
 
-    property int padding: 10;
+    property int hpadding: Style.padding.normal;
     property color bg: Style.colors.bg0;
-    property int border: 1;
+    property int border: Style.border.thin;
     property color borderCol: Style.colors.bg1;
 
-    property int spacing: 2;
+    property int spacing: Style.spacing.smallest;
 
     required property var getPosition;
     required property var setPosition;
     property real sliderStepSize: 0.0;
     property int sliderHeight: 6;
-    property int sliderRadius: 2;
+    property int sliderRadius: Style.rounding.normal;
     property color sliderBg: Style.colors.bg1;
-    property color sliderHighlight: Style.colors.fg;
+    property color sliderHighlight: Style.colors.fg1;
     property bool onTimer: false;
 
     property string icon: "";
@@ -32,35 +32,31 @@ Item {
     property var iconLeftClicked;
 
     property bool showPercentage: true;
-    property int textSize: 16;
 
-    Rectangle {
-        anchors.fill: parent;
+    StyledBg {
         color: root.bg;
-        border {
-            width: root.border;
-            color: root.borderCol;
-        }
+        border.width: root.border;
+        border.color: root.borderCol;
     }
 
     RowLayout {
         anchors.fill: parent;
-        anchors.margins: root.padding;
+        anchors.leftMargin: root.hpadding;
+        anchors.rightMargin: root.hpadding;
         spacing: root.spacing;
 
         Item {
+            visible: root.icon != "";
             Layout.alignment: Qt.AlignLeft;
 
             implicitWidth: sliderIcon.implicitSize;
             implicitHeight: sliderIcon.implicitSize;
 
-            IconImage {
+            StyledIcon {
                 id: sliderIcon;
-                visible: root.icon != "";
                 anchors.centerIn: parent;
                 source: root.icon;
                 implicitSize: root.iconSize;
-                mipmap: true;
             }
 
             MouseArea {
@@ -91,13 +87,13 @@ Item {
         Item {
             visible: root.showPercentage;
             Layout.alignment: Qt.AlignRight;
-            implicitWidth: root.iconSize;
-            Text {
+            // pad it a bit to make the spacing more regular
+            implicitWidth: root.iconSize + root.spacing * 2;
+            StyledText {
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
                 text: Math.round(root.getPosition() * 100) + "%";
-                color: Style.colors.fg;
-                font.pixelSize: root.textSize;
+                font.pointSize: Style.text.normal;
             }
         }
     }

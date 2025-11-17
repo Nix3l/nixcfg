@@ -15,22 +15,11 @@ import "root:/components"
 BaseDrawer {
     id: root;
 
-    isVisible: () => GlobalState.notifDrawerOpen;
-    toggle: (on) => { GlobalState.notifDrawerOpen = on };
-
-    property int padding: 8;
+    isVisible: () => GlobalState.drawers.notifs;
+    toggle: (on) => { GlobalState.drawers.notifs = on }
 
     implicitWidth: Config.notifs.width + padding * 2;
     implicitHeight: Config.notifs.minimumHeight * 8 + header.implicitHeight + padding * 2;
-
-    Rectangle {
-        anchors.fill: parent;
-        color: Style.colors.bg0;
-        border {
-            width: 1;
-            color: Style.colors.accent;
-        }
-    }
 
     ColumnLayout {
         id: content;
@@ -38,49 +27,41 @@ BaseDrawer {
         anchors.margins: root.padding;
         spacing: root.padding;
 
-        Item {
+        RowLayout {
             id: header;
             Layout.fillWidth: true;
             Layout.alignment: Qt.AlignTop;
 
             implicitHeight: Math.max(titleText.implicitHeight, garbageIcon.implicitSize);
 
-            Text {
+            StyledText {
                 id: titleText;
-                anchors.left: parent.left;
+                Layout.alignment: Qt.AlignLeft;
                 text: "Notifications";
-                color: Style.colors.fg;
-                font.pixelSize: 16;
+                font.pointSize: Style.text.normal;
+            }
+
+            Rectangle {
+                Layout.fillWidth: true;
+                color: Style.colors.fg1;
+                implicitHeight: Style.border.thin;
             }
 
             IconButton {
                 id: garbageIcon;
-                anchors.right: parent.right;
-                source: Icons.notifs.garbage;
-                implicitSize: 16;
-                clicked: () => { Notifs.clear(); };
+                Layout.alignment: Qt.AlignRight;
+                icon: Icons.notifs.garbage;
+                clicked: () => { Notifs.clear(); }
             }
         }
 
-        ClippingRectangle {
+        StyledList {
             Layout.fillWidth: true;
             Layout.fillHeight: true;
-            color: 'transparent';
-
-            implicitHeight: notiflist.implicitHeight;
-
-            ListView {
-                id: notiflist;
-                anchors.fill: parent;
-
-                orientation: Qt.Vertical;
-                spacing: root.padding;
-
-                model: Notifs.notifs;
-                delegate: NotifItem {
-                    borderCol: Style.colors.bg1;
-                    hoveredBorderCol: Style.colors.fgMuted;
-                }
+            items.model: Notifs.notifs;
+            items.delegate: NotifItem {
+                borderColor: Style.colors.bg1;
+                hoveredBorderColor: Style.colors.fg0;
             }
         }
     }

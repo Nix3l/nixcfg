@@ -4,17 +4,20 @@ import QtQuick
 
 import "root:/services"
 import "root:/style"
+import "root:/components"
 
 BarItem {
     id: root;
 
-    Text {
+    borderColor: Style.colors.fg0;
+
+    StyledText {
         text: Icons.volTextIcon(Audio.volume());
-        color: Audio.muted() ? Style.colors.fgMuted : Style.colors.fg;
+        color: Audio.muted() ? Style.colors.fg0 : Style.colors.fg1;
     }
 
-    Text {
+    StyledText {
         text: Math.round((Audio.volume() * 100)) + "%";
-        color: Audio.muted() ? Style.colors.fgMuted : Style.colors.fg;
+        color: Audio.muted() ? Style.colors.fg0 : Style.colors.fg1;
     }
 }

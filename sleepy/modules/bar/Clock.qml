@@ -4,14 +4,14 @@ import QtQuick
 import "root:/cfg"
 import "root:/style"
 import "root:/services"
+import "root:/components"
 
 BarItem {
     id: root;
 
-    hovered: () => { GlobalState.dashboardDrawerOpen = true; };
+    hovered: () => { GlobalState.drawers.dashboard = true; }
 
-    Text {
+    StyledText {
         text: Time.format("ddd hh:mm");
-        color: Style.colors.fg;
     }
 }

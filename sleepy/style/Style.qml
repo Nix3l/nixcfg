@@ -1,18 +1,19 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import QtQuick
 
+import "root:/cfg"
+
 Singleton {
-    property Colorscheme gruvbox;
-
-    property Colorscheme colors: gruvbox;
-
-    gruvbox: Colorscheme {
-        bg0:     "#1d2021";
-        bg1:     "#3c3836";
-        fg:      "#ebdbb2";
-        fgMuted: "#a89984";
-        accent:  "#fb4934";
-    }
+    property var colors: Config.style.colors;
+    property var border: Config.style.border;
+    property var rounding: Config.style.rounding;
+    property var padding: Config.style.padding;
+    property var spacing: Config.style.spacing;
+    property var fonts: Config.style.fonts;
+    property var text: Config.style.text;
+    property var icons: Config.style.icons;
+    property var anim: Config.style.anim;
 }

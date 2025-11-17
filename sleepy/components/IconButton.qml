@@ -2,20 +2,45 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 
-IconImage {
+import "root:/style"
+
+Item {
     id: root;
 
-    mipmap: true;
+    required property var clicked;
 
-    property var clicked;
-    property bool enable: true;
+    property int padding: 0;
 
-    // TODO: change cursor on hover
+    property color bgColor: "transparent";
+    property color bgHoveredColor: "transparent";
+    property color borderColor: Style.colors.bg1;
+    property color borderHoveredColor: Style.colors.bg1;
+    property int borderSize: 0;
+
+    required property string icon;
+    property int iconSize: Style.icons.small;
+
+    implicitWidth: iconSize + padding * 2;
+    implicitHeight: iconSize + padding * 2;
+
+    StyledBg {
+        color: minput.containsMouse ? root.bgHoveredColor : root.bgColor;
+        border.color: minput.containsMouse ? root.borderHoveredColor : root.borderColor;
+        border.width: root.borderSize;
+    }
+
+    StyledIcon {
+        anchors.fill: parent;
+        anchors.margins: root.padding;
+        source: root.icon;
+        implicitSize: root.iconSize;
+    }
 
     MouseArea {
+        id: minput;
         anchors.fill: parent;
+        hoverEnabled: true;
         acceptedButtons: Qt.LeftButton;
-        enabled: root.enable;
         onClicked: root.clicked();
     }
 }
