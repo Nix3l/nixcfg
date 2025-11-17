@@ -9,7 +9,7 @@ import "root:/style"
 
 BarItem {
     id: root;
-    visible: Config.modules.powerStatus;
+    visible: Config.modules.power;
 
     StyledIcon {
         source: {

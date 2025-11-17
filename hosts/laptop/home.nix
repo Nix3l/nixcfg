@@ -59,8 +59,8 @@
             enable = true;
             cfg = {
                 modules = {
-                    bluetoothStatus = true;
-                    powerStatus = true;
+                    bluetooth = true;
+                    power = true;
                 };
             };
 

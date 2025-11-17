@@ -37,22 +37,8 @@ Singleton {
         return root.wifiEnabled ? root.connectedWifi?.strength ?? 0 : 100;
     }
 
-    Process {
-        id: connectionActivateProc;
-
-        property string con;
-        command: [ "sh", "-c", `nmcli con up ${this.con}` ];
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                connectionActivateProc.con = "";
-            }
-        }
-    }
-
     function connect(network: WifiNetwork) {
-            connectionActivateProc.con = network.ssid;
-            connectionActivateProc.running = true;
+        // TODO
     }
 
     function disconnect(network: WifiNetwork) {
@@ -90,10 +76,7 @@ Singleton {
         running: true;
         command: [ "sh", "-c", "nmcli -t -f NAME con show" ];
         stdout: StdioCollector {
-            onStreamFinished: {
-                root.bonds = this.text.trim().split("\n");
-                console.log(root.bonds);
-            }
+            onStreamFinished: root.bonds = this.text.trim().split("\n");
         }
     }
 

@@ -8,7 +8,7 @@ import "root:/style"
 import "root:/services"
 
 BarItem {
-    visible: Config.modules.bluetoothStatus;
+    visible: Config.modules.bluetooth;
 
     hovered: () => { GlobalState.drawers.bluetooth = true; };
 

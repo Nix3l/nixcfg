@@ -16,7 +16,7 @@ Singleton {
     property NotifsCfg notifs: notifscfg;
 
     FileView {
-        path: "";//Paths.configFile;
+        path: Paths.configFile;
         blockLoading: true;
         watchChanges: true;
         onFileChanged: reload();

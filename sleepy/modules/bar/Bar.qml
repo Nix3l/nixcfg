@@ -10,7 +10,7 @@ import "root:/services"
 import "root:/modules/drawers"
 import "root:/modules/drawers/dashboard"
 import "root:/modules/drawers/bluetooth"
-import "root:/modules/drawers/network"
+// import "root:/modules/drawers/network"
 
 PanelWindow {
     id: root;
@@ -77,7 +77,7 @@ PanelWindow {
             BluetoothStatus { id: bluetoothstatus; }
             BluetoothDrawer { anchorItem: bluetoothstatus; }
             NetworkStatus { id: networkstatus; }
-            NetworkDrawer { anchorItem: networkstatus; }
+            // NetworkDrawer { anchorItem: networkstatus; }
             VolumeStatus {}
             PowerStatus {}
             SysTray {}
