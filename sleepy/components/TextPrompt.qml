@@ -14,6 +14,8 @@ import "root:/modules/drawers"
 Item {
     id: root;
 
+    property alias field: inputfield;
+
     property var cancel;
     property var accept;
 
@@ -33,7 +35,6 @@ Item {
 
     StyledBg {
         color: inputfield.focus ? root.focusedBgColor : root.bgColor;
-        opacity: root.bgOpacity;
         border.color: inputfield.focus ? root.focusedBorderColor : root.borderColor;
         border.width: root.borderSize;
     }

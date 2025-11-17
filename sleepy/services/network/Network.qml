@@ -38,12 +38,21 @@ Singleton {
     }
 
     Process {
-        id: connectProc;
-        // TODO
+        id: connectionActivateProc;
+
+        property string con;
+        command: [ "sh", "-c", `nmcli con up ${this.con}` ];
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                connectionActivateProc.con = "";
+            }
+        }
     }
 
     function connect(network: WifiNetwork) {
-        // TODO
+            connectionActivateProc.con = network.ssid;
+            connectionActivateProc.running = true;
     }
 
     function disconnect(network: WifiNetwork) {
@@ -81,7 +90,10 @@ Singleton {
         running: true;
         command: [ "sh", "-c", "nmcli -t -f NAME con show" ];
         stdout: StdioCollector {
-            onStreamFinished: root.bonds = this.text.trim().split("\n");
+            onStreamFinished: {
+                root.bonds = this.text.trim().split("\n");
+                console.log(root.bonds);
+            }
         }
     }
 
@@ -112,7 +124,7 @@ Singleton {
         command: [
             "sh",
             "-c",
-            "nmcli -t -f " + wifiInfoFmt + " device wifi"
+            `nmcli -t -f ${wifiInfoFmt} device wifi`
         ];
 
         stdout: StdioCollector {

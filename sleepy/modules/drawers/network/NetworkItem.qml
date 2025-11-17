@@ -32,6 +32,7 @@ Item {
 
     property bool expand: false;
 
+
     ColumnLayout {
         id: content;
         anchors.fill: parent;
@@ -85,7 +86,7 @@ Item {
             StyledButton {
                 Layout.fillWidth: true;
                 visible: !modelData.connected;
-                clicked: () => console.log("woah");
+                clicked: () => Network.connect(modelData, "");
                 StyledText { text: "Connect"; }
             }
 
@@ -104,11 +105,13 @@ Item {
             }
         }
 
+        /*
         TextPrompt {
             visible: root.expand;
             Layout.fillWidth: true;
-            implicitHeight: 32;
+            implicitHeight: 48;
         }
+        */
 
         ColumnLayout {
             visible: root.expand;
