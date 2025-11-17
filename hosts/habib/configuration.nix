@@ -13,7 +13,7 @@
     mods = {
         locale.en = true;
         input.ime = {
-            enable = true;
+            enable = false;
             jp = false;
         };
 
@@ -39,6 +39,7 @@
         ssh.enable = true;
         printing.enable = true;
         bluetooth.enable = true;
+        upower.enable = true;
 
         apps = {
             electron.wayland.enable = true;
@@ -64,7 +65,7 @@
         dev = {
             java = {
                 enable = true;
-                jetbrains.enable = false;
+                jetbrains.enable = true;
             };
         };
 
@@ -73,6 +74,7 @@
 
         extraPackages = with pkgs; [
             ciscoPacketTracer8
+            quickemu
         ];
     };
 }

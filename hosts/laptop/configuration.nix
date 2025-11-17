@@ -25,7 +25,7 @@
         nvidia.enable = true;
 
         mainUser = {
-            name = "nix3l";
+            name ="nix3l";
             email = "momanianas123@gmail.com";
             homeManager = {
                 enable = true;
@@ -46,6 +46,8 @@
                 enable = true;
                 jetbrains.enable = true;
             };
+
+            arduino.enable = true;
         };
 
         apps = {

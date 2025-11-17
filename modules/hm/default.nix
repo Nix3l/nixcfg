@@ -11,16 +11,19 @@
 
         # modules
         ./apps/alacritty.nix
-        ./apps/defaults.nix
         ./apps/git.nix
-        ./apps/nvim.nix
+        ./apps/kitty.nix
+        ./apps/session.nix
         ./apps/spotify.nix
         ./cursor/cursor.nix
         ./cursor/capitaine.nix
+        ./dev/vscode.nix
+        ./dev/nvim.nix
         ./gtk/gtk.nix
         ./gtk/gruvbox.nix
         ./qt/qt.nix
         ./quickshell/sleepy.nix
+        ./shell/fish.nix
         ./shell/zsh.nix
         ./wallpaper/hyprpaper.nix
         ./wm/hyprland.nix
