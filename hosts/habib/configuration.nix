@@ -67,6 +67,8 @@
                 enable = true;
                 jetbrains.enable = true;
             };
+
+            mysql.enable = true;
         };
 
         fonts.enable = true;

@@ -48,6 +48,7 @@
             };
 
             arduino.enable = true;
+            mysql.enable = true;
         };
 
         apps = {

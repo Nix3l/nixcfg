@@ -18,6 +18,7 @@
         ./desktop-env/de.nix
         ./dev/arduino.nix
         ./dev/java.nix
+        ./dev/mysql.nix
         ./kernel-modules/ddcci.nix
         ./locale/en.nix
         ./locale/jp.nix
