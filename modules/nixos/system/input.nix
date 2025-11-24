@@ -25,6 +25,7 @@
             QT_IM_MODULES = "wayland;fcitx";
             XMODIFIERS = "@im=fcitx";
             XMODIFIER = "@im=fcitx";
+            GTK_IM_MODULE = "";
         };
     };
 }
