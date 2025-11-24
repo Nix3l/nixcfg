@@ -9,6 +9,9 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-        environment.systemPackages = with pkgs; [ mysql-workbench ];
+        environment.systemPackages = with pkgs; [ mysql-workbench mycli ];
+        services.mysql = {
+            enable = true;
+        };
     };
 }
