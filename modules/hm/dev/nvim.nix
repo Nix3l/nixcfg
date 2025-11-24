@@ -55,6 +55,7 @@ in
                     ts.enable = true;
                     java.enable = true;
                     rust.enable = true;
+                    sql.enable = true;
                 };
 
                 visuals = {
