@@ -146,6 +146,7 @@ in {
                     # (supposedly) fixes cursor themes in gnome apps under hyprland
                     "gsettings set org.gnome.desktop.interface cursor-theme '${config.home.pointerCursor.name}'"
                     "gsettings set org.gnome.desktop.interface cursor-size ${toString config.home.pointerCursor.size}"
+                    "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
                 ];
 
                 misc = {

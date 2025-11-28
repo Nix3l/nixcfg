@@ -50,7 +50,7 @@ BaseDrawer {
                     StyledText {
                         Layout.row: 0;
                         Layout.column: 0;
-                        text: Time.format("hh:mm");
+                        text: Time.hour(Config.clock.fmt12Hour) + ":" + Time.format("mm");
                         color: Style.colors.fg1;
                         font.pointSize: Style.text.colossal;
                     }

@@ -80,6 +80,12 @@
 
         extraPackages = with pkgs; [
             # renderdoc
+            (lutris.override {
+                extraLibraries = pkgs: with pkgs; [
+                    libadwaita
+                    gtk4
+                ];
+            })
         ];
     };
 }

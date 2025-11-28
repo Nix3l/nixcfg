@@ -63,6 +63,8 @@
                     bluetooth = true;
                     power = true;
                 };
+
+                clock.fmt12Hour = true;
             };
 
             pfp = {

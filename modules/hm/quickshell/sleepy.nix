@@ -130,6 +130,10 @@ in
                 padding       = mkOption { default = 8;     };
                 margin        = mkOption { default = 8;     };
             };
+
+            clock = {
+                format12Hour = mkOption { default = false; };
+            };
         };
 
         # TODO(nix3l): redo this, make sleepybind a type

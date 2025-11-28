@@ -23,6 +23,11 @@ Singleton {
         return date.toLocaleString(Qt.locale(), fmt);
     }
 
+    function hour(fmt12Hour: bool): string {
+        if(fmt12Hour) return date.toLocaleString(Qt.locale(), "hh ap").slice(0, 2);
+        else return date.toLocaleString(Qt.locale(), "hh");
+    }
+
     function timeFromSeconds(val: real): list<int> {
         const minutes = Math.floor(Math.round(val) / 60);
         const seconds = Math.round(val - minutes * 60);

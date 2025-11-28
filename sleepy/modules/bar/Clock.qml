@@ -12,6 +12,6 @@ BarItem {
     hovered: () => { GlobalState.drawers.dashboard = true; }
 
     StyledText {
-        text: Time.format("ddd hh:mm");
+        text: Time.format("ddd") + " " + Time.format(Config.clock.fmt12Hour ? "hh:mm ap" : "hh:mm");
     }
 }

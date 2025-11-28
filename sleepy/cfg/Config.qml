@@ -14,6 +14,7 @@ Singleton {
     property ChooserCfg chooser: choosercfg;
     property AppLauncherCfg applauncher: applaunchercfg;
     property NotifsCfg notifs: notifscfg;
+    property ClockCfg clock: clockcfg;
 
     FileView {
         path: Paths.configFile;
@@ -29,6 +30,7 @@ Singleton {
             property ChooserCfg chooser: ChooserCfg { id: choosercfg; }
             property AppLauncherCfg applauncher: AppLauncherCfg { id: applaunchercfg; }
             property NotifsCfg notifs: NotifsCfg { id: notifscfg; }
+            property ClockCfg clock: ClockCfg { id: clockcfg; }
         }
     }
 }
