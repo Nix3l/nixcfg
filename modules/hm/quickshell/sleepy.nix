@@ -132,7 +132,7 @@ in
             };
 
             clock = {
-                format12Hour = mkOption { default = false; };
+                fmt12Hour = mkOption { default = false; };
             };
         };
 
