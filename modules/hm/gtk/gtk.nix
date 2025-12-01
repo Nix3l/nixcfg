@@ -24,21 +24,8 @@
                 enable = true;
                 extraPortals = with pkgs; [
                     xdg-desktop-portal-gtk
-                    xdg-desktop-portal-hyprland
-                    xdg-desktop-portal-wlr
-                    xdg-desktop-portal-gnome
+                    gnome-keyring
                 ];
-
-                config = {
-                    hyprland = {
-                        default = [ "hyprland" "wlr" "gtk" ];
-                        "org.freedesktop.impl.portal.ScreenCast" = [
-                            "gnome"
-                        ];
-                    };
-
-                    common.default = [ "gtk" ];
-                };
             };
         };
 

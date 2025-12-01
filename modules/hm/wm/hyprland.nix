@@ -1,4 +1,4 @@
-{ lib, config, osConfig, ... }:
+{ lib, config, osConfig, pkgs, ... }:
 
 let
     monitorType = lib.types.submodule {
@@ -152,6 +152,25 @@ in {
                 misc = {
                     disable_hyprland_logo = true;
                     disable_splash_rendering = true;
+                };
+            };
+        };
+
+        xdg = {
+            enable = true;
+            portal = {
+                enable = true;
+                extraPortals = with pkgs; [
+                    xdg-desktop-portal-hyprland
+                ];
+
+                config = {
+                    default = {
+                        default = lib.mkForce [ "hyprland" "gtk" ];
+                        "org.freedesktop.impl.portal.ScreenCast" = [
+                            "hyprland"
+                        ];
+                    };
                 };
             };
         };
