@@ -30,7 +30,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "catrail.png";
+            wallpaper = "hlorang.png";
             monitor = "eDP-1";
         };
 
