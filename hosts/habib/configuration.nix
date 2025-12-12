@@ -71,6 +71,7 @@
             };
 
             mysql.enable = true;
+            apache.enable = true;
         };
 
         fonts.enable = true;
