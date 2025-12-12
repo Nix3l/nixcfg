@@ -37,9 +37,9 @@ in
             };
         };
 
-    networking.firewall.allowedTCPPorts = [ 80 ];
+        networking.firewall.allowedTCPPorts = [ 80 ];
 
-    environment.systemPackages = with pkgs; [ php phpPackages.composer ];
+        environment.systemPackages = with pkgs; [ php phpPackages.composer ];
     };
 }
 
