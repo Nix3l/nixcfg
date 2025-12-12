@@ -19,6 +19,7 @@
         ./dev/arduino.nix
         ./dev/java.nix
         ./dev/mysql.nix
+        ./dev/xampp.nix
         ./kernel-modules/ddcci.nix
         ./locale/en.nix
         ./locale/jp.nix

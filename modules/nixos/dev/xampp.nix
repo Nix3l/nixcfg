@@ -39,11 +39,6 @@ in
 
     networking.firewall.allowedTCPPorts = [ 80 ];
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.documentRoot} 0755 - - -"
-      "f ${cfg.documentRoot}/index.php 0644 - - - - <?php echo 'XAMPP-like stack is running ✅<br>'; phpinfo(); ?>"
-    ];
-
     environment.systemPackages = with pkgs; [ php phpPackages.composer ];
   };
 }

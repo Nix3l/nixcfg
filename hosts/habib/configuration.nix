@@ -71,6 +71,11 @@
             };
 
             mysql.enable = true;
+            
+            xampp = {
+                enable = true;
+                documentRoot = "/home/ae92/uni/fall-25/web/php";
+            };
         };
 
         fonts.enable = true;
