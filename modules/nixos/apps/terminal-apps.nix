@@ -18,6 +18,7 @@
             htop
             btop
             cpustat
+            shtris
         ];
     };
 }

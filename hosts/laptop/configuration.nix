@@ -49,6 +49,7 @@
 
             arduino.enable = true;
             mysql.enable = true;
+            apache.enable = true;
         };
 
         apps = {
