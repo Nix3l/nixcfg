@@ -82,6 +82,6 @@ in
             };
         };
 
-        hm.mods.session.terminal = lib.mkForce "kitty";
+        hm.mods.session.terminal = "kitty";
     };
 }

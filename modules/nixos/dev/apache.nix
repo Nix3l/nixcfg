@@ -17,14 +17,14 @@ in
             default = "localhost";
         };
 
-        withMysql = mkOption {
+        withMySQL = mkOption {
             type = types.bool;
             default = true;
         };
     };
 
     config = lib.mkIf cfg.enable {
-        mods.dev.mysql.enable = cfg.withMysql;
+        mods.dev.mysql.enable = cfg.withMySQL;
 
         services = {
             httpd = {

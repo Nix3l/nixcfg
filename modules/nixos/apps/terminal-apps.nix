@@ -19,6 +19,7 @@
             btop
             cpustat
             shtris
+            frogmouth
         ];
     };
 }

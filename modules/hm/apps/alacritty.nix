@@ -53,5 +53,7 @@
                 };
             };
         };
+
+        hm.mods.session.terminal = "alacritty";
     };
 }

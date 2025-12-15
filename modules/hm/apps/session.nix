@@ -7,7 +7,7 @@ in
     options.hm.mods.session = with lib; {
         enable = mkEnableOption "session env variables";
 
-        terminal    = mkOption { default = "alacritty"; };
+        terminal    = mkOption { default = "kitty"; };
         shell       = mkOption { default = "bash"; };
         browser     = mkOption { default = "librewolf"; };
         explorer    = mkOption { default = "thunar"; };
