@@ -7,6 +7,7 @@
 
         # modules
         ./apps/desktop-apps.nix
+        ./apps/discord.nix
         ./apps/electron.nix
         ./apps/extra.nix
         ./apps/media.nix

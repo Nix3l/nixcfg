@@ -60,6 +60,7 @@
             };
 
             media.enable = true;
+            discord.enable = true;
             steam.enable = true;
             wine.enable = true;
             terminalapps.enable = true;
