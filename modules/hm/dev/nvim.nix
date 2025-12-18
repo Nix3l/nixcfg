@@ -56,6 +56,9 @@ in
                     java.enable = true;
                     rust.enable = true;
                     sql.enable = true;
+                    html.enable = true;
+                    css.enable = true;
+                    php.enable = true;
                 };
 
                 visuals = {

@@ -13,7 +13,7 @@
     mods = {
         locale.en = true;
         input.ime = {
-            enable = false;
+            enable = true;
             jp = false;
         };
 
