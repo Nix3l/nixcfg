@@ -19,7 +19,7 @@
             btop
             cpustat
             shtris
-            frogmouth
+            vivify
         ];
     };
 }
