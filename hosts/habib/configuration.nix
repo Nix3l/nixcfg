@@ -72,6 +72,9 @@
             };
 
             mysql.enable = true;
+        };
+
+        server = {
             apache.enable = true;
         };
 

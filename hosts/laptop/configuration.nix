@@ -49,7 +49,6 @@
 
             arduino.enable = true;
             mysql.enable = true;
-            apache.enable = true;
         };
 
         apps = {
@@ -75,6 +74,10 @@
             wine.enable = true;
             terminalapps.enable = true;
             minecraft.enable = true;
+        };
+
+        server = {
+            apache.enable = true;
         };
 
         fonts.enable = true;

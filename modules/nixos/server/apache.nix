@@ -1,10 +1,10 @@
 { lib, config, pkgs, ... }:
 
 let
-    cfg = config.mods.dev.apache;
+    cfg = config.mods.server.apache;
 in
 {
-    options.mods.dev.apache = with lib; {
+    options.mods.server.apache = with lib; {
         enable = mkEnableOption "apache";
 
         documentRoot = mkOption {
