@@ -84,6 +84,7 @@
         extraPackages = with pkgs; [
             ciscoPacketTracer8
             quickemu
+            projectlibre
         ];
     };
 }
