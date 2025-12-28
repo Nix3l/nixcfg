@@ -30,7 +30,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "magma_gruvbox.png";
+            wallpaper = "rockman.png";
             monitor = "eDP-1";
         };
 

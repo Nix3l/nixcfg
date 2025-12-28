@@ -28,7 +28,7 @@
         environment.systemPackages = lib.lists.flatten (with pkgs; [
             (lib.optional config.mods.apps.desktop.anki.enable anki)
             (lib.optional config.mods.apps.desktop.torrent.enable qbittorrent)
-            (lib.optional config.mods.apps.desktop.office.enable libreoffice-qt6-fresh)
+            (lib.optional config.mods.apps.desktop.office.enable wpsoffice)
         ]) ++ (with config.mods.apps.desktop; [
             fileExplorer
             browser
