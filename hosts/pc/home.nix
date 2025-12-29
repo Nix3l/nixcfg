@@ -5,12 +5,8 @@
     hm.mods = {
         session.enable = true;
 
-        alacritty = {
-            enable = true;
-            font = "Tamzen";
-        };
-
-        zsh.enable = true;
+        kitty.enable = true;
+        fish.enable = true;
 
         git.enable = true;
 
@@ -25,6 +21,11 @@
 
         spotify.enable = true;
 
+        audio.effects = {
+            enable = true;
+            preset = "mic-noise-remover";
+        };
+
         gtk = {
             enable = true;
             gruvbox.enable = true;
@@ -34,7 +35,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "magma_gruvbox.png";
+            wallpaper = "rockman.png";
         };
 
         cursors.capitaine.enable = true;

@@ -15,6 +15,7 @@
         ./apps/kitty.nix
         ./apps/session.nix
         ./apps/spotify.nix
+        ./audio/easyeffects.nix
         ./cursor/cursor.nix
         ./cursor/capitaine.nix
         ./dev/vscode.nix
