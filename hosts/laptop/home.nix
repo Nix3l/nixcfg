@@ -21,6 +21,11 @@
 
         spotify.enable = true;
 
+        audio.effects = {
+            enable = true;
+            preset = "mic-noise-remover";
+        };
+
         gtk = {
             enable = true;
             gruvbox.enable = true;
