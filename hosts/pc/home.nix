@@ -35,7 +35,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "rockman.png";
+            wallpaper = "life.png";
         };
 
         cursors.capitaine.enable = true;

@@ -43,6 +43,10 @@
         ssh.enable = true;
         printing.enable = true;
 
+        dev = {
+            mysql.enable = true;
+        };
+
         apps = {
             electron.wayland.enable = true;
 
@@ -65,6 +69,10 @@
             wine.enable = true;
             terminalapps.enable = true;
             minecraft.enable = true;
+        };
+
+        server = {
+            apache.enable = true;
         };
 
         virt = {

@@ -12,7 +12,7 @@ in
         environment.systemPackages = [
             (pkgs.writeShellApplication {
                 name = "discord-wayland";
-                text = "${pkgs.discord}/bin/discord --use-gl=desktop";
+                text = "NIXOS_OZONE_WL=1 ${pkgs.discord}/bin/discord --use-gl=desktop";
             })
             (pkgs.makeDesktopItem {
                 name = "discord";
