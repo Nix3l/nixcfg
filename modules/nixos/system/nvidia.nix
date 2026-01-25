@@ -6,7 +6,7 @@
     };
 
     config = lib.mkIf config.mods.nvidia.enable {
-        services.xserver.videoDrivers = [ "nvidia" ];
+        services.xserver.videoDrivers = [ "nvidia" "intel" ];
         hardware = {
             graphics.enable = true;
             nvidia = {

@@ -39,7 +39,7 @@
         ssh.enable = true;
         printing.enable = true;
         bluetooth.enable = true;
-        upower.enable = true;
+        # upower.enable = true;
 
         desktopenv = {
             xfce.enable = true;
