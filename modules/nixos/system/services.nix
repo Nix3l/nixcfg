@@ -37,7 +37,7 @@ in
 
         programs.dconf.enable = cfg.dconf.enable;
 
-        services.upower.enable = cfg.upower.enable;
+        services.upower.enable = lib.mkForce cfg.upower.enable;
 
         services.openssh.enable = cfg.ssh.enable;
         users.users.root.openssh.authorizedKeys.keys = lib.mkIf cfg.ssh.enable cfg.ssh.rootAuthorizedKeys;

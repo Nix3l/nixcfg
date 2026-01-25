@@ -17,6 +17,7 @@
         ./apps/util.nix
         ./apps/wine.nix
         ./desktop-env/de.nix
+        ./desktop-env/xfce.nix
         ./dev/arduino.nix
         ./dev/java.nix
         ./dev/mysql.nix

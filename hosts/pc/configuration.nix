@@ -43,7 +43,16 @@
         ssh.enable = true;
         printing.enable = true;
 
+        desktopenv = {
+            xfce.enable = true;
+        };
+
         dev = {
+            java = {
+                enable = true;
+                jetbrains.enable = true;
+            };
+
             mysql.enable = true;
         };
 
@@ -61,6 +70,7 @@
                 obs = true;
                 hexViewer = true;
                 obsidian = true;
+                figma = true;
             };
 
             media.enable = true;

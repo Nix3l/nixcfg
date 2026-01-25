@@ -41,6 +41,10 @@
         bluetooth.enable = true;
         upower.enable = true;
 
+        desktopenv = {
+            xfce.enable = true;
+        };
+
         dev = {
             java = {
                 enable = true;

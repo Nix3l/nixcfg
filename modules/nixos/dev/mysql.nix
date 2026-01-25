@@ -14,6 +14,7 @@ in
             mysql = {
                 enable = true;
                 package = pkgs.mariadb;
+
             };
 
             gnome.gnome-keyring.enable = true;
