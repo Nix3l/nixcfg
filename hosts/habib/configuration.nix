@@ -43,10 +43,6 @@
         bluetooth.enable = true;
         upower.enable = true;
 
-        desktopenv = {
-            xfce.enable = true;
-        };
-
         apps = {
             electron.wayland.enable = true;
 
@@ -89,6 +85,7 @@
             ciscoPacketTracer8
             quickemu
             projectlibre
+            chromium
         ];
     };
 }
