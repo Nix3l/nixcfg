@@ -21,6 +21,7 @@
         ./dev/arduino.nix
         ./dev/java.nix
         ./dev/mysql.nix
+        ./dev/unity.nix
         ./kernel-modules/ddcci.nix
         ./locale/en.nix
         ./locale/jp.nix

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
     imports = [
@@ -43,10 +43,6 @@
         ssh.enable = true;
         printing.enable = true;
 
-        desktopenv = {
-            xfce.enable = true;
-        };
-
         dev = {
             java = {
                 enable = true;
@@ -54,6 +50,7 @@
             };
 
             mysql.enable = true;
+            unity.enable = true;
         };
 
         apps = {
