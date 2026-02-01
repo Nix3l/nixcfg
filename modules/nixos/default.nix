@@ -19,6 +19,7 @@
         ./desktop-env/de.nix
         ./desktop-env/xfce.nix
         ./dev/arduino.nix
+        ./dev/dotnet.nix
         ./dev/java.nix
         ./dev/mysql.nix
         ./dev/unity.nix

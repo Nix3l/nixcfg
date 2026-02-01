@@ -51,6 +51,7 @@
 
             mysql.enable = true;
             unity.enable = true;
+            dotnet.enable = true;
         };
 
         apps = {
