@@ -28,7 +28,7 @@
         environment.systemPackages = with pkgs; [
             gnome-keyring
             xfce.xfwm4-themes
-            xfce.thunar
+            thunar
             xfce.thunar-volman
             xfce.xfce4-appfinder
             xfce.xfce4-clipman-plugin

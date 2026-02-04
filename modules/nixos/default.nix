@@ -19,11 +19,13 @@
         ./desktop-env/de.nix
         ./desktop-env/xfce.nix
         ./dev/arduino.nix
+        ./dev/blender.nix
         ./dev/dotnet.nix
         ./dev/java.nix
         ./dev/mysql.nix
         ./dev/unity.nix
         ./kernel-modules/ddcci.nix
+        ./kernel-modules/latest.nix
         ./locale/en.nix
         ./locale/jp.nix
         ./server/apache.nix

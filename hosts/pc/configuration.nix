@@ -25,6 +25,7 @@
         nvidia.enable = true;
 
         kernel = {
+            latest.enable = true;
             ddcci.enable = true;
         };
 
@@ -52,6 +53,7 @@
             mysql.enable = true;
             unity.enable = true;
             dotnet.enable = true;
+            blender.enable = true;
         };
 
         apps = {

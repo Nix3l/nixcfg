@@ -35,7 +35,12 @@ in
                 #    (p: toString p);
 
                 preload = with cfg; [ "${toString dir}/${wallpaper}" ];
-                wallpaper = with config.hm.mods.wallpaper.hyprpaper; [ "${monitor},${toString dir}/${wallpaper}" ];
+                wallpaper = with config.hm.mods.wallpaper.hyprpaper; [
+                    {
+                        monitor = "${monitor}";
+                        path = "${toString dir}/${wallpaper}";
+                    }
+                ];
             };
         };
     };

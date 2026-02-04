@@ -7,12 +7,12 @@
 
         fileExplorer = mkOption {
             type = types.package;
-            default = pkgs.xfce.thunar;
+            default = pkgs.thunar;
         };
 
         browser = mkOption {
             type = types.package;
-            default = pkgs.librewolf-bin;
+            default = pkgs.librewolf;
         };
 
         terminal = mkOption {

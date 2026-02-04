@@ -24,6 +24,8 @@
 
         nvidia.enable = true;
 
+        kernel.latest.enable = true;
+
         mainUser = {
             name = "ae92";
             email = "nidi.6002@gmail.com";

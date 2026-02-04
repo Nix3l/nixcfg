@@ -19,7 +19,7 @@
             vscode.enable = true;
         };
 
-        spotify.enable = true;
+        # spotify.enable = true;
 
         gtk = {
             enable = true;
