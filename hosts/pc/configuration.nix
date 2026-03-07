@@ -43,6 +43,7 @@
         dconf.enable = true;
         ssh.enable = true;
         printing.enable = true;
+        system.appimage.enable = true;
 
         dev = {
             java = {
@@ -54,6 +55,7 @@
             unity.enable = true;
             dotnet.enable = true;
             blender.enable = true;
+            trenchbroom.enable = true;
         };
 
         apps = {

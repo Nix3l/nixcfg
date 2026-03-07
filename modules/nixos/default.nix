@@ -23,6 +23,7 @@
         ./dev/dotnet.nix
         ./dev/java.nix
         ./dev/mysql.nix
+        ./dev/trenchbroom.nix
         ./dev/unity.nix
         ./kernel-modules/ddcci.nix
         ./kernel-modules/latest.nix
@@ -30,6 +31,7 @@
         ./locale/jp.nix
         ./server/apache.nix
         ./server/copyparty.nix
+        ./system/appimage.nix
         ./system/audio.nix
         ./system/fonts.nix
         ./system/input.nix
