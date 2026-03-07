@@ -49,6 +49,9 @@
 
             arduino.enable = true;
             mysql.enable = true;
+            unity.enable = true;
+            dotnet.enable = true;
+            blender.enable = true;
         };
 
         apps = {
@@ -91,7 +94,6 @@
                     gtk4
                 ];
             })
-            chromium
         ];
     };
 }
