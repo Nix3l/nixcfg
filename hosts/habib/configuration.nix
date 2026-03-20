@@ -84,7 +84,6 @@
         ld.enable = true;
 
         extraPackages = with pkgs; [
-            ciscoPacketTracer8
             quickemu
             projectlibre
             chromium
