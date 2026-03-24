@@ -9,16 +9,6 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-        environment.systemPackages = [
-            (pkgs.writeShellApplication {
-                name = "discord-wayland";
-                text = "NIXOS_OZONE_WL=1 ${pkgs.discord}/bin/discord --use-gl=desktop";
-            })
-            (pkgs.makeDesktopItem {
-                name = "discord";
-                exec = "discord-wayland";
-                desktopName = "Discord";
-            })
-        ];
+        environment.systemPackages = with pkgs; [ vesktop ];
     };
 }
