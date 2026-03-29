@@ -46,8 +46,6 @@
         upower.enable = true;
 
         apps = {
-            electron.wayland.enable = true;
-
             desktop = {
                 enable = true;
             };

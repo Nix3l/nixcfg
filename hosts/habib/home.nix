@@ -5,10 +5,16 @@
     hm.mods = {
         session.enable = true;
 
-        kitty.enable = true;
-        fish.enable = true;
+        system = {
+            gtk.enable = true;
+            qt.enable = true;
+            fonts.enable = true;
+        };
 
         git.enable = true;
+
+        kitty.enable = true;
+        fish.enable = true;
 
         dev = {
             nvim = {
@@ -20,13 +26,6 @@
         };
 
         spotify.enable = true;
-
-        gtk = {
-            enable = true;
-            gruvbox.enable = true;
-        };
-
-        qt.enable = true;
 
         wallpaper.hyprpaper = {
             enable = true;

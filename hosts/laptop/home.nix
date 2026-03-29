@@ -5,10 +5,21 @@
     hm.mods = {
         session.enable = true;
 
-        kitty.enable = true;
-        fish.enable = true;
+        system = {
+            audio.effects = {
+                enable = true;
+                preset = "mic-noise-remover";
+            };
+
+            gtk.enable = true;
+            qt.enable = true;
+            fonts.enable = true;
+        };
 
         git.enable = true;
+
+        kitty.enable = true;
+        fish.enable = true;
 
         dev = {
             nvim = {
@@ -20,18 +31,6 @@
         };
 
         spotify.enable = true;
-
-        audio.effects = {
-            enable = true;
-            preset = "mic-noise-remover";
-        };
-
-        gtk = {
-            enable = true;
-            gruvbox.enable = true;
-        };
-
-        qt.enable = true;
 
         wallpaper.hyprpaper = {
             enable = true;
