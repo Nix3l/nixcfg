@@ -59,8 +59,6 @@
         };
 
         apps = {
-            electron.wayland.enable = true;
-
             desktop = {
                 enable = true;
                 anki.enable = true;
@@ -103,7 +101,6 @@
                     gtk4
                 ];
             })
-            kdePackages.dolphin
             # spotify
         ];
     };

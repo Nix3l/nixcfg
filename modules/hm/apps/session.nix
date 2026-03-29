@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, osConfig, ... }:
 
 let
     cfg = config.hm.mods.session;
@@ -10,7 +10,7 @@ in
         terminal    = mkOption { default = "kitty"; };
         shell       = mkOption { default = "bash"; };
         browser     = mkOption { default = "librewolf"; };
-        explorer    = mkOption { default = "thunar"; };
+        explorer    = mkOption { default = "dolphin"; };
         editor      = mkOption { default = "nvim"; };
         mediaPlayer = mkOption { default = "mpv"; };
         imageViewer = mkOption { default = "nsxiv"; };

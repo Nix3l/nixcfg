@@ -11,13 +11,14 @@
             kdePackages.qtstyleplugin-kvantum
             libsForQt5.qt5ct
             kdePackages.qt6ct
+            kde-gruvbox
         ];
 
         qt = let
             settings = {
                 Appearance = {
                    style = "kvantum";
-                   icon_theme = "oomox-gruvbox-dark";
+                   icon_theme = "Gruvbox-Plus-Dark";
                    standard_dialogs = "gtk3";
                 };
 
@@ -48,6 +49,21 @@
 
             qt5ctSettings = settings;
             qt6ctSettings = settings;
+        };
+
+        home.sessionVariables =  {
+            QT_STYLE_OVERRIDE = lib.mkForce "qt6ct-style";
+        };
+
+        # dont use qt*ct for kde apps, use the kde-gruvbox package (looks way nicer)
+        xdg.configFile."kdeglobals" = {
+            enable = true;
+            text =
+                ''
+                    [UiSettings]
+                    ColorScheme=*
+                ''
+                + (builtins.readFile "${pkgs.kde-gruvbox}/share/color-schemes/Gruvbox.colors");
         };
     };
 }

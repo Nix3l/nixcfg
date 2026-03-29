@@ -128,7 +128,7 @@ in {
                     "$mod, B, exec, $browser"
                     "$mod SHIFT, B, exec, $browser --private-window"
                     "$mod, E, exec, $explorer"
-                    (lib.optional osConfig.mods.apps.util.enable "$mod SHIFT, S, exec, snip --active-window")
+                    (lib.optional osConfig.mods.apps.util.enable "$mod SHIFT, S, exec, snipaste snip")
                 ];
 
                 binde = [
@@ -153,11 +153,32 @@ in {
                     "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
                 ];
 
+                # 
+                # taken from https://github.com/nix-community/home-manager/issues/2659
+                envd = with builtins; attrValues
+                    (mapAttrs
+                        (name: value: "${name}, ${toString value}")
+                        config.home.sessionVariables
+                    );
+
                 misc = {
                     disable_hyprland_logo = true;
                     disable_splash_rendering = true;
                 };
             };
+        };
+
+        home.sessionVariables = {
+            QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+            QT_QPA_PLATFORM = "wayland;xcb";
+            QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+            GDK_BACKEND = "wayland,x11,*";
+            SDL_VIDEODRIVER = "wayland";
+            CLUTTER_BACKEND = "wayland";
+            XDG_CURRENT_DESKTOP = "Hyprland";
+            XDG_SESSION_TYPE = "wayland";
+            XDG_SESSION_DESKTOP = "Hyprland";
+            NIXOS_OZONE_WL = "1";
         };
 
         xdg = {

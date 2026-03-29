@@ -13,6 +13,8 @@
         polymc.url = "github:PolyMC/PolyMC";
 
         copyparty.url = "github:9001/copyparty";
+
+        dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     };
 
     outputs = { self, nixpkgs, ... } @ inputs: {

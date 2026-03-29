@@ -1,6 +1,8 @@
 { inputs, pkgs, ... }:
 
 {
+    nixpkgs.overlays = [ inputs.dolphin-overlay.overlays.default ];
+
     imports = [
         # flakes
         inputs.copyparty.nixosModules.default
@@ -8,7 +10,6 @@
         # modules
         ./apps/desktop-apps.nix
         ./apps/discord.nix
-        ./apps/electron.nix
         ./apps/extra.nix
         ./apps/media.nix
         ./apps/minecraft.nix
