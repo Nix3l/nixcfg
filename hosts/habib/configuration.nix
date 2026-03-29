@@ -65,6 +65,7 @@
             steam.enable = true;
             wine.enable = true;
             terminalapps.enable = true;
+            pureref.enable = true;
         };
 
         dev = {
