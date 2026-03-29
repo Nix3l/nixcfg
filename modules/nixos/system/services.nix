@@ -1,10 +1,10 @@
 { lib, config, pkgs, ... }:
 
 let
-    cfg = config.mods;
+    cfg = config.mods.system;
 in
 {
-    options.mods = with lib; {
+    options.mods.system = with lib; {
         bluetooth.enable = mkEnableOption "bluetooth";
         autoUSBMount.enable = mkEnableOption "auto usb mounting";
         dconf.enable = mkEnableOption "dconf";
@@ -18,6 +18,7 @@ in
             };
         };
 
+        keyring.enable = mkEnableOption "keyring";
         printing.enable = mkEnableOption "printing service";
     };
 
@@ -43,5 +44,8 @@ in
         users.users.root.openssh.authorizedKeys.keys = lib.mkIf cfg.ssh.enable cfg.ssh.rootAuthorizedKeys;
 
         services.printing.enable = cfg.printing.enable;
+
+        services.gnome.gnome-keyring.enable = cfg.keyring.enable;
+        security.pam.services.login.enableGnomeKeyring = cfg.keyring.enable;
     };
 }

@@ -33,13 +33,17 @@
             };
         };
 
-        audio.enable = true;
-        autoUSBMount.enable = true;
-        dconf.enable = true;
-        ssh.enable = true;
-        printing.enable = true;
-        bluetooth.enable = true;
-        upower.enable = true;
+        system = {
+            audio.enable = true;
+            autoUSBMount.enable = true;
+            dconf.enable = true;
+            ssh.enable = true;
+            printing.enable = true;
+            bluetooth.enable = true;
+            upower.enable = true;
+            appimage.enable = true;
+            keyring.enable = true;
+        };
 
         dev = {
             java = {

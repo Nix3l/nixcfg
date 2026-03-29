@@ -38,12 +38,15 @@
             };
         };
 
-        audio.enable = true;
-        autoUSBMount.enable = true;
-        dconf.enable = true;
-        ssh.enable = true;
-        printing.enable = true;
-        system.appimage.enable = true;
+        system = {
+            audio.enable = true;
+            autoUSBMount.enable = true;
+            dconf.enable = true;
+            ssh.enable = true;
+            printing.enable = true;
+            appimage.enable = true;
+            keyring.enable = true;
+        };
 
         dev = {
             java = {
