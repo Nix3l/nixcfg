@@ -3,9 +3,9 @@
 {
     options.hm.mods.cursor = with lib; {
         enable = mkEnableOption "cursor theme";
-        name = mkOption { type = types.str; };
-        pkg = mkOption { type = types.package; };
-        size = mkOption { type = types.int; };
+        name   = mkOption { type = types.str; };
+        pkg    = mkOption { type = types.package; };
+        size   = mkOption { type = types.int; };
     };
 
     config = lib.mkIf config.hm.mods.cursor.enable {
@@ -14,7 +14,7 @@
             name = cursor.name;
             size = cursor.size;
 
-            gtk.enable = gtk.enable;
+            gtk.enable = system.gtk.enable;
             hyprcursor = lib.mkIf hyprland.enable {
                 enable = true;
                 size = cursor.size;

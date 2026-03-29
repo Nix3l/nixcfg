@@ -49,21 +49,25 @@ in {
                 decoration = {
                     rounding = 0;
 
-                    active_opacity = 0.96;
-                    inactive_opacity = 0.90;
+                    active_opacity = 0.88;
+                    inactive_opacity = 0.66;
 
                     dim_inactive = false;
 
                     blur = {
                         enabled = true;
-                        xray = true;
-                        special = false;
+
+                        size = 7;
+                        passes = 3;
+                        brightness = 0.8;
+                        noise = 0.08;
+                        contrast = 1.5;
+
+                        xray = false;
+                        ignore_opacity = true;
+                        special = true;
                         new_optimizations = true;
-                        size = 10;
-                        passes = 2;
-                        brightness = 1;
-                        noise = 0.01;
-                        contrast = 1;
+
                         popups = true;
                         popups_ignorealpha = 0.6;
                         input_methods = true;
@@ -124,7 +128,7 @@ in {
                     "$mod, B, exec, $browser"
                     "$mod SHIFT, B, exec, $browser --private-window"
                     "$mod, E, exec, $explorer"
-                    (lib.optional osConfig.mods.apps.util.enable "$mod SHIFT, S, exec, flameshot gui")
+                    (lib.optional osConfig.mods.apps.util.enable "$mod SHIFT, S, exec, snip --active-window")
                 ];
 
                 binde = [
@@ -141,7 +145,7 @@ in {
                 ];
 
                 exec-once = lib.lists.flatten [
-                    (lib.optional osConfig.mods.apps.util.enable "flameshot &")
+                    (lib.optional osConfig.mods.apps.util.enable "snipaste &")
                     (lib.optional osConfig.mods.input.ime.enable "fcitx5 &")
                     # (supposedly) fixes cursor themes in gnome apps under hyprland
                     "gsettings set org.gnome.desktop.interface cursor-theme '${config.home.pointerCursor.name}'"

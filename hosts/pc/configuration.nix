@@ -103,6 +103,7 @@
                     gtk4
                 ];
             })
+            kdePackages.dolphin
             # spotify
         ];
     };

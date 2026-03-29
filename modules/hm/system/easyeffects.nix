@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-    cfg = config.hm.mods.audio.effects;
+    cfg = config.hm.mods.system.audio.effects;
 in
 {
-    options.hm.mods.audio.effects = with lib; {
+    options.hm.mods.system.audio.effects = with lib; {
         enable = mkEnableOption "easyeffects";
         preset = mkOption { default = ""; };
     };

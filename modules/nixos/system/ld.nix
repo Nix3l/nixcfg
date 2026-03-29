@@ -24,32 +24,31 @@
                 util-linux
                 xz
                 systemd
-
-                xorg.libXcomposite
-                xorg.libXtst
-                xorg.libXrandr
-                xorg.libXext
-                xorg.libX11
-                xorg.libXfixes
                 libGL
                 libva
-                xorg.libxcb
-                xorg.libXdamage
-                xorg.libxshmfence
-                xorg.libXxf86vm
-                libelf
+
+                libxcomposite
+                libxtst
+                libxrandr
+                libxext
+                libx11
+                libxfixes
+                libxcb
+                libxdamage
+                libxshmfence
+                libxxf86vm
+                libxinerama
+                libxcursor
+                libxrender
+                libxscrnsaver
+                libxi
+                libsm
+                libice
 
                 # required
                 glib
                 gtk2
-
-                xorg.libXinerama
-                xorg.libXcursor
-                xorg.libXrender
-                xorg.libXScrnSaver
-                xorg.libXi
-                xorg.libSM
-                xorg.libICE
+                libelf
                 gnome2.GConf
                 nspr
                 nss
@@ -68,8 +67,8 @@
                 libadwaita
 
                 # verified games requirements
-                xorg.libXt
-                xorg.libXmu
+                libxt
+                libxmu
                 libogg
                 libvorbis
                 SDL
@@ -106,7 +105,7 @@
                 libgcrypt
                 libvpx
                 librsvg
-                xorg.libXft
+                libxft
                 libvdpau
                 pango
                 cairo

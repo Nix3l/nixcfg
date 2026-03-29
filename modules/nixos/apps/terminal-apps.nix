@@ -7,7 +7,7 @@
 
     config = lib.mkIf config.mods.apps.terminalapps.enable {
         environment.systemPackages = with pkgs; [
-            neofetch
+            fastfetch
             unzip
             unrar
             p7zip

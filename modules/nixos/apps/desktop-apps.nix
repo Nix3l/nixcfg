@@ -17,7 +17,7 @@
 
         terminal = mkOption {
             type = types.package;
-            default = pkgs.alacritty;
+            default = pkgs.kitty;
         };
 
         torrent.enable = mkOption { default = true; };

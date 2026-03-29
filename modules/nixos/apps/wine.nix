@@ -7,9 +7,9 @@
 
     config = lib.mkIf config.mods.apps.wine.enable {
         environment.systemPackages = with pkgs; [
-            wineWowPackages.stable
+            wineWow64Packages.stable
             # native wayland support (can be unstable)
-            wineWowPackages.waylandFull
+            wineWow64Packages.waylandFull
             winetricks
         ];
     };

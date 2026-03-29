@@ -15,14 +15,14 @@
         ./apps/kitty.nix
         ./apps/session.nix
         ./apps/spotify.nix
-        ./audio/easyeffects.nix
         ./cursor/cursor.nix
         ./cursor/capitaine.nix
         ./dev/vscode.nix
         ./dev/nvim.nix
-        ./gtk/gtk.nix
-        ./gtk/gruvbox.nix
-        ./qt/qt.nix
+        ./system/easyeffects.nix
+        ./system/fontconfig.nix
+        ./system/gtk.nix
+        ./system/qt.nix
         ./quickshell/sleepy.nix
         ./shell/fish.nix
         ./shell/zsh.nix
