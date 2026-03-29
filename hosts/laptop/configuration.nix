@@ -77,6 +77,7 @@
             wine.enable = true;
             terminalapps.enable = true;
             minecraft.enable = true;
+            pureref.enable = true;
         };
 
         server = {

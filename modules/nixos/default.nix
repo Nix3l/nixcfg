@@ -12,6 +12,7 @@
         ./apps/extra.nix
         ./apps/media.nix
         ./apps/minecraft.nix
+        ./apps/pureref.nix
         ./apps/steam.nix
         ./apps/terminal-apps.nix
         ./apps/util.nix
