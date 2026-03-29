@@ -30,7 +30,7 @@
 
             (lib.optional config.mods.apps.desktop.anki.enable anki)
             (lib.optional config.mods.apps.desktop.torrent.enable qbittorrent)
-            (lib.optional config.mods.apps.desktop.office.enable wpsoffice)
+            (lib.optional config.mods.apps.desktop.office.enable wpsoffice-cn)
         ]) ++ (with config.mods.apps.desktop; [
             fileExplorer
             browser
