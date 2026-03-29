@@ -18,8 +18,8 @@
                 fullScreen
             ];
 
-            theme = spicepkgs.themes.text;
-            colorScheme = "Gruvbox";
+            theme = spicepkgs.themes.dribbblish;
+            colorScheme = "gruvbox";
         };
     };
 }
