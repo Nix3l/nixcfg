@@ -33,6 +33,8 @@
             };
         };
 
+        laptop.lid.disableSleepOnClose = true;
+
         system = {
             audio.enable = true;
             autoUSBMount.enable = true;
