@@ -6,10 +6,10 @@
         session.enable = true;
 
         system = {
-            audio.effects = {
-                enable = true;
-                preset = "mic-noise-remover";
-            };
+            #audio.effects = {
+            #    enable = true;
+            #    preset = "mic-noise-remover";
+            #};
 
             gtk.enable = true;
             qt.enable = true;
