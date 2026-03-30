@@ -97,7 +97,10 @@ in {
 
                 input = {
                     kb_layout = "us";
-                    touchpad = { natural_scroll = true; };
+                    touchpad = {
+                        disable_while_typing = false;
+                        natural_scroll = true;
+                    };
 
                     repeat_rate = 45;
                     repeat_delay = 200;
