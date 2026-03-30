@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 {
     options.mods.system.audio = {
@@ -15,5 +15,10 @@
             pulse.enable = true;
             jack.enable = true;
         };
+
+        environment.systemPackages = with pkgs; [
+            pwvucontrol
+            wiremix
+        ];
     };
 }
