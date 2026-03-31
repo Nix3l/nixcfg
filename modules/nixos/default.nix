@@ -27,6 +27,7 @@
         ./dev/mysql.nix
         ./dev/trenchbroom.nix
         ./dev/unity.nix
+        ./dm/sddm.nix
         ./kernel-modules/ddcci.nix
         ./kernel-modules/latest.nix
         ./locale/en.nix

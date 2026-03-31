@@ -1,0 +1,28 @@
+{
+    stdenvNoCC,
+    fetchFromGitHub,
+    kdePackages,
+}:
+
+stdenvNoCC.mkDerivation {
+    name = "pixie-sddm";
+
+    src = fetchFromGitHub {
+        owner = "xCaptaiN09";
+        repo = "pixie-sddm";
+        rev = "main";
+        sha256 = "sha256-lmE/49ySuAZDh5xLochWqfSw9qWrIV+fYaK5T2Ckck8=";
+    };
+
+    dontWrapQtApps = true;
+
+    installPhase = ''
+        mkdir -p $out/share/sddm/themes/pixie
+        cp -r * $out/share/sddm/themes/pixie/
+    '';
+
+    buildInputs = [
+        kdePackages.qtdeclarative
+        kdePackages.qtsvg
+    ];
+}

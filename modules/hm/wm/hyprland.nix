@@ -13,6 +13,7 @@ let
 in {
     options.hm.mods.hyprland = with lib; {
         enable = mkEnableOption "hyprland";
+        # why did i do it like this lol
         monitors = mkOption { type = types.listOf monitorType; };
     };
 
@@ -20,6 +21,7 @@ in {
         wayland.windowManager.hyprland = {
             enable = true;
             systemd.enable = true;
+            # withUWSM = true;
             xwayland.enable = true;
 
             settings = {

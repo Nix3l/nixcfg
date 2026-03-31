@@ -47,6 +47,10 @@
             keyring.enable = true;
         };
 
+        dm = {
+            sddm.enable = true;
+        };
+
         dev = {
             java = {
                 enable = true;
