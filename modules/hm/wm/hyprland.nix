@@ -133,7 +133,7 @@ in {
                     "$mod, B, exec, $browser"
                     "$mod SHIFT, B, exec, $browser --private-window"
                     "$mod, E, exec, $explorer"
-                    (lib.optional osConfig.mods.apps.util.enable "$mod SHIFT, S, exec, snipaste snip")
+                    (lib.optional osConfig.mods.apps.screenshot.enable "$mod SHIFT, S, exec, grimblast copy area")
                 ];
 
                 binde = [
@@ -150,7 +150,6 @@ in {
                 ];
 
                 exec-once = lib.lists.flatten [
-                    (lib.optional osConfig.mods.apps.util.enable "snipaste &")
                     (lib.optional osConfig.mods.input.ime.enable "fcitx5 &")
                     # (supposedly) fixes cursor themes in gnome apps under hyprland
                     "gsettings set org.gnome.desktop.interface cursor-theme '${config.home.pointerCursor.name}'"

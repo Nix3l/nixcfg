@@ -90,6 +90,7 @@
             terminalapps.enable = true;
             minecraft.enable = true;
             pureref.enable = true;
+            screenshot.enable = true;
         };
 
         server = {

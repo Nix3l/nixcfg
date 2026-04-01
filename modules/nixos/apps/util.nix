@@ -12,9 +12,6 @@
 
     config = lib.mkIf config.mods.apps.util.enable {
         environment.systemPackages = lib.lists.flatten (with pkgs; [
-            grim
-            slurp
-            gscreenshot
             android-tools
             qemu
             quickemu

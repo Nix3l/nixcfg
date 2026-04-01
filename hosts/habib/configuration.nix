@@ -76,6 +76,7 @@
             wine.enable = true;
             terminalapps.enable = true;
             pureref.enable = true;
+            screenshot.enable = true;
         };
 
         dev = {
