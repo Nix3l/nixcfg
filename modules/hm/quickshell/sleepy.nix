@@ -1,7 +1,8 @@
-{ lib, config, osConfig, ... }:
+{ lib, config, osConfig, pkgs, ... }:
 
 let
     cfg = config.hm.mods.sleepy;
+    qs-pkg = ../../../pkgs/quickshell.nix;
     sleepybind = b: name: "$mod ${if b.shift then "SHIFT" else ""}, ${b.key}, global, sleepy:${name}";
     bindOption = s: k: with lib; {
         shift = mkOption {
@@ -157,6 +158,7 @@ in
 
         programs.quickshell = {
             enable = true;
+            package = (pkgs.callPackage qs-pkg {});
             systemd.enable = true;
             configs = {
                 "sleepy" = ../../../sleepy;  
