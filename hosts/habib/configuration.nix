@@ -49,6 +49,14 @@
             keyring.enable = true;
         };
 
+        dm = {
+            sddm.enable = true;
+        };
+
+        desktop = {
+            hyprland.enable = true;
+        };
+
         apps = {
             desktop = {
                 enable = true;

@@ -48,6 +48,14 @@
             keyring.enable = true;
         };
 
+        dm = {
+            sddm.enable = true;
+        };
+
+        desktop = {
+            hyprland.enable = true;
+        };
+
         dev = {
             java = {
                 enable = true;

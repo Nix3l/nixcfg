@@ -1,11 +1,11 @@
 { lib, config, pkgs, ... }:
 
 {
-    options.mods.desktopenv.xfce = with lib; {
+    options.mods.desktop.xfce = with lib; {
         enable = mkEnableOption "xfce";
     };
 
-    config = lib.mkIf config.mods.desktopenv.xfce.enable {
+    config = lib.mkIf config.mods.desktop.xfce.enable {
         services = {
             xserver = {
                 enable = true;

@@ -51,6 +51,10 @@
             sddm.enable = true;
         };
 
+        desktop = {
+            hyprland.enable = true;
+        };
+
         dev = {
             java = {
                 enable = true;
@@ -94,15 +98,5 @@
 
         fonts.enable = true;
         ld.enable = true;
-
-        extraPackages = with pkgs; [
-            # renderdoc
-            (lutris.override {
-                extraLibraries = pkgs: with pkgs; [
-                    libadwaita
-                    gtk4
-                ];
-            })
-        ];
     };
 }

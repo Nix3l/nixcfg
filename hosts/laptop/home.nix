@@ -18,6 +18,8 @@
 
         git.enable = true;
 
+        user.pfp.enable = true;
+
         kitty.enable = true;
         fish.enable = true;
 

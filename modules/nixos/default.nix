@@ -18,8 +18,8 @@
         ./apps/terminal-apps.nix
         ./apps/util.nix
         ./apps/wine.nix
-        ./desktop-env/de.nix
-        ./desktop-env/xfce.nix
+        ./desktop/xfce.nix
+        ./desktop/hyprland.nix
         ./dev/arduino.nix
         ./dev/blender.nix
         ./dev/dotnet.nix

@@ -26,6 +26,7 @@
         ./quickshell/sleepy.nix
         ./shell/fish.nix
         ./shell/zsh.nix
+        ./user/pfp.nix
         ./wallpaper/hyprpaper.nix
         ./wm/hyprland.nix
     ];
