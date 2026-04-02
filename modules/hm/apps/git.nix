@@ -8,6 +8,7 @@
     config = lib.mkIf config.hm.mods.git.enable {
         programs.git = {
             enable = true;
+            lfs.enable = true;
             settings = {
                 user = {
                     name = osConfig.mods.mainUser.name;
