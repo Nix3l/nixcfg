@@ -15,7 +15,6 @@
             android-tools
             qemu
             quickemu
-            snipaste
 
             (lib.optional config.mods.apps.util.mediaDownloader media-downloader)
             (lib.optional config.mods.apps.util.obs obs-studio)
