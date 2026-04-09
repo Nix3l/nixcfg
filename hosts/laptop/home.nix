@@ -36,7 +36,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "life.png";
+            wallpaper = "wizard04.png";
             monitor = "eDP-1";
         };
 
