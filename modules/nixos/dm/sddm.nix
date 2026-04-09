@@ -3,7 +3,8 @@
 let
     cfg = config.mods.dm.sddm;
 
-    pixie-pkg = ../../../pkgs/pixie.nix;
+    pixie-pkg = pkgs.callPackage ../../../pkgs/pixie.nix {};
+    qylock-pkg = pkgs.callPackage ../../../pkgs/qylock.nix {};
     astronaut-pkg = pkgs.sddm-astronaut.override {
         embeddedTheme = "pixel_sakura";
     };
@@ -17,9 +18,10 @@ in
             type = with types; enum [
                 "pixie"
                 "astronaut"
+                "hollowknight"
             ];
 
-            default = "astronaut";
+            default = "hollowknight";
         };
     };
 
@@ -32,7 +34,8 @@ in
             theme = theme-name;
 
             extraPackages = []
-                ++ (lib.optional (cfg.theme == "astronaut") astronaut-pkg);
+                ++ (lib.optional (cfg.theme == "astronaut") astronaut-pkg)
+                ++ (lib.optional (cfg.theme == "hollowknight") qylock-pkg);
 
             settings = {
                 Theme = {
@@ -77,7 +80,8 @@ in
         };
 
         environment.systemPackages = with pkgs; [ capitaine-cursors ]
-            ++ (lib.optional (cfg.theme == "pixie") (pkgs.callPackage pixie-pkg {}))
-            ++ (lib.optional (cfg.theme == "astronaut") astronaut-pkg);
+            ++ (lib.optional (cfg.theme == "pixie") pixie-pkg)
+            ++ (lib.optional (cfg.theme == "astronaut") astronaut-pkg)
+            ++ (lib.optional (cfg.theme == "hollowknight") qylock-pkg);
     };
 }
