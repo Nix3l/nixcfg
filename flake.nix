@@ -11,10 +11,17 @@
         nvf.url = "github:notashelf/nvf";
         spicetify.url = "github:Gerg-L/spicetify-nix";
         polymc.url = "github:PolyMC/PolyMC";
+        dolphin-overlay.url = "github:rumboon/dolphin-overlay";
+
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs = {
+                nixpkgs.follows = "nixpkgs";
+                home-manager.follows = "home-manager";
+            };
+        };
 
         copyparty.url = "github:9001/copyparty";
-
-        dolphin-overlay.url = "github:rumboon/dolphin-overlay";
     };
 
     outputs = { self, nixpkgs, ... } @ inputs: {
