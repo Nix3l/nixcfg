@@ -129,6 +129,10 @@ in {
                     "$mod, up, movefocus, u"
                     "$mod, down, movefocus, d"
 
+                    # taken from https://www.reddit.com/r/hyprland/comments/12nkesy/deleted_by_user/
+                    ''$mod CONTROL, up, exec, hyprctl keyword cursor:zoom_factor $(awk "BEGIN {print $(hyprctl getoption cursor:zoom_factor | grep 'float:' | awk '{print $2}') + 0.5}")''
+                    "$mod CONTROL, down, exec, hyprctl keyword cursor:zoom_factor 1.0"
+
                     "$mod, RETURN, exec, $terminal"
                     "$mod, B, exec, $browser"
                     "$mod SHIFT, B, exec, $browser --private-window"
