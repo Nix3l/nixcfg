@@ -51,14 +51,15 @@ in
                     };
 
                     assembly.enable = true;
-                    nix.enable = true;
-                    ts.enable = true;
-                    java.enable = true;
-                    rust.enable = true;
-                    sql.enable = true;
-                    html.enable = true;
-                    css.enable = true;
-                    php.enable = true;
+                    nix.enable      = true;
+                    ts.enable       = true;
+                    java.enable     = true;
+                    rust.enable     = true;
+                    sql.enable      = true;
+                    html.enable     = true;
+                    css.enable      = true;
+                    php.enable      = true;
+                    csharp.enable   = true;
                 };
 
                 visuals = {
