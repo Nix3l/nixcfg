@@ -138,6 +138,7 @@ in {
                     "$mod SHIFT, B, exec, $browser --private-window"
                     "$mod, E, exec, $explorer"
                     (lib.optional osConfig.mods.apps.screenshot.enable "$mod SHIFT, S, exec, grimblast copy area")
+                    (lib.optional osConfig.mods.apps.screenshot.enable "$mod SHIFT, F, exec, grimblast copy area --freeze")
                 ];
 
                 binde = [
