@@ -91,7 +91,6 @@
             minecraft.enable = true;
             pureref.enable = true;
             screenshot.enable = true;
-            firefox.enable = true;
         };
 
         server = {

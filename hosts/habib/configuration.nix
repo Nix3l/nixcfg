@@ -77,7 +77,6 @@
             terminalapps.enable = true;
             pureref.enable = true;
             screenshot.enable = true;
-            firefox.enable = true;
         };
 
         dev = {

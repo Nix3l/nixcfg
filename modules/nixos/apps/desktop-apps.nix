@@ -12,7 +12,7 @@
 
         browser = mkOption {
             type = types.package;
-            default = pkgs.firefox;
+            default = pkgs.librewolf;
         };
 
         terminal = mkOption {
