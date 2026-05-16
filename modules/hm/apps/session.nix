@@ -9,7 +9,7 @@ in
 
         terminal    = mkOption { default = "kitty"; };
         shell       = mkOption { default = "bash"; };
-        browser     = mkOption { default = "librewolf"; };
+        browser     = mkOption { default = "firefox"; };
         explorer    = mkOption { default = "dolphin"; };
         editor      = mkOption { default = "nvim"; };
         mediaPlayer = mkOption { default = "mpv"; };

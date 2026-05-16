@@ -11,6 +11,7 @@
         ./apps/desktop-apps.nix
         ./apps/discord.nix
         ./apps/extra.nix
+        ./apps/firefox.nix
         ./apps/media.nix
         ./apps/minecraft.nix
         ./apps/pureref.nix
