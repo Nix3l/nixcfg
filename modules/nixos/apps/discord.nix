@@ -9,6 +9,6 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-        environment.systemPackages = with pkgs; [ vesktop ];
+        environment.systemPackages = with pkgs; [ discord ];
     };
 }
