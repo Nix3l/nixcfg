@@ -29,7 +29,7 @@
 
         wallpaper.hyprpaper = {
             enable = true;
-            wallpaper = "hlorang.png";
+            wallpaper = "snoopy.png";
             monitor = "eDP-1";
         };
 
