@@ -101,6 +101,7 @@
         virt = {
             libvirtd.enable = true;
             android.enable = true;
+            virtualbox.enable = true;
         };
 
         fonts.enable = true;
@@ -113,6 +114,7 @@
                     gtk4
                 ];
             })
+            virtualbox
             # spotify
         ];
     };
